@@ -1,0 +1,56 @@
+# Mapa zawartosci repozytorium foodlaw-ai
+
+## Pliki glowne
+- README.md                          Opis projektu, instrukcje uzycia, zastrzezenia prawne
+- CONTRIBUTING.md                    Zasady wspolpracy i wkladow
+- LICENSE                            Informacja o podwojnej licencji (Apache-2.0 OR MIT)
+- LICENSE-APACHE                     Pelny tekst licencji Apache 2.0
+- LICENSE-MIT                        Pelny tekst licencji MIT
+- llms.txt                           Opis repozytorium zoptymalizowany dla AI
+- index.txt                          Ten plik - mapa zawartosci
+
+## Umiejetnosci AI (skills/)
+- skills/suplementy-diety/skill.md   Ekspert ds. suplementow diety
+- skills/etykietowanie/skill.md      Ekspert ds. etykietowania zywnosci (Rozp. 1169/2011)
+- skills/oswiadczenia-zdrowotne/skill.md  Ekspert ds. oswiadczen zdrowotnych (Rozp. 1924/2006)
+- skills/novel-food/skill.md         Ekspert ds. nowej zywnosci (Rozp. 2015/2283)
+- skills/higiena-zywnosci/skill.md   Ekspert ds. higieny zywnosci (Rozp. 852/2004, 853/2004)
+- skills/zanieczyszczenia/skill.md   Ekspert ds. zanieczyszczen w zywnosci (Rozp. 2023/915)
+- skills/fortyfikacja/skill.md       Ekspert ds. wzbogacania zywnosci (Rozp. 1925/2006)
+- skills/postepowania-gis/skill.md   Ekspert ds. postepowan administracyjnych GIS/Sanepid
+
+## Przepisy unijne (przepisy/unijne/)
+- przepisy/unijne/reg-178-2002-general-food-law.md        Rozp. 178/2002 - Ogolne prawo zywnosciowe
+- przepisy/unijne/reg-1169-2011-food-information.md       Rozp. 1169/2011 - Informacja o zywnosci
+- przepisy/unijne/reg-1924-2006-health-claims.md          Rozp. 1924/2006 - Oswiadczenia zdrowotne
+- przepisy/unijne/reg-1925-2006-fortification.md          Rozp. 1925/2006 - Wzbogacanie zywnosci
+- przepisy/unijne/reg-2015-2283-novel-food.md             Rozp. 2015/2283 - Nowa zywnosc
+- przepisy/unijne/reg-852-2004-food-hygiene.md            Rozp. 852/2004 - Higiena zywnosci
+- przepisy/unijne/reg-853-2004-hygiene-animal-origin.md   Rozp. 853/2004 - Higiena zywnosci zwierzecego
+- przepisy/unijne/reg-2023-915-contaminants.md            Rozp. 2023/915 - Zanieczyszczenia
+- przepisy/unijne/reg-609-2013-food-specific-groups.md    Rozp. 609/2013 - Zywnosc specjalna
+
+## Przepisy krajowe (przepisy/krajowe/)
+- przepisy/krajowe/ustawa-bezpieczenstwo-zywnosci.md      Ustawa o bezpieczenstwie zywnosci i zywienia
+- przepisy/krajowe/ustawa-pis.md                          Ustawa o Panstwowej Inspekcji Sanitarnej
+
+## Orzecznictwo (orzecznictwo/)
+- orzecznictwo/nsa/.gitkeep          Wyroki NSA (do uzupelnienia)
+- orzecznictwo/wsa/.gitkeep          Wyroki WSA (do uzupelnienia)
+- orzecznictwo/tsue/.gitkeep         Wyroki TSUE (do uzupelnienia)
+- orzecznictwo/gis-decyzje/.gitkeep  Decyzje GIS (do uzupelnienia)
+
+## Materialy referencyjne (references/)
+- references/cytowanie.md            Zasady cytowania zrodel prawa zywnosciowego
+- references/metodyka.md             Metodyka analizy prawa zywnosciowego
+
+## Skrypty (scripts/)
+- scripts/requirements.txt           Zaleznosci Python
+- scripts/fetch_eurlex.py            Pobieranie rozporzadzen UE z EUR-Lex (CELLAR SPARQL)
+- scripts/fetch_isap.py              Pobieranie ustaw z ISAP
+- scripts/fetch_cbosa.py             Wyszukiwanie orzeczen w CBOSA
+- scripts/fetch_curia.py             Wyszukiwanie orzeczen TSUE w CURIA
+- scripts/convert_to_markdown.py     Konwersja HTML/XML na Markdown
+
+## Automatyzacja (.github/workflows/)
+- .github/workflows/update-laws.yml  Workflow aktualizacji aktow prawnych (cron miesiczny)

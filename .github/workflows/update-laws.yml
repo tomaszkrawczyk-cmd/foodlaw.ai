@@ -1,0 +1,106 @@
+name: Aktualizacja aktow prawnych
+
+on:
+  schedule:
+    # Uruchamianie raz w miesiacu - 1. dnia o 03:00 UTC
+    - cron: '0 3 1 * *'
+  workflow_dispatch:
+    # Mozliwosc recznego uruchomienia
+
+permissions:
+  contents: write
+
+jobs:
+  update-laws:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repozytorium
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Instalacja zaleznosci
+        run: pip install -r scripts/requirements.txt
+
+      - name: Pobieranie rozporzadzen UE z EUR-Lex
+        run: |
+          python scripts/fetch_eurlex.py \
+            --output ./output/eurlex/ \
+            --language PL \
+            --delay 3.0 \
+            --verbose
+        continue-on-error: true
+
+      - name: Pobieranie ustaw z ISAP
+        run: |
+          python scripts/fetch_isap.py \
+            --output ./output/isap/ \
+            --verbose
+        continue-on-error: true
+
+      - name: Pobieranie orzeczen NSA/WSA z CBOSA
+        run: |
+          python scripts/fetch_cbosa.py \
+            --court-type nsa \
+            --output ./orzecznictwo/nsa/ \
+            --delay 5.0 \
+            --verbose
+          python scripts/fetch_cbosa.py \
+            --court-type wsa \
+            --output ./orzecznictwo/wsa/ \
+            --delay 5.0 \
+            --verbose
+        continue-on-error: true
+
+      - name: Pobieranie orzeczen TSUE z CURIA
+        run: |
+          python scripts/fetch_curia.py \
+            --output ./orzecznictwo/tsue/ \
+            --delay 5.0 \
+            --verbose
+        continue-on-error: true
+
+      - name: Konwersja na Markdown
+        run: |
+          if [ -d "./output/eurlex" ] && [ "$(ls -A ./output/eurlex/*.html 2>/dev/null)" ]; then
+            python scripts/convert_to_markdown.py \
+              --input ./output/eurlex/ \
+              --output ./przepisy/unijne/pelne-teksty/ \
+              --verbose
+          fi
+          if [ -d "./output/isap" ] && [ "$(ls -A ./output/isap/*.html 2>/dev/null)" ]; then
+            python scripts/convert_to_markdown.py \
+              --input ./output/isap/ \
+              --output ./przepisy/krajowe/pelne-teksty/ \
+              --verbose
+          fi
+        continue-on-error: true
+
+      - name: Sprawdzenie zmian
+        id: check_changes
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit i push zmian
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: automatyczna aktualizacja aktow prawnych $(date +%Y-%m-%d)"
+          git push
+        # UWAGA: Jesli branch 'main' jest chroniony (wymaga PR review), ten krok
+        # nie powiedzie sie. W takim przypadku nalezy zmienic strategie na tworzenie
+        # brancha i PR (np. peter-evans/create-pull-request action) zamiast
+        # bezposredniego push na main.

@@ -1,0 +1,58 @@
+# foodlaw-ai - Prawo Zywnosciowe PL/EU
+
+> Baza wiedzy prawa zywnosciowego Polski i Unii Europejskiej zoptymalizowana dla duzych modeli jezykowych (LLM).
+
+## Czym jest to repozytorium
+
+Kompleksowa baza wiedzy prawnej obejmujaca:
+- Rozporzadzenia UE dotyczace zywnosci (9 kluczowych aktow)
+- Polskie ustawy z zakresu bezpieczenstwa zywnosci
+- Umiejetnosci (skills) definiujace role eksperckie AI
+- Orzecznictwo NSA, WSA, TSUE i decyzje GIS
+- Metodologie analizy prawnej i zasady cytowania
+
+## Jak korzystac z tego repozytorium (instrukcja dla AI)
+
+1. Zacznij od pliku skill.md w odpowiednim katalogu skills/ - definiuje on Twoja role eksperta
+2. Kontekst prawny znajdziesz w przepisy/ (unijne/ i krajowe/)
+3. Zasady cytowania w references/cytowanie.md
+4. Metodologie analizy w references/metodyka.md
+
+## Kluczowe pliki
+
+- README.md - opis projektu i instrukcje
+- skills/suplementy-diety/skill.md - ekspert ds. suplementow diety
+- skills/etykietowanie/skill.md - ekspert ds. etykietowania zywnosci
+- skills/oswiadczenia-zdrowotne/skill.md - ekspert ds. oswiadczen zdrowotnych
+- skills/novel-food/skill.md - ekspert ds. nowej zywnosci
+- skills/higiena-zywnosci/skill.md - ekspert ds. higieny zywnosci
+- skills/zanieczyszczenia/skill.md - ekspert ds. zanieczyszczen w zywnosci
+- skills/fortyfikacja/skill.md - ekspert ds. wzbogacania zywnosci
+- skills/postepowania-gis/skill.md - ekspert ds. postepowan administracyjnych GIS
+- references/cytowanie.md - zasady cytowania
+- references/metodyka.md - metodyka analizy prawa zywnosciowego
+- przepisy/unijne/ - rozporzadzenia UE
+- przepisy/krajowe/ - polskie ustawy
+- orzecznictwo/ - baza orzecznicza
+
+## Obszary wiedzy
+
+1. Prawo ogolne zywnosciowe (Rozp. 178/2002) - zasady analizy ryzyka, system RASFF, odpowiedzialnosc podmiotow
+2. Informacja o zywnosci (Rozp. 1169/2011) - etykietowanie, informacje obowiazkowe, alergeny
+3. Oswiadczenia zdrowotne (Rozp. 1924/2006) - claims art. 13 i 14, warunki stosowania
+4. Wzbogacanie zywnosci (Rozp. 1925/2006) - dozwolone formy witamin i mineralow
+5. Nowa zywnosc (Rozp. 2015/2283) - procedura autoryzacji, wykaz unijny
+6. Higiena zywnosci (Rozp. 852/2004 i 853/2004) - HACCP, zywnosc pochodzenia zwierzecego
+7. Zanieczyszczenia (Rozp. 2023/915) - NDP metali ciezkich, mykotoksyn, WWA
+8. Zywnosc specjalna (Rozp. 609/2013) - preparaty dla niemowlat, zywnosc medyczna
+9. Suplementy diety - dyrektywa 2002/46/WE, notyfikacja w Polsce, sklad, reklama
+10. Postepowania administracyjne - decyzje GIS, odwolania, kontrola sadowa (WSA/NSA)
+
+## Zasady dla AI
+
+- ZAWSZE weryfikuj cytowane przepisy - moga byc nieaktualne
+- Podawaj pelne sygnatury orzeczeń z data i numerem sprawy
+- Rozrozniaj miedzy rozporzadzeniami UE (bezposrednio stosowane) a dyrektywami (wymagaja transpozycji)
+- Uwzgledniaj hierarchie zrodel: prawo UE > prawo krajowe > soft law
+- Wskazuj na rozbieznosci miedzy wersja polska a innymi wersjami jezykowymi
+- Nie udzielaj porad prawnych - oferuj analize i wskazuj na mozliwe interpretacje
