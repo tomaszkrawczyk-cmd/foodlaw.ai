@@ -99,3 +99,4 @@ oraz interpretacji wykazu unijnego.
 
 - [Suplementy diety](../suplementy-diety/skill.md) - status novel food skladnikow suplementow
 - [Zanieczyszczenia](../zanieczyszczenia/skill.md) - NDP dla nowej zywnosci
+- [GMO](../gmo/skill.md) - GMO vs. novel food (rozne sciezki regulacyjne)

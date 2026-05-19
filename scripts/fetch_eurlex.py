@@ -39,6 +39,10 @@ DEFAULT_CELEX_NUMBERS = [
     "32004R0853",  # Rozp. 853/2004 - Higiena zywnosci zwierzecego
     "32023R0915",  # Rozp. 2023/915 - Zanieczyszczenia
     "32013R0609",  # Rozp. 609/2013 - Zywnosc specjalna
+    "32008R1333",  # Rozp. 1333/2008 - Dodatki do zywnosci
+    "32003R1829",  # Rozp. 1829/2003 - Genetycznie zmodyfikowana zywnosc i pasza
+    "32003R1830",  # Rozp. 1830/2003 - Identyfikowalnosc i etykietowanie GMO
+    "32018R0848",  # Rozp. 2018/848 - Produkcja ekologiczna
 ]
 
 CELLAR_SPARQL_ENDPOINT = "https://publications.europa.eu/webapi/rdf/sparql"

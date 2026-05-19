@@ -102,3 +102,5 @@ Checklist 12 elementow:
 - [Oswiadczenia zdrowotne](../oswiadczenia-zdrowotne/skill.md) - claims na etykietach zywnosci
 - [Fortyfikacja](../fortyfikacja/skill.md) - oznakowanie zywnosci wzbogaconej
 - [Suplementy diety](../suplementy-diety/skill.md) - szczegolne wymogi oznakowania suplementow
+- [Dodatki do zywnosci](../dodatki-do-zywnosci/skill.md) - deklaracja dodatkow w wykazie skladnikow
+- [Zywnosc ekologiczna](../zywnosc-ekologiczna/skill.md) - wymogi etykietowania produktow ekologicznych

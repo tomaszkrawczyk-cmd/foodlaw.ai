@@ -5,10 +5,11 @@
 ## Czym jest to repozytorium
 
 Kompleksowa baza wiedzy prawnej obejmujaca:
-- Rozporzadzenia UE dotyczace zywnosci (9 kluczowych aktow)
+- Rozporzadzenia UE dotyczace zywnosci (13 kluczowych aktow)
 - Polskie ustawy z zakresu bezpieczenstwa zywnosci
 - Umiejetnosci (skills) definiujace role eksperckie AI
 - Orzecznictwo NSA, WSA, TSUE i decyzje GIS
+- Dokumenty wytycznych i Q&A (guidance/)
 - Metodologie analizy prawnej i zasady cytowania
 
 ## Jak korzystac z tego repozytorium (instrukcja dla AI)
@@ -29,11 +30,15 @@ Kompleksowa baza wiedzy prawnej obejmujaca:
 - skills/zanieczyszczenia/skill.md - ekspert ds. zanieczyszczen w zywnosci
 - skills/fortyfikacja/skill.md - ekspert ds. wzbogacania zywnosci
 - skills/postepowania-gis/skill.md - ekspert ds. postepowan administracyjnych GIS
+- skills/dodatki-do-zywnosci/skill.md - ekspert ds. dodatkow do zywnosci
+- skills/gmo/skill.md - ekspert ds. genetycznie zmodyfikowanej zywnosci i paszy
+- skills/zywnosc-ekologiczna/skill.md - ekspert ds. zywnosci ekologicznej
 - references/cytowanie.md - zasady cytowania
 - references/metodyka.md - metodyka analizy prawa zywnosciowego
 - przepisy/unijne/ - rozporzadzenia UE
 - przepisy/krajowe/ - polskie ustawy
 - orzecznictwo/ - baza orzecznicza
+- guidance/ - dokumenty wytycznych i Q&A (pytania i odpowiedzi praktyczne)
 
 ## Obszary wiedzy
 
@@ -47,6 +52,9 @@ Kompleksowa baza wiedzy prawnej obejmujaca:
 8. Zywnosc specjalna (Rozp. 609/2013) - preparaty dla niemowlat, zywnosc medyczna
 9. Suplementy diety - dyrektywa 2002/46/WE, notyfikacja w Polsce, sklad, reklama
 10. Postepowania administracyjne - decyzje GIS, odwolania, kontrola sadowa (WSA/NSA)
+11. Dodatki do zywnosci (Rozp. 1333/2008) - numery E, klasy funkcjonalne, autoryzacja, re-evaluation, quantum satis
+12. GMO - genetycznie zmodyfikowana zywnosc i pasza (Rozp. 1829/2003), identyfikowalnosc (Rozp. 1830/2003), prog 0,9%
+13. Zywnosc ekologiczna (Rozp. 2018/848) - certyfikacja, logo UE, import, konwersja, substancje zakazane
 
 ## Zasady dla AI
 

@@ -28,12 +28,15 @@ Projekt inspirowany repozytorium [claude-fuer-deutsches-recht](https://github.co
 | [`zanieczyszczenia`](./skills/zanieczyszczenia/skill.md) | Zanieczyszczenia w zywnosci - najwyzsze dopuszczalne poziomy wg Rozp. 2023/915 |
 | [`fortyfikacja`](./skills/fortyfikacja/skill.md) | Wzbogacanie zywnosci w witaminy i skladniki mineralne wg Rozp. 1925/2006 |
 | [`postepowania-gis`](./skills/postepowania-gis/skill.md) | Postepowania administracyjne GIS/Sanepid - decyzje, odwolania, skarga do WSA/NSA |
+| [`dodatki-do-zywnosci`](./skills/dodatki-do-zywnosci/skill.md) | Dodatki do zywnosci (food additives) - numery E, klasy funkcjonalne, autoryzacja, re-evaluation |
+| [`gmo`](./skills/gmo/skill.md) | Genetycznie zmodyfikowana zywnosc i pasza - autoryzacja, etykietowanie, prog 0,9% |
+| [`zywnosc-ekologiczna`](./skills/zywnosc-ekologiczna/skill.md) | Produkcja ekologiczna - certyfikacja, logo UE, import, konwersja |
 
 ### Przepisy
 
 | Katalog | Zawartosc |
 | --- | --- |
-| [`przepisy/unijne/`](./przepisy/unijne/) | Kluczowe rozporzadzenia UE dot. zywnosci (178/2002, 1169/2011, 1924/2006, 1925/2006, 2015/2283, 852/2004, 853/2004, 2023/915, 609/2013) |
+| [`przepisy/unijne/`](./przepisy/unijne/) | Kluczowe rozporzadzenia UE dot. zywnosci (178/2002, 1169/2011, 1924/2006, 1925/2006, 2015/2283, 852/2004, 853/2004, 2023/915, 609/2013, 1333/2008, 1829/2003, 1830/2003, 2018/848) |
 | [`przepisy/krajowe/`](./przepisy/krajowe/) | Polskie ustawy (o bezpieczenstwie zywnosci i zywienia, o PIS) |
 
 ### Orzecznictwo
@@ -109,6 +112,25 @@ Repozytorium zawiera workflow `.github/workflows/update-laws.yml`, ktory co mies
 | 853/2004 | Higiena zywnosci pochodzenia zwierzecego | 32004R0853 |
 | 2023/915 | Zanieczyszczenia w zywnosci | 32023R0915 |
 | 609/2013 | Zywnosc dla szczegolnych grup | 32013R0609 |
+| 1333/2008 | Dodatki do zywnosci (Food Additives) | 32008R1333 |
+| 1829/2003 | Genetycznie zmodyfikowana zywnosc i pasza | 32003R1829 |
+| 1830/2003 | Identyfikowalnosc i etykietowanie GMO | 32003R1830 |
+| 2018/848 | Produkcja ekologiczna i znakowanie | 32018R0848 |
+
+## Dokumenty wytycznych / Guidance
+
+Katalog [`guidance/`](./guidance/) zawiera zestawienia pytan i odpowiedzi (Q&A) opracowane na podstawie wytycznych Komisji Europejskiej i praktyki stosowania prawa zywnosciowego:
+
+| Plik | Temat |
+| --- | --- |
+| [`qa-food-information-1169-2011.md`](./guidance/qa-food-information-1169-2011.md) | Informacja o zywnosci dla konsumentow |
+| [`qa-health-claims-1924-2006.md`](./guidance/qa-health-claims-1924-2006.md) | Oswiadczenia zywieniowe i zdrowotne |
+| [`qa-novel-food-2015-2283.md`](./guidance/qa-novel-food-2015-2283.md) | Nowa zywnosc (novel food) |
+| [`qa-organic-2018-848.md`](./guidance/qa-organic-2018-848.md) | Produkcja ekologiczna |
+| [`qa-food-additives-1333-2008.md`](./guidance/qa-food-additives-1333-2008.md) | Dodatki do zywnosci |
+| [`qa-gmo-1829-2003.md`](./guidance/qa-gmo-1829-2003.md) | GMO w zywnosci i paszy |
+| [`qa-food-hygiene.md`](./guidance/qa-food-hygiene.md) | Higiena zywnosci |
+| [`qa-contaminants.md`](./guidance/qa-contaminants.md) | Zanieczyszczenia w zywnosci |
 
 ## Wazne zastrzezenia
 

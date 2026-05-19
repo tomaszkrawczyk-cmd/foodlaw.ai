@@ -113,3 +113,4 @@ wymagan sanitarnych oraz kontroli urzedowych.
 ## Powiazane umiejetnosci
 
 - [Zanieczyszczenia](../zanieczyszczenia/skill.md) - zanieczyszczenia biologiczne i chemiczne w kontekscie higieny
+- [Zywnosc ekologiczna](../zywnosc-ekologiczna/skill.md) - wymogi higieniczne w produkcji ekologicznej

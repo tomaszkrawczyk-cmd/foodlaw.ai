@@ -18,6 +18,9 @@
 - skills/zanieczyszczenia/skill.md   Ekspert ds. zanieczyszczen w zywnosci (Rozp. 2023/915)
 - skills/fortyfikacja/skill.md       Ekspert ds. wzbogacania zywnosci (Rozp. 1925/2006)
 - skills/postepowania-gis/skill.md   Ekspert ds. postepowan administracyjnych GIS/Sanepid
+- skills/dodatki-do-zywnosci/skill.md  Ekspert ds. dodatkow do zywnosci (Rozp. 1333/2008)
+- skills/gmo/skill.md                Ekspert ds. genetycznie zmodyfikowanej zywnosci i paszy (Rozp. 1829/2003)
+- skills/zywnosc-ekologiczna/skill.md  Ekspert ds. zywnosci ekologicznej (Rozp. 2018/848)
 
 ## Przepisy unijne (przepisy/unijne/)
 - przepisy/unijne/reg-178-2002-general-food-law.md        Rozp. 178/2002 - Ogolne prawo zywnosciowe
@@ -29,6 +32,10 @@
 - przepisy/unijne/reg-853-2004-hygiene-animal-origin.md   Rozp. 853/2004 - Higiena zywnosci zwierzecego
 - przepisy/unijne/reg-2023-915-contaminants.md            Rozp. 2023/915 - Zanieczyszczenia
 - przepisy/unijne/reg-609-2013-food-specific-groups.md    Rozp. 609/2013 - Zywnosc specjalna
+- przepisy/unijne/reg-1333-2008-food-additives.md        Rozp. 1333/2008 - Dodatki do zywnosci
+- przepisy/unijne/reg-1829-2003-gmo-food-feed.md         Rozp. 1829/2003 - Genetycznie zmodyfikowana zywnosc i pasza
+- przepisy/unijne/reg-1830-2003-gmo-traceability.md      Rozp. 1830/2003 - Identyfikowalnosc i etykietowanie GMO
+- przepisy/unijne/reg-2018-848-organic.md                Rozp. 2018/848 - Produkcja ekologiczna
 
 ## Przepisy krajowe (przepisy/krajowe/)
 - przepisy/krajowe/ustawa-bezpieczenstwo-zywnosci.md      Ustawa o bezpieczenstwie zywnosci i zywienia
@@ -54,3 +61,14 @@
 
 ## Automatyzacja (.github/workflows/)
 - .github/workflows/update-laws.yml  Workflow aktualizacji aktow prawnych (cron miesiczny)
+
+## Dokumenty wytycznych (guidance/)
+- guidance/README.md                          Indeks dokumentow wytycznych
+- guidance/qa-food-information-1169-2011.md   Q&A: Informacja o zywnosci (Rozp. 1169/2011)
+- guidance/qa-health-claims-1924-2006.md      Q&A: Oswiadczenia zdrowotne (Rozp. 1924/2006)
+- guidance/qa-novel-food-2015-2283.md         Q&A: Nowa zywnosc (Rozp. 2015/2283)
+- guidance/qa-organic-2018-848.md             Q&A: Produkcja ekologiczna (Rozp. 2018/848)
+- guidance/qa-food-additives-1333-2008.md     Q&A: Dodatki do zywnosci (Rozp. 1333/2008)
+- guidance/qa-gmo-1829-2003.md                Q&A: GMO w zywnosci i paszy (Rozp. 1829/2003)
+- guidance/qa-food-hygiene.md                 Q&A: Higiena zywnosci (Rozp. 852/2004, 853/2004)
+- guidance/qa-contaminants.md                 Q&A: Zanieczyszczenia w zywnosci (Rozp. 2023/915)
