@@ -108,3 +108,5 @@ Odniesienia do ogolnych korzysci TYLKO gdy towarzyszy im konkretne autoryzowane 
 
 - [Etykietowanie](../etykietowanie/skill.md) - prezentacja claims na etykiecie
 - [Suplementy diety](../suplementy-diety/skill.md) - oswiadczenia zdrowotne na suplementach
+- [FSMP](../fsmp/skill.md) - wylaczenie FSMP z Rozp. 1924/2006, Art. 1(5)
+- [Reklama zywnosci](../reklama-zywnosci/skill.md) - claims w reklamie zywnosci

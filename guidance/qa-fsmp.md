@@ -6,6 +6,8 @@
 
 **Uwaga**: Ponizsze odpowiedzi maja charakter informacyjny i nie stanowia porady prawnej. Kwalifikacja produktu jako FSMP jest zlozonym zagadnieniem prawnym i naukowym - w przypadku watpliwosci konsultuj sie z prawnikiem specjalizujacym sie w prawie zywnosciowym.
 
+**Stan prawny na**: 2025-01
+
 ---
 
 ## P1: Kiedy produkt kwalifikuje sie jako FSMP?

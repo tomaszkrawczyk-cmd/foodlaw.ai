@@ -209,4 +209,4 @@ rozporzadzenia. Oznacza to, ze:
 - [Oswiadczenia zdrowotne](../oswiadczenia-zdrowotne/skill.md) - wylaczenie FSMP z Rozp. 1924/2006
 - [Etykietowanie](../etykietowanie/skill.md) - szczegolne wymogi oznakowania FSMP
 - [Postepowania GIS](../postepowania-gis/skill.md) - procedura notyfikacji, sprzeciw GIS, odwolanie
-- [Rozporzadzenia delegowane](../rozporzadzenia-delegowane/skill.md) - Rozp. del. 2016/128 jako akt wykonawczy do 609/2013
+- [Rozporzadzenia delegowane](../rozporzadzenia-delegowane/skill.md) - Rozp. del. 2016/128 jako akt delegowany do 609/2013

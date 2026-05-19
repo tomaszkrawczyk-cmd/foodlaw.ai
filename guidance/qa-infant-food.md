@@ -6,6 +6,8 @@
 
 **Uwaga**: Ponizsze odpowiedzi maja charakter informacyjny i nie stanowia porady prawnej. Przepisy moga ulec zmianie - weryfikuj aktualnosc w tekstach skonsolidowanych na EUR-Lex.
 
+**Stan prawny na**: 2025-01
+
 ---
 
 ## P1: Ktore rozporzadzenie ma zastosowanie do danego produktu dla niemowlat?

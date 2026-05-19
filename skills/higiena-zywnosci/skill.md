@@ -115,3 +115,4 @@ wymagan sanitarnych oraz kontroli urzedowych.
 - [Zanieczyszczenia](../zanieczyszczenia/skill.md) - zanieczyszczenia biologiczne i chemiczne w kontekscie higieny
 - [Zywnosc ekologiczna](../zywnosc-ekologiczna/skill.md) - wymogi higieniczne w produkcji ekologicznej
 - [Materialy kontaktowe](../materialy-kontaktowe/skill.md) - materialy do kontaktu z zywnoscia
+- [Pestycydy](../pestycydy/skill.md) - pozostalosci pestycydow w zywnosci, NDP

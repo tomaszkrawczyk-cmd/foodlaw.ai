@@ -6,6 +6,8 @@
 
 **Uwaga**: Ponizsze odpowiedzi maja charakter informacyjny i nie stanowia porady prawnej. MRL sa regularnie aktualizowane - zawsze weryfikuj aktualna wartosc w EU Pesticides Database lub tekscie skonsolidowanym Rozp. 396/2005.
 
+**Stan prawny na**: 2025-01
+
 ---
 
 ## P1: Jak sprawdzic obowiazujacy MRL dla danej substancji w danym produkcie?

@@ -135,3 +135,5 @@ Wyjatki:
 - [Suplementy diety](../suplementy-diety/skill.md) - postepowania dot. notyfikacji suplementow
 - [Etykietowanie](../etykietowanie/skill.md) - decyzje GIS dot. oznakowania
 - [Higiena zywnosci](../higiena-zywnosci/skill.md) - kontrole sanitarne i decyzje PPIS
+- [FSMP](../fsmp/skill.md) - notyfikacja FSMP, sprzeciw GIS dot. kwalifikacji
+- [Pestycydy](../pestycydy/skill.md) - kontrola pozostalosci pestycydow, RASFF

@@ -100,3 +100,4 @@ oraz interpretacji wykazu unijnego.
 - [Suplementy diety](../suplementy-diety/skill.md) - status novel food skladnikow suplementow
 - [Zanieczyszczenia](../zanieczyszczenia/skill.md) - NDP dla nowej zywnosci
 - [GMO](../gmo/skill.md) - GMO vs. novel food (rozne sciezki regulacyjne)
+- [Rozporzadzenia delegowane](../rozporzadzenia-delegowane/skill.md) - akty delegowane i wykonawcze do Rozp. 2015/2283

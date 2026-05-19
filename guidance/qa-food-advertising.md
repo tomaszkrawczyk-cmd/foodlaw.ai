@@ -6,6 +6,8 @@
 
 **Uwaga**: Ponizsze odpowiedzi maja charakter informacyjny i nie stanowia porady prawnej. Interpretacja przepisow o reklamie zywnosci moze roznic sie w zaleznosci od konkretnego stanu faktycznego i organu orzekajacego.
 
+**Stan prawny na**: 2025-01
+
 ---
 
 ## P1: Co stanowi "reklame" zywnosci w rozumieniu przepisow i czym rozni sie od "oznakowania"?
@@ -22,7 +24,7 @@
 
 ## P4: Jakie sa ograniczenia reklamy zywnosci kierowanej do dzieci?
 
-**O**: Na poziomie UE: Dyrektywa AVMSD 2018/1808 (art. 9 ust. 4) zacheca panstwa do ograniczania reklamy zywnosci HFSS (high in fat, sugar, salt) wobec dzieci, ale nie ustanawia twardego zakazu. WHO Nutrient Profiling Model sugeruje kryteria. EU Pledge (dobrowolne zobowiazanie przemyslu). W Polsce: brak ustawowego zakazu reklamy HFSS do dzieci (w przeciwienstwie do niektórych panstw UE, np. UK, Irlandia). Obowiazuje: (1) art. 16b ustawy o radiofonii i telewizji (zakaz reklamy w programach dla dzieci <12 lat); (2) KER - Zalacznik (Standardy Reklamy Skierowanej do Dzieci); (3) ogolne zakazy wprowadzania w blad.
+**O**: Na poziomie UE: Dyrektywa AVMSD 2018/1808 (art. 9 ust. 4) zacheca panstwa do ograniczania reklamy zywnosci HFSS (high in fat, sugar, salt) wobec dzieci, ale nie ustanawia twardego zakazu. WHO Nutrient Profiling Model sugeruje kryteria. EU Pledge (dobrowolne zobowiazanie przemyslu). W Polsce: brak ustawowego zakazu reklamy HFSS do dzieci (w przeciwienstwie do niektórych panstw UE, np. UK, Irlandia). Obowiazuje: (1) art. 16b ustawy o radiofonii i telewizji - wprowadza ograniczenia dotyczace reklamy w programach dla dzieci ponizej 12 lat (dokladny zakres ograniczen zalezy od aktualnego brzmienia ustawy); (2) KER - Zalacznik (Standardy Reklamy Skierowanej do Dzieci); (3) ogolne zakazy wprowadzania w blad.
 
 ## P5: Czy reklama porownawcza zywnosci jest dopuszczalna?
 
