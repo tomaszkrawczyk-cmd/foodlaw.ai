@@ -22,6 +22,11 @@
 - skills/materialy-kontaktowe/skill.md  Ekspert ds. materialow do kontaktu z zywnoscia (Rozp. 1935/2004, 10/2011)
 - skills/aromaty/skill.md               Ekspert ds. srodkow aromatyzujacych (Rozp. 1334/2008)
 - skills/enzymy/skill.md                Ekspert ds. enzymow spozywczych (Rozp. 1332/2008)
+- skills/pestycydy/skill.md             Ekspert ds. pozostalosci pestycydow (Rozp. 396/2005)
+- skills/zywnosc-dla-niemowlat/skill.md Ekspert ds. zywnosci dla niemowlat i malych dzieci (Rozp. 609/2013)
+- skills/fsmp/skill.md                  Ekspert ds. zywnosci specjalnego przeznaczenia medycznego (FSMP)
+- skills/reklama-zywnosci/skill.md      Ekspert ds. reklamy i marketingu zywnosci
+- skills/rozporzadzenia-delegowane/skill.md  Ekspert ds. aktow delegowanych i wykonawczych w prawie zywnosciowym
 
 ## Przepisy unijne (przepisy/unijne/)
 - przepisy/unijne/reg-178-2002-general-food-law.md        Rozp. 178/2002 - Ogolne prawo zywnosciowe
@@ -41,6 +46,10 @@
 - przepisy/unijne/reg-10-2011-plastic-fcm.md               Rozp. 10/2011 - Tworzywa sztuczne FCM
 - przepisy/unijne/reg-1334-2008-flavourings.md             Rozp. 1334/2008 - Srodki aromatyzujace
 - przepisy/unijne/reg-1332-2008-food-enzymes.md            Rozp. 1332/2008 - Enzymy spozywcze
+- przepisy/unijne/reg-396-2005-pesticide-mrls.md           Rozp. 396/2005 - Najwyzsze dopuszczalne poziomy pozostalosci pestycydow
+- przepisy/unijne/del-reg-2016-127-infant-formula.md       Rozp. del. 2016/127 - Preparaty dla niemowlat
+- przepisy/unijne/del-reg-2016-128-fsmp.md                 Rozp. del. 2016/128 - Zywnosc specjalnego przeznaczenia medycznego (FSMP)
+- przepisy/unijne/del-reg-2017-1798-total-diet-replacement.md  Rozp. del. 2017/1798 - Srodki zastepujace cala diete
 
 ## Przepisy krajowe (przepisy/krajowe/)
 - przepisy/krajowe/ustawa-bezpieczenstwo-zywnosci.md      Ustawa o bezpieczenstwie zywnosci i zywienia
@@ -80,6 +89,10 @@
 - guidance/qa-food-contact-materials.md       Q&A: Materialy do kontaktu z zywnoscia (Rozp. 1935/2004)
 - guidance/qa-flavourings.md                  Q&A: Srodki aromatyzujace (Rozp. 1334/2008)
 - guidance/qa-food-enzymes.md                 Q&A: Enzymy spozywcze (Rozp. 1332/2008)
+- guidance/qa-pesticides.md                   Q&A: Pozostalosci pestycydow (Rozp. 396/2005)
+- guidance/qa-infant-food.md                  Q&A: Zywnosc dla niemowlat i malych dzieci (Rozp. 609/2013)
+- guidance/qa-fsmp.md                         Q&A: Zywnosc specjalnego przeznaczenia medycznego (FSMP)
+- guidance/qa-food-advertising.md             Q&A: Reklama i marketing zywnosci
 
 ## Dokumentacja techniczna (docs/)
 - docs/eurlex-api-access.md              Dokumentacja dostepu do EUR-Lex (SPARQL, REST API)

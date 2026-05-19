@@ -104,3 +104,5 @@ Checklist 12 elementow:
 - [Suplementy diety](../suplementy-diety/skill.md) - szczegolne wymogi oznakowania suplementow
 - [Dodatki do zywnosci](../dodatki-do-zywnosci/skill.md) - deklaracja dodatkow w wykazie skladnikow
 - [Zywnosc ekologiczna](../zywnosc-ekologiczna/skill.md) - wymogi etykietowania produktow ekologicznych
+- [Reklama zywnosci](../reklama-zywnosci/skill.md) - reklama a oznakowanie, zakaz wprowadzania w blad
+- [Zywnosc dla niemowlat](../zywnosc-dla-niemowlat/skill.md) - szczegolne wymogi oznakowania preparatow dla niemowlat

@@ -36,6 +36,11 @@ Kompleksowa baza wiedzy prawnej obejmujaca:
 - skills/materialy-kontaktowe/skill.md - ekspert ds. materialow do kontaktu z zywnoscia
 - skills/aromaty/skill.md - ekspert ds. srodkow aromatyzujacych
 - skills/enzymy/skill.md - ekspert ds. enzymow spozywczych
+- skills/pestycydy/skill.md - ekspert ds. pozostalosci pestycydow (NDP/MRL)
+- skills/zywnosc-dla-niemowlat/skill.md - ekspert ds. zywnosci dla niemowlat i malych dzieci
+- skills/fsmp/skill.md - ekspert ds. zywnosci specjalnego przeznaczenia medycznego (FSMP)
+- skills/reklama-zywnosci/skill.md - ekspert ds. reklamy i marketingu zywnosci
+- skills/rozporzadzenia-delegowane/skill.md - ekspert ds. aktow delegowanych i wykonawczych
 - references/cytowanie.md - zasady cytowania
 - references/metodyka.md - metodyka analizy prawa zywnosciowego
 - przepisy/unijne/ - rozporzadzenia UE
@@ -61,6 +66,11 @@ Kompleksowa baza wiedzy prawnej obejmujaca:
 14. Materialy do kontaktu z zywnoscia (Rozp. 1935/2004, 10/2011) - migracja, deklaracje zgodnosci, recykling tworzyw
 15. Aromaty (Rozp. 1334/2008) - aromaty naturalne, FTNF, wykaz unijny substancji aromatycznych
 16. Enzymy spozywcze (Rozp. 1332/2008) - autoryzacja, wykaz unijny (w toku!), substancje pomocnicze
+17. Pestycydy i NDP (Rozp. 396/2005) - najwyzsze dopuszczalne poziomy pozostalosci, monitoring, RASFF
+18. Zywnosc dla niemowlat i malych dzieci (Rozp. 609/2013 + akty delegowane) - preparaty, zywnosc zbozowa, FSMP pediatryczne
+19. FSMP - zywnosc specjalnego przeznaczenia medycznego (Rozp. del. 2016/128) - kwalifikacja, granica suplement/FSMP/lek
+20. Reklama zywnosci (Rozp. 1169/2011 Art. 7, Rozp. 1924/2006, dyrektywy) - claims w reklamie, influencer marketing, dzieci
+21. Akty delegowane i wykonawcze - komitologia, Art. 290/291 TFUE, sledzenie zmian, okresy przejsciowe
 
 ## Zasady dla AI
 

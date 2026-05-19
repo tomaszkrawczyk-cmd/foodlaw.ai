@@ -95,3 +95,5 @@ notyfikacji, wymagan skladowych, oznakowania i reklamy suplementow diety.
 - [Oswiadczenia zdrowotne](../oswiadczenia-zdrowotne/skill.md) - claims na etykietach suplementow
 - [Postepowania GIS](../postepowania-gis/skill.md) - procedura notyfikacji i sprzeciw GIS
 - [Etykietowanie](../etykietowanie/skill.md) - wymogi oznakowania suplementow diety
+- [FSMP](../fsmp/skill.md) - granica suplement/FSMP, kwalifikacja produktow granicznych
+- [Reklama zywnosci](../reklama-zywnosci/skill.md) - reklama suplementow diety, influencer marketing

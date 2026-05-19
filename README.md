@@ -34,6 +34,11 @@ Projekt inspirowany repozytorium [claude-fuer-deutsches-recht](https://github.co
 | [`materialy-kontaktowe`](./skills/materialy-kontaktowe/skill.md) | Materialy i wyroby do kontaktu z zywnoscia - migracja, deklaracje zgodnosci |
 | [`aromaty`](./skills/aromaty/skill.md) | Srodki aromatyzujace - aromaty naturalne, FTNF, wykaz unijny |
 | [`enzymy`](./skills/enzymy/skill.md) | Enzymy spozywcze - autoryzacja, wykaz unijny, substancje pomocnicze |
+| [`pestycydy`](./skills/pestycydy/skill.md) | Pozostalosci pestycydow (NDP) w zywnosci - MRL, monitoring, RASFF |
+| [`zywnosc-dla-niemowlat`](./skills/zywnosc-dla-niemowlat/skill.md) | Zywnosc dla niemowlat i malych dzieci - Rozp. 609/2013, akty delegowane |
+| [`fsmp`](./skills/fsmp/skill.md) | Zywnosc specjalnego przeznaczenia medycznego (FSMP) - kwalifikacja, wymogi, granica z suplementami |
+| [`reklama-zywnosci`](./skills/reklama-zywnosci/skill.md) | Reklama i marketing zywnosci - claims w reklamie, influencer marketing, dzieci |
+| [`rozporzadzenia-delegowane`](./skills/rozporzadzenia-delegowane/skill.md) | Akty delegowane i wykonawcze w prawie zywnosciowym UE - komitologia, sledzenie zmian |
 
 ### Przepisy
 
@@ -125,6 +130,10 @@ Repozytorium zawiera workflow `.github/workflows/update-laws.yml`, ktory co mies
 | 10/2011 | Materialy z tworzyw sztucznych do kontaktu z zywnoscia | 32011R0010 |
 | 1334/2008 | Srodki aromatyzujace | 32008R1334 |
 | 1332/2008 | Enzymy spozywcze | 32008R1332 |
+| 396/2005 | Najwyzsze dopuszczalne poziomy pozostalosci pestycydow (MRL) | 32005R0396 |
+| 2016/127 | Preparaty do poczatkowego i dalszego zywienia niemowlat (akt del.) | 32016R0127 |
+| 2016/128 | Zywnosc specjalnego przeznaczenia medycznego - FSMP (akt del.) | 32016R0128 |
+| 2017/1798 | Srodki zastepujace cala diete do kontroli masy ciala (akt del.) | 32017R1798 |
 
 ## Dokumenty wytycznych / Guidance
 
@@ -143,6 +152,10 @@ Katalog [`guidance/`](./guidance/) zawiera zestawienia pytan i odpowiedzi (Q&A) 
 | [`qa-food-contact-materials.md`](./guidance/qa-food-contact-materials.md) | Materialy do kontaktu z zywnoscia |
 | [`qa-flavourings.md`](./guidance/qa-flavourings.md) | Srodki aromatyzujace |
 | [`qa-food-enzymes.md`](./guidance/qa-food-enzymes.md) | Enzymy spozywcze |
+| [`qa-pesticides.md`](./guidance/qa-pesticides.md) | Pozostalosci pestycydow (NDP/MRL) |
+| [`qa-infant-food.md`](./guidance/qa-infant-food.md) | Zywnosc dla niemowlat i malych dzieci |
+| [`qa-fsmp.md`](./guidance/qa-fsmp.md) | Zywnosc specjalnego przeznaczenia medycznego (FSMP) |
+| [`qa-food-advertising.md`](./guidance/qa-food-advertising.md) | Reklama i marketing zywnosci |
 
 ## Dokumentacja techniczna
 

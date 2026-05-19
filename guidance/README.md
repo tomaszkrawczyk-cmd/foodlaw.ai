@@ -19,6 +19,10 @@ zywnosciowego UE/PL. Materialy sluza jako pomoc interpretacyjna dla praktykow.
 | [qa-food-contact-materials.md](qa-food-contact-materials.md) | Materialy do kontaktu z zywnoscia | Rozp. (WE) 1935/2004, Rozp. (UE) 10/2011 |
 | [qa-flavourings.md](qa-flavourings.md) | Srodki aromatyzujace | Rozp. (WE) 1334/2008 |
 | [qa-food-enzymes.md](qa-food-enzymes.md) | Enzymy spozywcze | Rozp. (WE) 1332/2008 |
+| [qa-pesticides.md](qa-pesticides.md) | Pozostalosci pestycydow (NDP/MRL) | Rozp. (WE) 396/2005 |
+| [qa-infant-food.md](qa-infant-food.md) | Zywnosc dla niemowlat i malych dzieci | Rozp. (UE) 609/2013, Rozp. del. 2016/127 |
+| [qa-fsmp.md](qa-fsmp.md) | Zywnosc specjalnego przeznaczenia medycznego (FSMP) | Rozp. del. (UE) 2016/128 |
+| [qa-food-advertising.md](qa-food-advertising.md) | Reklama i marketing zywnosci | Rozp. (UE) 1169/2011, Rozp. (WE) 1924/2006 |
 
 ## Zrodla
 

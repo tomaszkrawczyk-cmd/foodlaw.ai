@@ -47,6 +47,10 @@ DEFAULT_CELEX_NUMBERS = [
     "32011R0010",  # Rozp. 10/2011 - Materialy z tworzyw sztucznych do kontaktu z zywnoscia
     "32008R1334",  # Rozp. 1334/2008 - Aromaty
     "32008R1332",  # Rozp. 1332/2008 - Enzymy spozywcze
+    "32005R0396",  # Rozp. 396/2005 - Najwyzsze dopuszczalne poziomy pozostalosci pestycydow
+    "32016R0127",  # Rozp. del. 2016/127 - Preparaty dla niemowlat
+    "32016R0128",  # Rozp. del. 2016/128 - Zywnosc specjalnego przeznaczenia medycznego (FSMP)
+    "32017R1798",  # Rozp. del. 2017/1798 - Srodki zastepujace cala diete do kontroli masy ciala
 ]
 
 CELLAR_SPARQL_ENDPOINT = "https://publications.europa.eu/webapi/rdf/sparql"
@@ -249,7 +253,7 @@ def main():
     """Glowna funkcja - parsuje argumenty i uruchamia pobieranie."""
     parser = argparse.ArgumentParser(
         description="Pobiera rozporzadzenia UE z EUR-Lex (CELLAR SPARQL + REST API). "
-                    "Domyslnie pobiera 17 kluczowych rozporzadzen prawa zywnosciowego "
+                    "Domyslnie pobiera 21 kluczowych rozporzadzen prawa zywnosciowego "
                     "w polskiej wersji jezykowej.",
         epilog="Przyklad: python fetch_eurlex.py --celex 32002R0178 32011R1169 --output ./data/",
     )
@@ -257,7 +261,7 @@ def main():
         "--celex",
         nargs="+",
         default=DEFAULT_CELEX_NUMBERS,
-        help="Numery CELEX do pobrania (domyslnie: 17 rozporzadzen prawa zywnosciowego)",
+        help="Numery CELEX do pobrania (domyslnie: 21 rozporzadzen prawa zywnosciowego)",
     )
     parser.add_argument(
         "--output", "-o",
