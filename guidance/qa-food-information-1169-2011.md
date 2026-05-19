@@ -1,8 +1,8 @@
 # Q&A: Informacja o Zywnosci dla Konsumentow (Rozp. 1169/2011)
 
-**Zrodlo**: Komisja Europejska, DG SANTE - wytyczne dot. stosowania Rozp. (UE) nr 1169/2011
-**URL**: https://food.ec.europa.eu/safety/labelling-and-nutrition/food-information-consumers-legislation_en
-**Data dostepu**: 2025-01
+**Zrodlo**: Opracowanie wlasne na podstawie Rozporzadzenia (UE) nr 1169/2011 i praktyki regulacyjnej
+**Referencyjne strony KE**: https://food.ec.europa.eu/safety/labelling-and-nutrition/food-information-consumers-legislation_en
+**Uwaga**: Ponizsze Q&A stanowia interpretacyjne podsumowanie na podstawie tresci przepisow. Nie sa oficjalnym dokumentem Komisji Europejskiej. W razie watpliwosci, nalezy sprawdzic aktualna wersje przepisow na EUR-Lex.
 
 ---
 

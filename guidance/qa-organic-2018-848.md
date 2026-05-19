@@ -1,8 +1,8 @@
 # Q&A: Produkcja Ekologiczna (Rozp. 2018/848)
 
-**Zrodlo**: Komisja Europejska, DG AGRI - wytyczne dot. produkcji ekologicznej
-**URL**: https://agriculture.ec.europa.eu/farming/organic-farming/legislation_en
-**Data dostepu**: 2025-01
+**Zrodlo**: Opracowanie wlasne na podstawie Rozporzadzenia (UE) 2018/848 i praktyki regulacyjnej
+**Referencyjne strony KE**: https://agriculture.ec.europa.eu/farming/organic-farming/legislation_en
+**Uwaga**: Ponizsze Q&A stanowia interpretacyjne podsumowanie na podstawie tresci przepisow. Nie sa oficjalnym dokumentem Komisji Europejskiej. W razie watpliwosci, nalezy sprawdzic aktualna wersje przepisow na EUR-Lex.
 
 ---
 

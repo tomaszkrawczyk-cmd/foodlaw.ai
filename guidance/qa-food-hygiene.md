@@ -1,8 +1,8 @@
 # Q&A: Higiena Zywnosci (Rozp. 852/2004 i 853/2004)
 
-**Zrodlo**: Komisja Europejska, DG SANTE - wytyczne dot. higieny zywnosci
-**URL**: https://food.ec.europa.eu/safety/biological-safety/food-hygiene/legislation_en
-**Data dostepu**: 2025-01
+**Zrodlo**: Opracowanie wlasne na podstawie Rozporzadzen (WE) nr 852/2004 i 853/2004 oraz praktyki regulacyjnej
+**Referencyjne strony KE**: https://food.ec.europa.eu/safety/biological-safety/food-hygiene/legislation_en
+**Uwaga**: Ponizsze Q&A stanowia interpretacyjne podsumowanie na podstawie tresci przepisow. Nie sa oficjalnym dokumentem Komisji Europejskiej. W razie watpliwosci, nalezy sprawdzic aktualna wersje przepisow na EUR-Lex.
 
 ---
 

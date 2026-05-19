@@ -81,6 +81,8 @@ Pytanie: Czy produkt zawierajacy 5-HTP moze byc notyfikowany jako suplement diet
 
 ### Pobieranie aktualnych tekstow prawnych
 
+> **Uwaga**: EUR-Lex, ISAP oraz CURIA stosuja obecnie zabezpieczenia WAF/bot protection, ktore blokuja automatyczne pobieranie tresci. Skrypty ponizej moga wymagac w przyszlosci dostepu przez przegladarke (headless browser) lub uwierzytelnienia kluczem API.
+
 ```bash
 # Zainstaluj zaleznosci
 pip install -r scripts/requirements.txt

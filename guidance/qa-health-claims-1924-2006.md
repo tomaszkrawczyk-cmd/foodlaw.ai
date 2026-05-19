@@ -1,8 +1,8 @@
 # Q&A: Oswiadczenia Zywieniowe i Zdrowotne (Rozp. 1924/2006)
 
-**Zrodlo**: Komisja Europejska, DG SANTE - wytyczne dot. stosowania Rozp. (WE) nr 1924/2006
-**URL**: https://food.ec.europa.eu/safety/labelling-and-nutrition/nutrition-and-health-claims_en
-**Data dostepu**: 2025-01
+**Zrodlo**: Opracowanie wlasne na podstawie Rozporzadzenia (WE) nr 1924/2006 i praktyki regulacyjnej
+**Referencyjne strony KE**: https://food.ec.europa.eu/safety/labelling-and-nutrition/nutrition-and-health-claims_en
+**Uwaga**: Ponizsze Q&A stanowia interpretacyjne podsumowanie na podstawie tresci przepisow. Nie sa oficjalnym dokumentem Komisji Europejskiej. W razie watpliwosci, nalezy sprawdzic aktualna wersje przepisow na EUR-Lex.
 
 ---
 

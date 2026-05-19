@@ -1,8 +1,8 @@
 # Q&A: Zanieczyszczenia w Zywnosci (Rozp. 2023/915)
 
-**Zrodlo**: Komisja Europejska, DG SANTE - wytyczne dot. zanieczyszczen w zywnosci
-**URL**: https://food.ec.europa.eu/safety/chemical-safety/contaminants_en
-**Data dostepu**: 2025-01
+**Zrodlo**: Opracowanie wlasne na podstawie Rozporzadzenia (UE) 2023/915 i praktyki regulacyjnej
+**Referencyjne strony KE**: https://food.ec.europa.eu/safety/chemical-safety/contaminants_en
+**Uwaga**: Ponizsze Q&A stanowia interpretacyjne podsumowanie na podstawie tresci przepisow. Nie sa oficjalnym dokumentem Komisji Europejskiej. W razie watpliwosci, nalezy sprawdzic aktualna wersje przepisow na EUR-Lex.
 
 ---
 

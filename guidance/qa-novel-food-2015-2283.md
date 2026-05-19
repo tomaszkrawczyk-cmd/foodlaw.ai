@@ -1,8 +1,8 @@
 # Q&A: Nowa Zywnosc (Rozp. 2015/2283)
 
-**Zrodlo**: Komisja Europejska, DG SANTE - wytyczne dot. nowej zywnosci
-**URL**: https://food.ec.europa.eu/safety/novel-food/legislation_en
-**Data dostepu**: 2025-01
+**Zrodlo**: Opracowanie wlasne na podstawie Rozporzadzenia (UE) 2015/2283 i praktyki regulacyjnej
+**Referencyjne strony KE**: https://food.ec.europa.eu/safety/novel-food/legislation_en
+**Uwaga**: Ponizsze Q&A stanowia interpretacyjne podsumowanie na podstawie tresci przepisow. Nie sa oficjalnym dokumentem Komisji Europejskiej. W razie watpliwosci, nalezy sprawdzic aktualna wersje przepisow na EUR-Lex.
 
 ---
 

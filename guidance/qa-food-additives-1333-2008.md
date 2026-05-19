@@ -1,8 +1,8 @@
 # Q&A: Dodatki do Zywnosci (Rozp. 1333/2008)
 
-**Zrodlo**: Komisja Europejska, DG SANTE - wytyczne dot. dodatkow do zywnosci
-**URL**: https://food.ec.europa.eu/safety/food-improvement-agents/additives_en
-**Data dostepu**: 2025-01
+**Zrodlo**: Opracowanie wlasne na podstawie Rozporzadzenia (WE) nr 1333/2008 i praktyki regulacyjnej
+**Referencyjne strony KE**: https://food.ec.europa.eu/safety/food-improvement-agents/additives_en
+**Uwaga**: Ponizsze Q&A stanowia interpretacyjne podsumowanie na podstawie tresci przepisow. Nie sa oficjalnym dokumentem Komisji Europejskiej. W razie watpliwosci, nalezy sprawdzic aktualna wersje przepisow na EUR-Lex.
 
 ---
 

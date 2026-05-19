@@ -245,7 +245,7 @@ def main():
     """Glowna funkcja - parsuje argumenty i uruchamia pobieranie."""
     parser = argparse.ArgumentParser(
         description="Pobiera rozporzadzenia UE z EUR-Lex (CELLAR SPARQL + REST API). "
-                    "Domyslnie pobiera 9 kluczowych rozporzadzen prawa zywnosciowego "
+                    "Domyslnie pobiera 13 kluczowych rozporzadzen prawa zywnosciowego "
                     "w polskiej wersji jezykowej.",
         epilog="Przyklad: python fetch_eurlex.py --celex 32002R0178 32011R1169 --output ./data/",
     )
@@ -253,7 +253,7 @@ def main():
         "--celex",
         nargs="+",
         default=DEFAULT_CELEX_NUMBERS,
-        help="Numery CELEX do pobrania (domyslnie: 9 rozporzadzen prawa zywnosciowego)",
+        help="Numery CELEX do pobrania (domyslnie: 13 rozporzadzen prawa zywnosciowego)",
     )
     parser.add_argument(
         "--output", "-o",
