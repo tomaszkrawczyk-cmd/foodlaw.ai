@@ -6,7 +6,7 @@ Pobiera polskie wersje jezykowe aktow prawnych na podstawie numerow CELEX.
 Wykorzystuje endpoint SPARQL: https://publications.europa.eu/webapi/rdf/sparql
 
 Autor: Tomasz Krawczyk / supplemental.pl
-Licencja: Apache-2.0 OR MIT
+Licencja: Apache-2.0
 """
 
 import argparse
@@ -43,6 +43,10 @@ DEFAULT_CELEX_NUMBERS = [
     "32003R1829",  # Rozp. 1829/2003 - Genetycznie zmodyfikowana zywnosc i pasza
     "32003R1830",  # Rozp. 1830/2003 - Identyfikowalnosc i etykietowanie GMO
     "32018R0848",  # Rozp. 2018/848 - Produkcja ekologiczna
+    "32004R1935",  # Rozp. 1935/2004 - Materialy kontaktowe z zywnoscia (framework)
+    "32011R0010",  # Rozp. 10/2011 - Materialy z tworzyw sztucznych do kontaktu z zywnoscia
+    "32008R1334",  # Rozp. 1334/2008 - Aromaty
+    "32008R1332",  # Rozp. 1332/2008 - Enzymy spozywcze
 ]
 
 CELLAR_SPARQL_ENDPOINT = "https://publications.europa.eu/webapi/rdf/sparql"
@@ -245,7 +249,7 @@ def main():
     """Glowna funkcja - parsuje argumenty i uruchamia pobieranie."""
     parser = argparse.ArgumentParser(
         description="Pobiera rozporzadzenia UE z EUR-Lex (CELLAR SPARQL + REST API). "
-                    "Domyslnie pobiera 13 kluczowych rozporzadzen prawa zywnosciowego "
+                    "Domyslnie pobiera 17 kluczowych rozporzadzen prawa zywnosciowego "
                     "w polskiej wersji jezykowej.",
         epilog="Przyklad: python fetch_eurlex.py --celex 32002R0178 32011R1169 --output ./data/",
     )
@@ -253,7 +257,7 @@ def main():
         "--celex",
         nargs="+",
         default=DEFAULT_CELEX_NUMBERS,
-        help="Numery CELEX do pobrania (domyslnie: 13 rozporzadzen prawa zywnosciowego)",
+        help="Numery CELEX do pobrania (domyslnie: 17 rozporzadzen prawa zywnosciowego)",
     )
     parser.add_argument(
         "--output", "-o",

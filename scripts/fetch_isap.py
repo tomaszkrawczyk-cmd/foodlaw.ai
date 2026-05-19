@@ -6,7 +6,7 @@ Korzysta z API ISAP: https://isap.sejm.gov.pl/api/isap/
 Pobiera teksty ustaw dotyczacych prawa zywnosciowego.
 
 Autor: Tomasz Krawczyk / supplemental.pl
-Licencja: Apache-2.0 OR MIT
+Licencja: Apache-2.0
 """
 
 import argparse

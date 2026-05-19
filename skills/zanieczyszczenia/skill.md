@@ -106,3 +106,4 @@ metod badan, probkobrania i srodkow zaradczych.
 - [Higiena zywnosci](../higiena-zywnosci/skill.md) - wymogi higieniczne minimalizujace zanieczyszczenia
 - [Novel Food](../novel-food/skill.md) - NDP dla nowych skladnikow zywnosci
 - [Dodatki do zywnosci](../dodatki-do-zywnosci/skill.md) - czystosc dodatkow, zanieczyszczenia w dodatkach
+- [Materialy kontaktowe](../materialy-kontaktowe/skill.md) - migracja substancji z materialow kontaktowych

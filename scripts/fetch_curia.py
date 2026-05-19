@@ -15,7 +15,7 @@ odpowiadaja biezacemu DOM. W razie problemow z parsowaniem, uzyj flagi
 analizy struktury DOM.
 
 Autor: Tomasz Krawczyk / supplemental.pl
-Licencja: Apache-2.0 OR MIT
+Licencja: Apache-2.0
 """
 
 import argparse

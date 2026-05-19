@@ -5,7 +5,7 @@
 ## Czym jest to repozytorium
 
 Kompleksowa baza wiedzy prawnej obejmujaca:
-- Rozporzadzenia UE dotyczace zywnosci (13 kluczowych aktow)
+- Rozporzadzenia UE dotyczace zywnosci (17 kluczowych aktow)
 - Polskie ustawy z zakresu bezpieczenstwa zywnosci
 - Umiejetnosci (skills) definiujace role eksperckie AI
 - Orzecznictwo NSA, WSA, TSUE i decyzje GIS
@@ -33,6 +33,9 @@ Kompleksowa baza wiedzy prawnej obejmujaca:
 - skills/dodatki-do-zywnosci/skill.md - ekspert ds. dodatkow do zywnosci
 - skills/gmo/skill.md - ekspert ds. genetycznie zmodyfikowanej zywnosci i paszy
 - skills/zywnosc-ekologiczna/skill.md - ekspert ds. zywnosci ekologicznej
+- skills/materialy-kontaktowe/skill.md - ekspert ds. materialow do kontaktu z zywnoscia
+- skills/aromaty/skill.md - ekspert ds. srodkow aromatyzujacych
+- skills/enzymy/skill.md - ekspert ds. enzymow spozywczych
 - references/cytowanie.md - zasady cytowania
 - references/metodyka.md - metodyka analizy prawa zywnosciowego
 - przepisy/unijne/ - rozporzadzenia UE
@@ -55,6 +58,9 @@ Kompleksowa baza wiedzy prawnej obejmujaca:
 11. Dodatki do zywnosci (Rozp. 1333/2008) - numery E, klasy funkcjonalne, autoryzacja, re-evaluation, quantum satis
 12. GMO - genetycznie zmodyfikowana zywnosc i pasza (Rozp. 1829/2003), identyfikowalnosc (Rozp. 1830/2003), prog 0,9%
 13. Zywnosc ekologiczna (Rozp. 2018/848) - certyfikacja, logo UE, import, konwersja, substancje zakazane
+14. Materialy do kontaktu z zywnoscia (Rozp. 1935/2004, 10/2011) - migracja, deklaracje zgodnosci, recykling tworzyw
+15. Aromaty (Rozp. 1334/2008) - aromaty naturalne, FTNF, wykaz unijny substancji aromatycznych
+16. Enzymy spozywcze (Rozp. 1332/2008) - autoryzacja, wykaz unijny (w toku!), substancje pomocnicze
 
 ## Zasady dla AI
 

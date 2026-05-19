@@ -13,7 +13,7 @@ W razie problemow z parsowaniem, uzyj flagi --output-raw aby zapisac surowy HTML
 do katalogu wyjsciowego w celu recznej analizy struktury DOM.
 
 Autor: Tomasz Krawczyk / supplemental.pl
-Licencja: Apache-2.0 OR MIT
+Licencja: Apache-2.0
 """
 
 import argparse

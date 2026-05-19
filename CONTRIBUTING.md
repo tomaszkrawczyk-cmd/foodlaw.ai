@@ -71,7 +71,7 @@ Pliki orzecznicze powinny zawierac:
 ## Licencja wkladow
 
 O ile nie zaznaczono inaczej, wszelkie wklady sa licencjonowane na warunkach
-Apache-2.0 OR MIT (podwojna licencja), zgodnie z sekcja 5 licencji Apache 2.0.
+Apache-2.0, zgodnie z sekcja 5 licencji Apache 2.0.
 
 ## Kontakt
 

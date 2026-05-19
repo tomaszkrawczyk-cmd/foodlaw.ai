@@ -6,7 +6,7 @@ Obsluguje format HTML z EUR-Lex (artykuly, motywy, zalaczniki) oraz
 format ISAP. Zachowuje numeracje artykulow i strukture paragrafow.
 
 Autor: Tomasz Krawczyk / supplemental.pl
-Licencja: Apache-2.0 OR MIT
+Licencja: Apache-2.0
 """
 
 import argparse

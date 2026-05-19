@@ -31,12 +31,15 @@ Projekt inspirowany repozytorium [claude-fuer-deutsches-recht](https://github.co
 | [`dodatki-do-zywnosci`](./skills/dodatki-do-zywnosci/skill.md) | Dodatki do zywnosci (food additives) - numery E, klasy funkcjonalne, autoryzacja, re-evaluation |
 | [`gmo`](./skills/gmo/skill.md) | Genetycznie zmodyfikowana zywnosc i pasza - autoryzacja, etykietowanie, prog 0,9% |
 | [`zywnosc-ekologiczna`](./skills/zywnosc-ekologiczna/skill.md) | Produkcja ekologiczna - certyfikacja, logo UE, import, konwersja |
+| [`materialy-kontaktowe`](./skills/materialy-kontaktowe/skill.md) | Materialy i wyroby do kontaktu z zywnoscia - migracja, deklaracje zgodnosci |
+| [`aromaty`](./skills/aromaty/skill.md) | Srodki aromatyzujace - aromaty naturalne, FTNF, wykaz unijny |
+| [`enzymy`](./skills/enzymy/skill.md) | Enzymy spozywcze - autoryzacja, wykaz unijny, substancje pomocnicze |
 
 ### Przepisy
 
 | Katalog | Zawartosc |
 | --- | --- |
-| [`przepisy/unijne/`](./przepisy/unijne/) | Kluczowe rozporzadzenia UE dot. zywnosci (178/2002, 1169/2011, 1924/2006, 1925/2006, 2015/2283, 852/2004, 853/2004, 2023/915, 609/2013, 1333/2008, 1829/2003, 1830/2003, 2018/848) |
+| [`przepisy/unijne/`](./przepisy/unijne/) | Kluczowe rozporzadzenia UE dot. zywnosci (178/2002, 1169/2011, 1924/2006, 1925/2006, 2015/2283, 852/2004, 853/2004, 2023/915, 609/2013, 1333/2008, 1829/2003, 1830/2003, 2018/848, 1935/2004, 10/2011, 1334/2008, 1332/2008) |
 | [`przepisy/krajowe/`](./przepisy/krajowe/) | Polskie ustawy (o bezpieczenstwie zywnosci i zywienia, o PIS) |
 
 ### Orzecznictwo
@@ -118,6 +121,10 @@ Repozytorium zawiera workflow `.github/workflows/update-laws.yml`, ktory co mies
 | 1829/2003 | Genetycznie zmodyfikowana zywnosc i pasza | 32003R1829 |
 | 1830/2003 | Identyfikowalnosc i etykietowanie GMO | 32003R1830 |
 | 2018/848 | Produkcja ekologiczna i znakowanie | 32018R0848 |
+| 1935/2004 | Materialy do kontaktu z zywnoscia (FCM framework) | 32004R1935 |
+| 10/2011 | Materialy z tworzyw sztucznych do kontaktu z zywnoscia | 32011R0010 |
+| 1334/2008 | Srodki aromatyzujace | 32008R1334 |
+| 1332/2008 | Enzymy spozywcze | 32008R1332 |
 
 ## Dokumenty wytycznych / Guidance
 
@@ -133,6 +140,15 @@ Katalog [`guidance/`](./guidance/) zawiera zestawienia pytan i odpowiedzi (Q&A) 
 | [`qa-gmo-1829-2003.md`](./guidance/qa-gmo-1829-2003.md) | GMO w zywnosci i paszy |
 | [`qa-food-hygiene.md`](./guidance/qa-food-hygiene.md) | Higiena zywnosci |
 | [`qa-contaminants.md`](./guidance/qa-contaminants.md) | Zanieczyszczenia w zywnosci |
+| [`qa-food-contact-materials.md`](./guidance/qa-food-contact-materials.md) | Materialy do kontaktu z zywnoscia |
+| [`qa-flavourings.md`](./guidance/qa-flavourings.md) | Srodki aromatyzujace |
+| [`qa-food-enzymes.md`](./guidance/qa-food-enzymes.md) | Enzymy spozywcze |
+
+## Dokumentacja techniczna
+
+| Plik | Opis |
+| --- | --- |
+| [`docs/eurlex-api-access.md`](./docs/eurlex-api-access.md) | Dostep do danych EUR-Lex programowo (SPARQL, REST API) |
 
 ## Wazne zastrzezenia
 
@@ -150,11 +166,11 @@ Katalog [`guidance/`](./guidance/) zawiera zestawienia pytan i odpowiedzi (Q&A) 
 
 ## Licencja
 
-Podwojna licencja: **Apache License 2.0** LUB **MIT License**, do wyboru uzytkownika.
+Licencja: **Apache License 2.0**
 
-`SPDX-License-Identifier: Apache-2.0 OR MIT`
+`SPDX-License-Identifier: Apache-2.0`
 
-Szczegoly: [LICENSE](./LICENSE) | [LICENSE-APACHE](./LICENSE-APACHE) | [LICENSE-MIT](./LICENSE-MIT)
+Szczegoly: [LICENSE](./LICENSE)
 
 ## Wspoludzial
 

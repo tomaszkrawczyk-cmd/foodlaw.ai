@@ -3,9 +3,7 @@
 ## Pliki glowne
 - README.md                          Opis projektu, instrukcje uzycia, zastrzezenia prawne
 - CONTRIBUTING.md                    Zasady wspolpracy i wkladow
-- LICENSE                            Informacja o podwojnej licencji (Apache-2.0 OR MIT)
-- LICENSE-APACHE                     Pelny tekst licencji Apache 2.0
-- LICENSE-MIT                        Pelny tekst licencji MIT
+- LICENSE                            Pelny tekst licencji Apache 2.0
 - llms.txt                           Opis repozytorium zoptymalizowany dla AI
 - index.txt                          Ten plik - mapa zawartosci
 
@@ -21,6 +19,9 @@
 - skills/dodatki-do-zywnosci/skill.md  Ekspert ds. dodatkow do zywnosci (Rozp. 1333/2008)
 - skills/gmo/skill.md                Ekspert ds. genetycznie zmodyfikowanej zywnosci i paszy (Rozp. 1829/2003)
 - skills/zywnosc-ekologiczna/skill.md  Ekspert ds. zywnosci ekologicznej (Rozp. 2018/848)
+- skills/materialy-kontaktowe/skill.md  Ekspert ds. materialow do kontaktu z zywnoscia (Rozp. 1935/2004, 10/2011)
+- skills/aromaty/skill.md               Ekspert ds. srodkow aromatyzujacych (Rozp. 1334/2008)
+- skills/enzymy/skill.md                Ekspert ds. enzymow spozywczych (Rozp. 1332/2008)
 
 ## Przepisy unijne (przepisy/unijne/)
 - przepisy/unijne/reg-178-2002-general-food-law.md        Rozp. 178/2002 - Ogolne prawo zywnosciowe
@@ -36,6 +37,10 @@
 - przepisy/unijne/reg-1829-2003-gmo-food-feed.md         Rozp. 1829/2003 - Genetycznie zmodyfikowana zywnosc i pasza
 - przepisy/unijne/reg-1830-2003-gmo-traceability.md      Rozp. 1830/2003 - Identyfikowalnosc i etykietowanie GMO
 - przepisy/unijne/reg-2018-848-organic.md                Rozp. 2018/848 - Produkcja ekologiczna
+- przepisy/unijne/reg-1935-2004-food-contact-materials.md  Rozp. 1935/2004 - Materialy do kontaktu z zywnoscia
+- przepisy/unijne/reg-10-2011-plastic-fcm.md               Rozp. 10/2011 - Tworzywa sztuczne FCM
+- przepisy/unijne/reg-1334-2008-flavourings.md             Rozp. 1334/2008 - Srodki aromatyzujace
+- przepisy/unijne/reg-1332-2008-food-enzymes.md            Rozp. 1332/2008 - Enzymy spozywcze
 
 ## Przepisy krajowe (przepisy/krajowe/)
 - przepisy/krajowe/ustawa-bezpieczenstwo-zywnosci.md      Ustawa o bezpieczenstwie zywnosci i zywienia
@@ -72,3 +77,9 @@
 - guidance/qa-gmo-1829-2003.md                Q&A: GMO w zywnosci i paszy (Rozp. 1829/2003)
 - guidance/qa-food-hygiene.md                 Q&A: Higiena zywnosci (Rozp. 852/2004, 853/2004)
 - guidance/qa-contaminants.md                 Q&A: Zanieczyszczenia w zywnosci (Rozp. 2023/915)
+- guidance/qa-food-contact-materials.md       Q&A: Materialy do kontaktu z zywnoscia (Rozp. 1935/2004)
+- guidance/qa-flavourings.md                  Q&A: Srodki aromatyzujace (Rozp. 1334/2008)
+- guidance/qa-food-enzymes.md                 Q&A: Enzymy spozywcze (Rozp. 1332/2008)
+
+## Dokumentacja techniczna (docs/)
+- docs/eurlex-api-access.md              Dokumentacja dostepu do EUR-Lex (SPARQL, REST API)

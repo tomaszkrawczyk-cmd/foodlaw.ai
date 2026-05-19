@@ -126,4 +126,6 @@ etykietowania dodatkow do zywnosci.
 - [Suplementy diety](../suplementy-diety/skill.md) - dodatki w suplementach diety
 - [Zanieczyszczenia](../zanieczyszczenia/skill.md) - zanieczyszczenia vs. dodatki, czystosc
 - [Higiena zywnosci](../higiena-zywnosci/skill.md) - konserwanty i higiena
+- [Aromaty](../aromaty/skill.md) - srodki aromatyzujace (powiazana regulacja)
+- [Enzymy spozywcze](../enzymy/skill.md) - enzymy (wspolna procedura autoryzacji)
 

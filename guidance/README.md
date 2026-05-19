@@ -16,6 +16,9 @@ zywnosciowego UE/PL. Materialy sluza jako pomoc interpretacyjna dla praktykow.
 | [qa-gmo-1829-2003.md](qa-gmo-1829-2003.md) | Genetycznie zmodyfikowana zywnosc i pasza | Rozp. (WE) 1829/2003 |
 | [qa-food-hygiene.md](qa-food-hygiene.md) | Higiena zywnosci | Rozp. (WE) 852/2004, 853/2004 |
 | [qa-contaminants.md](qa-contaminants.md) | Zanieczyszczenia w zywnosci | Rozp. (UE) 2023/915 |
+| [qa-food-contact-materials.md](qa-food-contact-materials.md) | Materialy do kontaktu z zywnoscia | Rozp. (WE) 1935/2004, Rozp. (UE) 10/2011 |
+| [qa-flavourings.md](qa-flavourings.md) | Srodki aromatyzujace | Rozp. (WE) 1334/2008 |
+| [qa-food-enzymes.md](qa-food-enzymes.md) | Enzymy spozywcze | Rozp. (WE) 1332/2008 |
 
 ## Zrodla
 
