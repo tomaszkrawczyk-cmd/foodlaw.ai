@@ -190,6 +190,11 @@ def search_curia(session: requests.Session, keyword: str,
         soup = BeautifulSoup(response.text, "lxml")
 
         # Parsuj wyniki z CURIA
+        # UWAGA: Ponizsze selektory CSS NIE zostaly zweryfikowane wobec aktualnego
+        # DOM strony CURIA. Witryna jest aplikacja Angular SPA i zwraca pusty
+        # szkielet HTML przez zwykle zadania HTTP. Selektory sa spekulatywne
+        # i wymagaja walidacji za pomoca automatyzacji przegladarki (Playwright)
+        # lub analizy surowego HTML (--output-raw).
         result_rows = soup.select(
             "table.detail_table_documents tr, "
             ".liste_table tr, "
