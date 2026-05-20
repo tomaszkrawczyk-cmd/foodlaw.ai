@@ -5,7 +5,12 @@ Administracyjnych (CBOSA) - orzeczenia.nsa.gov.pl.
 
 Wyszukuje orzeczenia dotyczace prawa zywnosciowego na podstawie slow kluczowych.
 
-UWAGA: Selektory CSS uzyte w tym skrypcie (table.lista tr, .wyniki .wynik,
+UWAGA: CBOSA aktywnie blokuje polaczenia z adresow IP nalezacych do
+centrow danych i chmur obliczeniowych (np. AWS, GCP, Azure). Polaczenie TLS
+zostaje natychmiast zamkniete (SSLZeroReturnError). Skrypt dziala najlepiej
+z rezydencjalnego adresu IP lub przez VPN z wyjsciem rezydencjalnym.
+
+Selektory CSS uzyte w tym skrypcie (table.lista tr, .wyniki .wynik,
 .result-item) sa spekulatywne i musza byc skalibrowane wobec aktualnej struktury
 HTML strony orzeczenia.nsa.gov.pl przed pierwszym urzyciem produkcyjnym.
 CBOSA uzywa interfejsu JSF, ktory generuje dynamiczne identyfikatory elementow.
@@ -21,6 +26,7 @@ import json
 import logging
 import os
 import re
+import ssl
 import sys
 import time
 from pathlib import Path
@@ -52,6 +58,10 @@ CBOSA_BASE_URL = "https://orzeczenia.nsa.gov.pl"
 CBOSA_SEARCH_URL = f"{CBOSA_BASE_URL}/cbo/find"
 
 USER_AGENT = "foodlaw-ai/1.0 (https://github.com/supplemental-pl/foodlaw-ai; prawo zywnosciowe PL/EU)"
+
+# Retry configuration
+MAX_RETRIES = 3
+RETRY_BACKOFF_SECONDS = [2, 4, 8]
 
 logger = logging.getLogger(__name__)
 
@@ -104,11 +114,87 @@ def search_judgments(session: requests.Session, keyword: str,
     }
 
     results = []
+    response = None
+
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = session.get(CBOSA_SEARCH_URL, params=params, timeout=30)
+            response.raise_for_status()
+            break  # Success - exit retry loop
+
+        except (requests.exceptions.SSLError, ssl.SSLError) as e:
+            logger.error(
+                f"Blad SSL przy wyszukiwaniu '{keyword}' (proba {attempt + 1}/{MAX_RETRIES}): {e}"
+            )
+            logger.error(
+                "CBOSA rejects connections from cloud/datacenter IPs. "
+                "Use a residential network or VPN, or consider using the "
+                "--output-raw flag from a local machine."
+            )
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                logger.info(f"Ponowna proba za {wait}s...")
+                time.sleep(wait)
+            else:
+                return results
+
+        except requests.exceptions.ConnectionError as e:
+            error_str = str(e)
+            if "ConnectionReset" in error_str or "Connection aborted" in error_str:
+                logger.error(
+                    f"Polaczenie przerwane przy wyszukiwaniu '{keyword}' "
+                    f"(proba {attempt + 1}/{MAX_RETRIES}): {e}"
+                )
+                logger.error(
+                    "CBOSA rejects connections from cloud/datacenter IPs. "
+                    "Use a residential network or VPN, or consider using the "
+                    "--output-raw flag from a local machine."
+                )
+            else:
+                logger.error(
+                    f"Blad polaczenia przy wyszukiwaniu '{keyword}' "
+                    f"(proba {attempt + 1}/{MAX_RETRIES}): {e}"
+                )
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                logger.info(f"Ponowna proba za {wait}s...")
+                time.sleep(wait)
+            else:
+                return results
+
+        except requests.exceptions.Timeout:
+            logger.error(
+                f"Timeout przy wyszukiwaniu '{keyword}' "
+                f"(proba {attempt + 1}/{MAX_RETRIES})"
+            )
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                logger.info(f"Ponowna proba za {wait}s...")
+                time.sleep(wait)
+            else:
+                return results
+
+        except requests.exceptions.HTTPError as e:
+            logger.error(f"Blad HTTP {e.response.status_code} przy wyszukiwaniu '{keyword}'")
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                logger.info(f"Ponowna proba za {wait}s...")
+                time.sleep(wait)
+            else:
+                return results
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Blad zadania przy wyszukiwaniu '{keyword}': {e}")
+            return results
+
+        except Exception as e:
+            logger.error(f"Nieoczekiwany blad przy wyszukiwaniu '{keyword}': {e}")
+            return results
+
+    if response is None:
+        return results
 
     try:
-        response = session.get(CBOSA_SEARCH_URL, params=params, timeout=30)
-        response.raise_for_status()
-
         # Zapisz surowy HTML jesli wymagane (do debugowania selektorow)
         if output_raw and output_dir:
             raw_dir = output_dir / "raw_html"
@@ -148,16 +234,8 @@ def search_judgments(session: requests.Session, keyword: str,
                         "moze wymagac aktualizacji parsera",
             })
 
-    except requests.exceptions.Timeout:
-        logger.error(f"Timeout przy wyszukiwaniu: '{keyword}'")
-    except requests.exceptions.HTTPError as e:
-        logger.error(f"Blad HTTP {e.response.status_code} przy wyszukiwaniu '{keyword}'")
-    except requests.exceptions.ConnectionError as e:
-        logger.error(f"Blad polaczenia przy wyszukiwaniu '{keyword}': {e}")
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Blad zadania przy wyszukiwaniu '{keyword}': {e}")
     except Exception as e:
-        logger.error(f"Nieoczekiwany blad przy wyszukiwaniu '{keyword}': {e}")
+        logger.error(f"Blad parsowania wynikow dla '{keyword}': {e}")
 
     logger.info(f"Wynik dla '{keyword}': {len(results)} orzeczen")
     return results
@@ -225,27 +303,67 @@ def fetch_judgment_details(session: requests.Session, url: str) -> dict:
 
     logger.debug(f"Pobieranie szczegolow: {url}")
 
-    try:
-        response = session.get(url, timeout=30)
-        response.raise_for_status()
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = session.get(url, timeout=30)
+            response.raise_for_status()
 
-        soup = BeautifulSoup(response.text, "lxml")
+            soup = BeautifulSoup(response.text, "lxml")
 
-        details = {
-            "url": url,
-            "full_text": "",
-        }
+            details = {
+                "url": url,
+                "full_text": "",
+            }
 
-        # Probuj wyodrebnic tresc uzasadnienia
-        content_div = soup.select_one(".orzeczenie-tresc, .content, #content")
-        if content_div:
-            details["full_text"] = content_div.get_text(separator="\n", strip=True)
+            # Probuj wyodrebnic tresc uzasadnienia
+            content_div = soup.select_one(".orzeczenie-tresc, .content, #content")
+            if content_div:
+                details["full_text"] = content_div.get_text(separator="\n", strip=True)
 
-        return details
+            return details
 
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Blad pobierania szczegolow orzeczenia: {e}")
-        return {}
+        except (requests.exceptions.SSLError, ssl.SSLError) as e:
+            logger.error(
+                f"Blad SSL przy pobieraniu szczegolow (proba {attempt + 1}/{MAX_RETRIES}): {e}"
+            )
+            logger.error(
+                "CBOSA rejects connections from cloud/datacenter IPs. "
+                "Use a residential network or VPN, or consider using the "
+                "--output-raw flag from a local machine."
+            )
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                time.sleep(wait)
+            else:
+                return {}
+
+        except requests.exceptions.ConnectionError as e:
+            error_str = str(e)
+            if "ConnectionReset" in error_str or "Connection aborted" in error_str:
+                logger.error(
+                    "CBOSA rejects connections from cloud/datacenter IPs. "
+                    "Use a residential network or VPN, or consider using the "
+                    "--output-raw flag from a local machine."
+                )
+            logger.error(
+                f"Blad polaczenia przy pobieraniu szczegolow "
+                f"(proba {attempt + 1}/{MAX_RETRIES}): {e}"
+            )
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                time.sleep(wait)
+            else:
+                return {}
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Blad pobierania szczegolow orzeczenia: {e}")
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                time.sleep(wait)
+            else:
+                return {}
+
+    return {}
 
 
 def save_results(results: dict, output_dir: Path) -> None:
