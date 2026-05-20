@@ -24,7 +24,6 @@ Licencja: Apache-2.0
 import argparse
 import json
 import logging
-import os
 import re
 import ssl
 import sys
@@ -209,6 +208,10 @@ def search_judgments(session: requests.Session, keyword: str,
 
         # Szukaj wynikow w tabeli/liscie
         # Struktura CBOSA moze sie zmieniac - obsluga roznych wariantow
+        # UWAGA: Ponizsze selektory CSS NIE zostaly zweryfikowane wobec aktualnego
+        # DOM strony CBOSA. Witryna uzywa JSF z dynamicznymi ID elementow.
+        # Przed uzyciem produkcyjnym nalezy pobrac surowy HTML (--output-raw)
+        # i dostosowac selektory do rzeczywistej struktury.
         result_items = soup.select("table.lista tr, .wyniki .wynik, .result-item")
 
         if not result_items:

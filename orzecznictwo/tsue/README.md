@@ -7,18 +7,18 @@ Zbior kluczowych wyrokow Trybunalu Sprawiedliwosci Unii Europejskiej (TSUE) doty
 | Data | Sprawa | Temat | Plik |
 |------|--------|-------|------|
 | 2021-01-14 | C-514/19 | Informacja o alergenach w zywnosci nieopakowanej (gastronomia) | [2021-01-14-C-514-19-allergen-labeling-information.md](2021-01-14-C-514-19-allergen-labeling-information.md) |
-| 2020-11-19 | C-663/18 | Status prawny CBD - novel food a swoboda przeplywu towarow | [2019-11-19-C-609-18-davitas-novel-food-cbd.md](2019-11-19-C-609-18-davitas-novel-food-cbd.md) |
+| 2020-11-19 | C-663/18 | Status prawny CBD - novel food a swoboda przeplywu towarow | [2020-11-19-C-663-18-davitas-novel-food-cbd.md](2020-11-19-C-663-18-davitas-novel-food-cbd.md) |
 | 2020-03-19 | C-609/17 | Klasyfikacja novel food - tradycyjne stosowanie poza UE | [2020-03-19-C-609-17-novel-food-traditional-use.md](2020-03-19-C-609-17-novel-food-traditional-use.md) |
-| 2018-11-12 | C-169/17 | Etykietowanie - wymog wskazania kraju pochodzenia zywnosci | [2018-11-08-C-169-17-labeling-country-of-origin.md](2018-11-08-C-169-17-labeling-country-of-origin.md) |
+| 2018-11-12 | C-169/17 | Etykietowanie - wymog wskazania kraju pochodzenia zywnosci | [2018-11-12-C-169-17-labeling-country-of-origin.md](2018-11-12-C-169-17-labeling-country-of-origin.md) |
 | 2018-10-25 | C-345/17 | Oznakowanie ekologiczne - konsekwencje stwierdzenia niezgodnosci | [2018-10-25-C-345-17-organic-food-labeling.md](2018-10-25-C-345-17-organic-food-labeling.md) |
 | 2017-06-22 | C-497/15 | Informacja o zywnosci - wprowadzajacy w blad wyglad opakowania | [2017-06-22-C-497-15-food-information-misleading.md](2017-06-22-C-497-15-food-information-misleading.md) |
-| 2015-12-17 | C-157/14 | Etykietowanie wody mineralnej a oswiadczenia zywieniowe | [2015-06-17-C-195-12-mineral-water-labeling.md](2015-06-17-C-195-12-mineral-water-labeling.md) |
-| 2015-06-04 | C-195/14 | Procedura autoryzacji oswiadczen zdrowotnych - wymogi naukowe | [2014-07-10-C-195-14-health-claims-authorization.md](2014-07-10-C-195-14-health-claims-authorization.md) |
+| 2015-12-17 | C-157/14 | Etykietowanie wody mineralnej a oswiadczenia zywieniowe | [2015-12-17-C-157-14-mineral-water-labeling.md](2015-12-17-C-157-14-mineral-water-labeling.md) |
+| 2015-06-04 | C-195/14 | Procedura autoryzacji oswiadczen zdrowotnych - wymogi naukowe | [2015-06-04-C-195-14-health-claims-authorization.md](2015-06-04-C-195-14-health-claims-authorization.md) |
 | 2014-01-23 | C-609/12 | Status prawny on-hold claims (botanicals) w okresie przejsciowym | [2014-01-23-C-609-12-green-swan-health-claims.md](2014-01-23-C-609-12-green-swan-health-claims.md) |
 | 2013-02-28 | C-322/11 | Swoboda przeplywu zywnosci - wzajemne uznawanie suplementow | [2013-02-28-C-322-11-free-movement-food-mutual-recognition.md](2013-02-28-C-322-11-free-movement-food-mutual-recognition.md) |
 | 2012-09-06 | C-544/10 | Oswiadczenia zdrowotne na napojach alkoholowych (Deutsches Weintor) | [2012-09-06-C-544-10-health-claims-wine.md](2012-09-06-C-544-10-health-claims-wine.md) |
 | 2009-07-30 | C-140/07 | Granica suplement diety / produkt leczniczy - efekt farmakologiczny | [2009-07-30-C-140-07-food-supplement-medicine-boundary.md](2009-07-30-C-140-07-food-supplement-medicine-boundary.md) |
-| 2003-09-09 | C-236/01 | Zasada ostroznosci w prawie zywnosciowym (art. 7 Rozp. 178/2002) | [2002-12-05-C-236-01-precautionary-principle-food-safety.md](2002-12-05-C-236-01-precautionary-principle-food-safety.md) |
+| 2003-09-09 | C-236/01 | Zasada ostroznosci w prawie zywnosciowym (art. 7 Rozp. 178/2002) | [2003-09-09-C-236-01-precautionary-principle-food-safety.md](2003-09-09-C-236-01-precautionary-principle-food-safety.md) |
 
 ## Tematy orzeczen
 
