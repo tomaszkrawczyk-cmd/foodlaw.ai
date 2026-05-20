@@ -1,0 +1,25 @@
+{
+  "id": "FEAT-001",
+  "type": "chore",
+  "description": "Install dependencies and test the existing fetching scripts against CBOSA and CURIA to determine if they work or if we need an alternative approach",
+  "status": "completed",
+  "steps": [
+    "Install dependencies from scripts/requirements.txt (requests, beautifulsoup4, lxml, html2text, SPARQLWrapper)",
+    "Run python scripts/fetch_cbosa.py --keywords 'suplement diety' --limit 5 --output-raw --output /tmp/cbosa-test/ --verbose to test CBOSA access",
+    "Run python scripts/fetch_curia.py --keywords 'food safety' --limit 5 --output-raw --output /tmp/curia-test/ --verbose to test CURIA access",
+    "Examine the raw HTML files saved to determine if (a) the sites are accessible, (b) the selectors work, and (c) the data can be parsed",
+    "Document findings in the feature's findings field - whether scraping is viable or we need the fallback approach of creating judgment files from known landmark cases"
+  ],
+  "acceptance_criteria": [
+    "Dependencies installed successfully",
+    "Both scripts execute without crashing",
+    "Raw HTML output files are available for inspection",
+    "Clear determination of whether scraping works or not, documented in findings"
+  ],
+  "verification": [
+    "python scripts/fetch_cbosa.py --help exits with 0",
+    "python scripts/fetch_curia.py --help exits with 0"
+  ],
+  "blocked_reason": null,
+  "findings": "DETAILED TEST RESULTS (2026-05-20):\n\n1. DEPENDENCIES: All installed successfully (requests 2.32.5, beautifulsoup4 4.14.3, lxml 6.1.1, html2text 2025.4.15, SPARQLWrapper 2.0.0). Python 3.9.25 used (python3 command, not python).\n\n2. CBOSA (orzeczenia.nsa.gov.pl) - BLOCKED:\n   - TLS connection immediately closed by server (SSLZeroReturnError: TLS/SSL connection has been closed (EOF))\n   - Both HTTPS and HTTP connections refused from datacenter/cloud IPs\n   - The site appears to actively block non-browser traffic from cloud ranges\n   - Script exits cleanly (code 0) with error logged, no crash\n   - RAW HTML: Not saved because error occurs before response body is received\n   - VERDICT: Scraping CBOSA is NOT viable from cloud/CI environments\n\n3. CURIA (curia.europa.eu) - ANGULAR SPA, NOT SCRAPABLE:\n   - HTTP request succeeds (200) after redirect to infocuria.curia.europa.eu\n   - Response is 130KB Angular SPA shell (title: 'RPEX')\n   - Body contains only <app-root></app-root> with JS bundles (polyfills, scripts, main)\n   - Zero server-rendered content - all data loaded client-side via API calls\n   - CSS selectors in the script (table.detail_table_documents, .liste_table, etc.) match NOTHING\n   - Script exits cleanly (code 0) with 0 results\n   - VERDICT: HTML scraping of CURIA is NOT viable; would need headless browser or their internal API\n\n4. ALTERNATIVE: EU CELLAR SPARQL ENDPOINT (publications.europa.eu/webapi/rdf/sparql) - WORKS:\n   - Accessible, returns JSON results\n   - Can query case-law by CELEX number, ECLI, date, resource type\n   - Successfully retrieved CJEU cases (e.g., ECLI:EU:C:2013:793, 62012CJ0561)\n   - Properties available: ecli, celex, date, resource-type (JUDG/OPIN_AG), procedure language\n   - Text search on titles did NOT work (possibly expressions not linked in all records)\n   - Best approach: Query by known CELEX numbers for food law regulations (178/2002, 1924/2006, etc.)\n   - Limitation: Some queries timeout; keep queries simple and targeted\n\n5. ALTERNATIVE: SAOS API (saos.org.pl/api) - PARTIALLY WORKS:\n   - REST JSON API, fully accessible, no auth required\n   - Court types available: COMMON, SUPREME, CONSTITUTIONAL_TRIBUNAL, NATIONAL_APPEAL_CHAMBER\n   - ADMINISTRATIVE court type exists but returns 0 results (NSA/WSA judgments NOT indexed in SAOS)\n   - Has COMMON court judgments with full text content (HTML), judges, referenced regulations, keywords\n   - 'suplement diety' returns 674 results (all COMMON courts)\n   - 'Glowny Inspektor Sanitarny' returns 1711 results (all COMMON courts)\n   - Individual judgments have full text (50-100KB HTML), case numbers, dates, judges, legal bases\n   - VERDICT: Useful for common court food law cases but does NOT cover NSA/WSA administrative courts\n\n6. RECOMMENDED APPROACH FOR SUBSEQUENT FEATURES:\n   - For TSUE (EU) cases: Use EU CELLAR SPARQL endpoint with known CELEX numbers from food law regulations\n   - For NSA/WSA (PL administrative) cases: Create judgment markdown files manually from known landmark cases (scraping is blocked)\n   - For common court (PL) food law: SAOS API is viable but these are civil/criminal courts, not the administrative courts that handle GIS/food safety enforcement\n   - The fallback approach of manually creating files from known landmark cases is the correct strategy for NSA/WSA\n   - For CURIA/TSUE: Either use SPARQL or find CURIA's internal Angular API endpoints (would require reverse-engineering the SPA)"
+}
