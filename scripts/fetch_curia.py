@@ -5,14 +5,23 @@ Skrypt do wyszukiwania orzeczen Trybunalu Sprawiedliwosci UE (TSUE) w bazie CURI
 Wyszukuje orzeczenia dotyczace prawa zywnosciowego za pomoca interfejsu CURIA
 (curia.europa.eu).
 
-UWAGA: Selektory CSS uzyte w tym skrypcie (table.detail_table_documents tr,
-.liste_table tr, .result_table tr, #listeDocuments tr) sa spekulatywne i musza
-byc skalibrowane wobec aktualnej struktury HTML strony curia.europa.eu przed
-pierwszym uzyciem produkcyjnym. Interfejs CURIA byl wielokrotnie przebudowywany
-(ostatnio na frontend Angular) i zadne z tych selektorow prawdopodobnie nie
-odpowiadaja biezacemu DOM. W razie problemow z parsowaniem, uzyj flagi
---output-raw aby zapisac surowy HTML do katalogu wyjsciowego w celu recznej
-analizy struktury DOM.
+UWAGA: CURIA (infocuria.curia.europa.eu) jest obecnie aplikacja Angular SPA.
+Zwykle zadania HTTP (requests) otrzymuja jedynie pusty szkielet HTML z tagiem
+<app-root></app-root> i zestawem bundli JavaScript - brak tresci renderowanej
+po stronie serwera. Oznacza to, ze parsowanie HTML przez ten skrypt nie zwroci
+zadnych wynikow. Do pobrania danych potrzebna jest automatyzacja przegladarki
+(np. Playwright) lub alternatywne zrodlo danych.
+
+ALTERNATYWA: Endpoint SPARQL EU CELLAR (publications.europa.eu/webapi/rdf/sparql)
+pozwala na odpytywanie metadanych orzeczen TSUE (ECLI, CELEX, daty, typ zasobu)
+bez potrzeby renderowania JavaScript. Patrz scripts/fetch_cellar_sparql.py
+(jesli istnieje) lub dokumentacja EU CELLAR.
+
+Selektory CSS uzyte w tym skrypcie (table.detail_table_documents tr,
+.liste_table tr, .result_table tr, #listeDocuments tr) sa spekulatywne i nie
+odpowiadaja biezacemu DOM aplikacji Angular. W razie problemow z parsowaniem,
+uzyj flagi --output-raw aby zapisac surowy HTML do katalogu wyjsciowego w celu
+recznej analizy struktury.
 
 Autor: Tomasz Krawczyk / supplemental.pl
 Licencja: Apache-2.0
@@ -54,6 +63,10 @@ DEFAULT_KEYWORDS = [
 CURIA_SEARCH_URL = "https://curia.europa.eu/juris/liste.jsf"
 
 USER_AGENT = "foodlaw-ai/1.0 (https://github.com/supplemental-pl/foodlaw-ai; prawo zywnosciowe PL/EU)"
+
+# Retry configuration
+MAX_RETRIES = 3
+RETRY_BACKOFF_SECONDS = [2, 4, 8]
 
 logger = logging.getLogger(__name__)
 
@@ -108,11 +121,62 @@ def search_curia(session: requests.Session, keyword: str,
     }
 
     results = []
+    response = None
+
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = session.get(CURIA_SEARCH_URL, params=params, timeout=30)
+            response.raise_for_status()
+            break  # Success - exit retry loop
+
+        except requests.exceptions.Timeout:
+            logger.error(
+                f"Timeout przy wyszukiwaniu CURIA: '{keyword}' "
+                f"(proba {attempt + 1}/{MAX_RETRIES})"
+            )
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                logger.info(f"Ponowna proba za {wait}s...")
+                time.sleep(wait)
+            else:
+                return results
+
+        except requests.exceptions.HTTPError as e:
+            logger.error(
+                f"Blad HTTP {e.response.status_code} przy wyszukiwaniu '{keyword}' "
+                f"(proba {attempt + 1}/{MAX_RETRIES})"
+            )
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                logger.info(f"Ponowna proba za {wait}s...")
+                time.sleep(wait)
+            else:
+                return results
+
+        except requests.exceptions.ConnectionError as e:
+            logger.error(
+                f"Blad polaczenia przy wyszukiwaniu CURIA: '{keyword}' "
+                f"(proba {attempt + 1}/{MAX_RETRIES}): {e}"
+            )
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                logger.info(f"Ponowna proba za {wait}s...")
+                time.sleep(wait)
+            else:
+                return results
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Blad zadania przy wyszukiwaniu CURIA: {e}")
+            return results
+
+        except Exception as e:
+            logger.error(f"Nieoczekiwany blad przy wyszukiwaniu CURIA: {e}")
+            return results
+
+    if response is None:
+        return results
 
     try:
-        response = session.get(CURIA_SEARCH_URL, params=params, timeout=30)
-        response.raise_for_status()
-
         # Zapisz surowy HTML jesli wymagane (do debugowania selektorow)
         if output_raw and output_dir:
             raw_dir = output_dir / "raw_html"
@@ -156,16 +220,8 @@ def search_curia(session: requests.Session, keyword: str,
                             "sprawdz recznie lub zaktualizuj parser",
                 })
 
-    except requests.exceptions.Timeout:
-        logger.error(f"Timeout przy wyszukiwaniu CURIA: '{keyword}'")
-    except requests.exceptions.HTTPError as e:
-        logger.error(f"Blad HTTP {e.response.status_code} przy wyszukiwaniu '{keyword}'")
-    except requests.exceptions.ConnectionError as e:
-        logger.error(f"Blad polaczenia przy wyszukiwaniu CURIA: {e}")
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Blad zadania przy wyszukiwaniu CURIA: {e}")
     except Exception as e:
-        logger.error(f"Nieoczekiwany blad przy wyszukiwaniu CURIA: {e}")
+        logger.error(f"Blad parsowania wynikow CURIA dla '{keyword}': {e}")
 
     logger.info(f"Wynik CURIA dla '{keyword}': {len(results)} orzeczen")
     return results
@@ -241,24 +297,53 @@ def fetch_case_details(session: requests.Session, url: str) -> dict:
 
     logger.debug(f"Pobieranie szczegolow orzeczenia: {url}")
 
-    try:
-        response = session.get(url, timeout=30)
-        response.raise_for_status()
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = session.get(url, timeout=30)
+            response.raise_for_status()
 
-        soup = BeautifulSoup(response.text, "lxml")
+            soup = BeautifulSoup(response.text, "lxml")
 
-        details = {"url": url}
+            details = {"url": url}
 
-        # Szukaj tresci orzeczenia
-        content_div = soup.select_one("#document_content, .document_content, .content")
-        if content_div:
-            details["full_text"] = content_div.get_text(separator="\n", strip=True)[:10000]
+            # Szukaj tresci orzeczenia
+            content_div = soup.select_one("#document_content, .document_content, .content")
+            if content_div:
+                details["full_text"] = content_div.get_text(separator="\n", strip=True)[:10000]
 
-        return details
+            return details
 
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Blad pobierania orzeczenia CURIA: {e}")
-        return {}
+        except requests.exceptions.Timeout:
+            logger.error(
+                f"Timeout przy pobieraniu orzeczenia CURIA "
+                f"(proba {attempt + 1}/{MAX_RETRIES})"
+            )
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                time.sleep(wait)
+            else:
+                return {}
+
+        except requests.exceptions.ConnectionError as e:
+            logger.error(
+                f"Blad polaczenia przy pobieraniu orzeczenia CURIA "
+                f"(proba {attempt + 1}/{MAX_RETRIES}): {e}"
+            )
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                time.sleep(wait)
+            else:
+                return {}
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Blad pobierania orzeczenia CURIA: {e}")
+            if attempt < MAX_RETRIES - 1:
+                wait = RETRY_BACKOFF_SECONDS[attempt]
+                time.sleep(wait)
+            else:
+                return {}
+
+    return {}
 
 
 def save_results(results: dict, output_dir: Path) -> None:
