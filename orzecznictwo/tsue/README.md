@@ -18,6 +18,7 @@ Zbior kluczowych wyrokow Trybunalu Sprawiedliwosci Unii Europejskiej (TSUE) doty
 | 2013-02-28 | C-322/11 | Swoboda przeplywu zywnosci - wzajemne uznawanie suplementow | [2013-02-28-C-322-11-free-movement-food-mutual-recognition.md](2013-02-28-C-322-11-free-movement-food-mutual-recognition.md) |
 | 2012-09-06 | C-544/10 | Oswiadczenia zdrowotne na napojach alkoholowych (Deutsches Weintor) | [2012-09-06-C-544-10-health-claims-wine.md](2012-09-06-C-544-10-health-claims-wine.md) |
 | 2009-07-30 | C-140/07 | Granica suplement diety / produkt leczniczy - efekt farmakologiczny | [2009-07-30-C-140-07-food-supplement-medicine-boundary.md](2009-07-30-C-140-07-food-supplement-medicine-boundary.md) |
+| 2005-06-09 | C-211/03 | Granica lek/zywnosc - klasyfikacja produktow, wzajemne uznawanie | [2005-06-09-C-211-03-hlh-warenvertrieb.md](2005-06-09-C-211-03-hlh-warenvertrieb.md) |
 | 2003-09-09 | C-236/01 | Zasada ostroznosci w prawie zywnosciowym (art. 7 Rozp. 178/2002) | [2003-09-09-C-236-01-precautionary-principle-food-safety.md](2003-09-09-C-236-01-precautionary-principle-food-safety.md) |
 
 ## Tematy orzeczen
@@ -42,6 +43,7 @@ Zbior kluczowych wyrokow Trybunalu Sprawiedliwosci Unii Europejskiej (TSUE) doty
 
 ### Granica lek/suplement
 - Kryteria dzialania farmakologicznego: C-140/07 (Komisja v. Niemcy)
+- Klasyfikacja produktow, wzajemne uznawanie, zasada ostroznosci: C-211/03 (HLH Warenvertrieb)
 
 ### Swoboda przeplywu zywnosci
 - Wzajemne uznawanie suplementow diety: C-322/11
