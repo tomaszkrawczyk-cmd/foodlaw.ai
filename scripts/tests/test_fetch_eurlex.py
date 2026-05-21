@@ -21,6 +21,7 @@ from fetch_eurlex import (
     execute_soap_query,
     fetch_html_content,
     convert_html_to_markdown,
+    fetch_document_sparql_fallback,
     _extract_document_info,
     _parse_response_text,
 )
@@ -41,27 +42,24 @@ class TestLoadCredentials:
 
     @patch.dict("os.environ", {"EURLEX_PASSWORD": "pass1"}, clear=True)
     @patch("fetch_eurlex.load_dotenv")
-    def test_exits_when_username_missing(self, mock_dotenv):
-        """When EURLEX_USERNAME is missing, calls sys.exit(1)."""
-        with pytest.raises(SystemExit) as exc_info:
-            load_credentials()
-        assert exc_info.value.code == 1
+    def test_returns_none_tuple_when_username_missing(self, mock_dotenv):
+        """When EURLEX_USERNAME is missing, returns (None, None)."""
+        result = load_credentials()
+        assert result == (None, None)
 
     @patch.dict("os.environ", {"EURLEX_USERNAME": "user1"}, clear=True)
     @patch("fetch_eurlex.load_dotenv")
-    def test_exits_when_password_missing(self, mock_dotenv):
-        """When EURLEX_PASSWORD is missing, calls sys.exit(1)."""
-        with pytest.raises(SystemExit) as exc_info:
-            load_credentials()
-        assert exc_info.value.code == 1
+    def test_returns_none_tuple_when_password_missing(self, mock_dotenv):
+        """When EURLEX_PASSWORD is missing, returns (None, None)."""
+        result = load_credentials()
+        assert result == (None, None)
 
     @patch.dict("os.environ", {}, clear=True)
     @patch("fetch_eurlex.load_dotenv")
-    def test_exits_when_both_missing(self, mock_dotenv):
-        """When both env vars are missing, calls sys.exit(1)."""
-        with pytest.raises(SystemExit) as exc_info:
-            load_credentials()
-        assert exc_info.value.code == 1
+    def test_returns_none_tuple_when_both_missing(self, mock_dotenv):
+        """When both env vars are missing, returns (None, None)."""
+        result = load_credentials()
+        assert result == (None, None)
 
 
 # --- Tests for build_soap_request ---
@@ -431,3 +429,158 @@ class TestConvertHtmlToMarkdown:
         result = convert_html_to_markdown(html)
         mock_process.assert_called_once_with(html)
         assert result == "# Converted\n\nContent"
+
+
+# --- Tests for fetch_document_sparql_fallback with doc_type ---
+
+
+class TestFetchDocumentSparqlFallbackDocType:
+    """Tests for fetch_document_sparql_fallback with doc_type parameter."""
+
+    @patch("fetch_eurlex.convert_html_to_markdown")
+    @patch("fetch_eurlex.fetch_html_by_celex")
+    @patch("fetch_eurlex.fetch_metadata_sparql")
+    def test_judgment_type_uses_judgment_filename(self, mock_metadata, mock_html,
+                                                  mock_convert, tmp_path):
+        """With doc_type='judgment', uses generate_judgment_filename for output."""
+        mock_metadata.return_value = {"title": "Test", "date": "2013-10-03"}
+        mock_html.return_value = "<html><body>content</body></html>"
+        mock_convert.return_value = "# Content"
+
+        result = fetch_document_sparql_fallback(
+            "62012CJ0299", "PL", tmp_path, doc_type="judgment"
+        )
+
+        assert result is True
+        # Should use judgment filename convention
+        expected_file = tmp_path / "2013-10-03-C-299-12.md"
+        assert expected_file.exists()
+
+    @patch("fetch_eurlex.convert_html_to_markdown")
+    @patch("fetch_eurlex.fetch_html_by_celex")
+    @patch("fetch_eurlex.fetch_metadata_sparql")
+    def test_regulation_type_uses_celex_filename(self, mock_metadata, mock_html,
+                                                  mock_convert, tmp_path):
+        """With doc_type='regulation', uses {celex}.md for output."""
+        mock_metadata.return_value = {"title": "Test", "date": "2002-01-28"}
+        mock_html.return_value = "<html><body>content</body></html>"
+        mock_convert.return_value = "# Content"
+
+        result = fetch_document_sparql_fallback(
+            "32002R0178", "PL", tmp_path, doc_type="regulation"
+        )
+
+        assert result is True
+        expected_file = tmp_path / "32002R0178.md"
+        assert expected_file.exists()
+
+
+# --- Integration test for SOAP-to-SPARQL fallback orchestration ---
+
+
+class TestMainFallbackOrchestration:
+    """Integration tests for main() fallback logic."""
+
+    @patch("fetch_eurlex.fetch_document_sparql_fallback")
+    @patch("fetch_eurlex.fetch_document_soap")
+    @patch("fetch_eurlex.create_soap_client")
+    @patch("fetch_eurlex.load_credentials")
+    def test_sparql_fallback_attempted_when_soap_fails_per_document(
+        self, mock_creds, mock_client, mock_soap_fetch, mock_sparql_fallback
+    ):
+        """When SOAP client exists but per-document fetch fails, SPARQL fallback is attempted."""
+        mock_creds.return_value = ("user", "pass")
+        mock_client.return_value = MagicMock()  # SOAP client exists
+        mock_soap_fetch.return_value = False  # Per-document SOAP fails
+        mock_sparql_fallback.return_value = True  # SPARQL fallback succeeds
+
+        test_args = [
+            "fetch_eurlex.py",
+            "--celex", "32002R0178",
+            "--output", "/tmp/test_fallback_output",
+        ]
+
+        with patch("sys.argv", test_args):
+            from fetch_eurlex import main
+            main()
+
+        # Verify SOAP was attempted
+        mock_soap_fetch.assert_called_once()
+        # Verify SPARQL fallback was attempted after SOAP failure
+        mock_sparql_fallback.assert_called_once()
+
+    @patch("fetch_eurlex.fetch_document_sparql_fallback")
+    @patch("fetch_eurlex.fetch_document_soap")
+    @patch("fetch_eurlex.create_soap_client")
+    @patch("fetch_eurlex.load_credentials")
+    def test_no_fallback_when_soap_succeeds(
+        self, mock_creds, mock_client, mock_soap_fetch, mock_sparql_fallback
+    ):
+        """When SOAP fetch succeeds, SPARQL fallback is NOT attempted."""
+        mock_creds.return_value = ("user", "pass")
+        mock_client.return_value = MagicMock()
+        mock_soap_fetch.return_value = True  # SOAP succeeds
+
+        test_args = [
+            "fetch_eurlex.py",
+            "--celex", "32002R0178",
+            "--output", "/tmp/test_no_fallback_output",
+        ]
+
+        with patch("sys.argv", test_args):
+            from fetch_eurlex import main
+            main()
+
+        mock_soap_fetch.assert_called_once()
+        mock_sparql_fallback.assert_not_called()
+
+    @patch("fetch_eurlex.fetch_document_sparql_fallback")
+    @patch("fetch_eurlex.create_soap_client")
+    @patch("fetch_eurlex.load_credentials")
+    def test_sparql_only_when_credentials_missing(
+        self, mock_creds, mock_client, mock_sparql_fallback
+    ):
+        """When credentials are missing, script uses SPARQL-only mode without exiting."""
+        mock_creds.return_value = (None, None)  # No credentials
+        mock_sparql_fallback.return_value = True
+
+        test_args = [
+            "fetch_eurlex.py",
+            "--celex", "32002R0178",
+            "--output", "/tmp/test_sparql_only_output",
+        ]
+
+        with patch("sys.argv", test_args):
+            from fetch_eurlex import main
+            main()
+
+        # SOAP client should not be created
+        mock_client.assert_not_called()
+        # SPARQL fallback should be used
+        mock_sparql_fallback.assert_called_once()
+
+    @patch("fetch_eurlex.fetch_document_sparql_fallback")
+    @patch("fetch_eurlex.fetch_document_soap")
+    @patch("fetch_eurlex.create_soap_client")
+    @patch("fetch_eurlex.load_credentials")
+    def test_sparql_fallback_on_soap_exception(
+        self, mock_creds, mock_client, mock_soap_fetch, mock_sparql_fallback
+    ):
+        """When SOAP raises an exception, SPARQL fallback is attempted."""
+        mock_creds.return_value = ("user", "pass")
+        mock_client.return_value = MagicMock()
+        mock_soap_fetch.side_effect = Exception("SOAP connection error")
+        mock_sparql_fallback.return_value = True
+
+        test_args = [
+            "fetch_eurlex.py",
+            "--celex", "32002R0178",
+            "--output", "/tmp/test_exception_fallback_output",
+        ]
+
+        with patch("sys.argv", test_args):
+            from fetch_eurlex import main
+            main()
+
+        mock_soap_fetch.assert_called_once()
+        mock_sparql_fallback.assert_called_once()

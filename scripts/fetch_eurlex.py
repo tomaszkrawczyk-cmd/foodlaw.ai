@@ -118,21 +118,19 @@ def load_credentials() -> tuple:
     Laduje dane dostepu do EUR-Lex Web Service z pliku .env.
 
     Returns:
-        Tuple (username, password)
-
-    Raises:
-        SystemExit: Jesli brak zmiennych srodowiskowych
+        Tuple (username, password) lub (None, None) jesli brak danych
     """
     load_dotenv()
     username = os.environ.get("EURLEX_USERNAME")
     password = os.environ.get("EURLEX_PASSWORD")
 
     if not username or not password:
-        logger.error(
+        logger.warning(
             "Brak danych dostepu do EUR-Lex Web Service. "
-            "Ustaw zmienne EURLEX_USERNAME i EURLEX_PASSWORD w pliku .env"
+            "Ustaw zmienne EURLEX_USERNAME i EURLEX_PASSWORD w pliku .env. "
+            "Kontynuuje w trybie SPARQL-only."
         )
-        sys.exit(1)
+        return None, None
 
     return username, password
 
@@ -568,7 +566,8 @@ def fetch_document_soap(client: Client, celex: str, language: str = "PL",
 
 
 def fetch_document_sparql_fallback(celex: str, language: str = "PL",
-                                   output_dir: Path = None) -> bool:
+                                   output_dir: Path = None,
+                                   doc_type: str = "regulation") -> bool:
     """
     Pobiera dokument za pomoca SPARQL + bezposredni download (fallback).
 
@@ -576,6 +575,7 @@ def fetch_document_sparql_fallback(celex: str, language: str = "PL",
         celex: Numer CELEX
         language: Kod jezyka
         output_dir: Katalog wyjsciowy
+        doc_type: Typ dokumentu ('regulation' lub 'judgment')
 
     Returns:
         True jesli sukces, False w przypadku bledu
@@ -604,7 +604,11 @@ def fetch_document_sparql_fallback(celex: str, language: str = "PL",
     # Zapisz plik
     if output_dir:
         output_dir.mkdir(parents=True, exist_ok=True)
-        filepath = output_dir / f"{celex}.md"
+        if doc_type == "judgment":
+            filename = generate_judgment_filename(celex, metadata)
+        else:
+            filename = f"{celex}.md"
+        filepath = output_dir / filename
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(full_content)
         logger.info(f"[SPARQL fallback] Zapisano: {filepath}")
@@ -848,10 +852,13 @@ def main():
 
     # Zaladuj dane dostepu
     username, password = load_credentials()
-    logger.info(f"Zaladowano dane dostepu (uzytkownik: {username})")
 
-    # Sprobuj utworzyc klienta SOAP
-    soap_client = create_soap_client(username, password)
+    # Sprobuj utworzyc klienta SOAP (tylko jesli sa dane dostepu)
+    soap_client = None
+    if username and password:
+        logger.info("Zaladowano dane dostepu do EUR-Lex Web Service")
+        soap_client = create_soap_client(username, password)
+
     use_soap = soap_client is not None
 
     if not use_soap:
@@ -889,10 +896,10 @@ def main():
                     logger.info("Przelaczam na fallback SPARQL")
                     success = False
 
-            if not success and not use_soap:
+            if not success:
                 # Fallback do SPARQL
                 success = fetch_document_sparql_fallback(
-                    celex, args.language, output_dir
+                    celex, args.language, output_dir, doc_type=args.type
                 )
 
             if success:
