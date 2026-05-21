@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-Skrypt do pobierania rozporzadzen UE z EUR-Lex za pomoca CELLAR SPARQL endpoint.
+Skrypt do pobierania rozporzadzen UE z EUR-Lex za pomoca CELLAR content negotiation.
 
 Pobiera polskie wersje jezykowe aktow prawnych na podstawie numerow CELEX.
-Wykorzystuje endpoint SPARQL: https://publications.europa.eu/webapi/rdf/sparql
+Wykorzystuje content negotiation z URI: http://publications.europa.eu/resource/celex/{celex}
+z naglowkami Accept: application/xhtml+xml i Accept-Language: pl.
+
+SPARQL endpoint jest dostepny jako opcjonalne wzbogacenie metadanych, ale
+glowna metoda pobierania to content negotiation (CELLAR zwraca 303 -> tresc).
 
 Autor: Tomasz Krawczyk / supplemental.pl
 Licencja: Apache-2.0
@@ -25,8 +29,9 @@ except ImportError:
 try:
     from SPARQLWrapper import SPARQLWrapper, JSON
 except ImportError:
-    print("Brak modulu 'SPARQLWrapper'. Zainstaluj: pip install SPARQLWrapper")
-    sys.exit(1)
+    SPARQLWrapper = None
+    JSON = None
+    # SPARQL is optional - content negotiation is the primary method
 
 # Domyslne numery CELEX rozporzadzen prawa zywnosciowego
 DEFAULT_CELEX_NUMBERS = [
@@ -39,24 +44,24 @@ DEFAULT_CELEX_NUMBERS = [
     "32004R0853",  # Rozp. 853/2004 - Higiena zywnosci zwierzecego
     "32023R0915",  # Rozp. 2023/915 - Zanieczyszczenia
     "32013R0609",  # Rozp. 609/2013 - Zywnosc specjalna
-    "32008R1333",  # Rozp. 1333/2008 - Dodatki do zywnosci
-    "32003R1829",  # Rozp. 1829/2003 - Genetycznie zmodyfikowana zywnosc i pasza
-    "32003R1830",  # Rozp. 1830/2003 - Identyfikowalnosc i etykietowanie GMO
-    "32018R0848",  # Rozp. 2018/848 - Produkcja ekologiczna
-    "32004R1935",  # Rozp. 1935/2004 - Materialy kontaktowe z zywnoscia (framework)
-    "32011R0010",  # Rozp. 10/2011 - Materialy z tworzyw sztucznych do kontaktu z zywnoscia
-    "32008R1334",  # Rozp. 1334/2008 - Aromaty
-    "32008R1332",  # Rozp. 1332/2008 - Enzymy spozywcze
     "32005R0396",  # Rozp. 396/2005 - Najwyzsze dopuszczalne poziomy pozostalosci pestycydow
     "32016R0127",  # Rozp. del. 2016/127 - Preparaty dla niemowlat
     "32016R0128",  # Rozp. del. 2016/128 - Zywnosc specjalnego przeznaczenia medycznego (FSMP)
     "32017R1798",  # Rozp. del. 2017/1798 - Srodki zastepujace cala diete do kontroli masy ciala
+    "32008R1333",  # Rozp. 1333/2008 - Dodatki do zywnosci
+    "32008R1334",  # Rozp. 1334/2008 - Srodki aromatyzujace
+    "32008R1332",  # Rozp. 1332/2008 - Enzymy spozywcze
+    "32011R0010",  # Rozp. 10/2011 - Materialy z tworzyw sztucznych do kontaktu z zywnoscia (FCM)
+    "32004R1935",  # Rozp. 1935/2004 - Materialy do kontaktu z zywnoscia (FCM ramowe)
+    "32003R2065",  # Rozp. 2065/2003 - Srodki aromatyzujace dym wedzarniczy
+    "32009R1107",  # Rozp. 1107/2009 - Srodki ochrony roslin
+    "32006R1881",  # Rozp. 1881/2006 - Najwyzsze dopuszczalne poziomy zanieczyszczen (zastapione przez 2023/915)
 ]
 
+CELLAR_RESOURCE_BASE = "http://publications.europa.eu/resource/celex/"
 CELLAR_SPARQL_ENDPOINT = "https://publications.europa.eu/webapi/rdf/sparql"
-EURLEX_REST_BASE = "https://eur-lex.europa.eu/legal-content/PL/TXT/HTML/"
 
-USER_AGENT = "foodlaw-ai/1.0 (https://github.com/supplemental-pl/foodlaw-ai; prawo zywnosciowe PL/EU)"
+USER_AGENT = "foodlaw-ai/1.0 (prawo zywnosciowe PL/EU)"
 
 logger = logging.getLogger(__name__)
 
@@ -71,120 +76,137 @@ def setup_logging(verbose: bool = False) -> None:
     )
 
 
-def build_sparql_query(celex: str, language: str = "PL") -> str:
+def fetch_cellar_content(celex: str, language: str = "pl") -> str:
     """
-    Buduje zapytanie SPARQL do pobrania metadanych i URI dokumentu z CELLAR.
+    Pobiera tresc dokumentu z CELLAR za pomoca content negotiation.
+
+    Metoda: HTTP GET na http://publications.europa.eu/resource/celex/{celex}
+    z naglowkami Accept i Accept-Language. Serwer zwraca 303 redirect do tresci.
+
+    Proba 1: Accept: application/xhtml+xml (nowsze dokumenty)
+    Proba 2: Accept: text/html (starsze dokumenty, pre-2006)
 
     Args:
         celex: Numer CELEX dokumentu
-        language: Kod jezyka (domyslnie PL)
+        language: Kod jezyka (domyslnie 'pl')
 
     Returns:
-        Zapytanie SPARQL jako string
+        Tresc HTML/XHTML jako string, pusty string w przypadku bledu
     """
-    query = f"""
-    PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    url = f"{CELLAR_RESOURCE_BASE}{celex}"
 
-    SELECT DISTINCT ?title ?date ?expression ?manifestation
-    WHERE {{
-        ?work cdm:resource_legal_id_celex "{celex}"^^xsd:string .
-        ?work cdm:work_date_document ?date .
-        ?expression cdm:expression_belongs_to_work ?work .
-        ?expression cdm:expression_uses_language <http://publications.europa.eu/resource/authority/language/{language}> .
-        ?expression cdm:expression_title ?title .
-        OPTIONAL {{
-            ?manifestation cdm:manifestation_manifests_expression ?expression .
-            ?manifestation cdm:manifestation_type <http://publications.europa.eu/resource/authority/file-type/HTML> .
-        }}
-    }}
-    LIMIT 10
-    """
-    return query
+    # Try XHTML first (preferred - structured format), then HTML fallback
+    accept_types = ["application/xhtml+xml", "text/html"]
+
+    for accept_type in accept_types:
+        logger.info(f"Pobieranie z CELLAR: {url} (jezyk: {language}, accept: {accept_type})")
+
+        headers = {
+            "Accept": accept_type,
+            "Accept-Language": language,
+            "User-Agent": USER_AGENT,
+        }
+
+        try:
+            response = requests.get(url, headers=headers, timeout=120, allow_redirects=True)
+
+            if response.status_code == 200:
+                content = response.text
+                logger.info(
+                    f"Pobrano CELEX {celex}: {len(content)} bajtow, "
+                    f"content-type: {response.headers.get('Content-Type', 'unknown')}"
+                )
+                return content
+            elif response.status_code == 404:
+                logger.debug(
+                    f"CELEX {celex}: 404 dla {accept_type}, probuje nastepny format"
+                )
+                continue
+            elif response.status_code == 406:
+                logger.debug(
+                    f"CELEX {celex}: 406 dla {accept_type}, probuje nastepny format"
+                )
+                continue
+            else:
+                logger.warning(
+                    f"CELEX {celex}: status {response.status_code} dla {accept_type}"
+                )
+                continue
+
+        except requests.exceptions.Timeout:
+            logger.error(f"Timeout przy pobieraniu CELEX {celex} ({accept_type})")
+            continue
+        except requests.exceptions.ConnectionError as e:
+            logger.error(f"Blad polaczenia dla CELEX {celex}: {e}")
+            return ""
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Blad zadania dla CELEX {celex}: {e}")
+            return ""
+
+    logger.warning(f"CELEX {celex}: nie udalo sie pobrac w zadnym formacie")
+    return ""
 
 
 def fetch_metadata_sparql(celex: str, language: str = "PL") -> dict:
     """
-    Pobiera metadane dokumentu z CELLAR za pomoca SPARQL.
+    Pobiera metadane dokumentu z CELLAR za pomoca SPARQL (opcjonalne).
+
+    SPARQL endpoint czesto zwraca puste wyniki dla CELEX, wiec ta metoda
+    jest traktowana jako opcjonalne wzbogacenie - nie blokuje pobierania.
 
     Args:
         celex: Numer CELEX
-        language: Kod jezyka
+        language: Kod jezyka (uppercase)
 
     Returns:
-        Slownik z metadanymi (title, date, uri)
+        Slownik z metadanymi (title, date) lub pusty slownik
     """
-    logger.info(f"Pobieranie metadanych SPARQL dla CELEX: {celex}")
+    if SPARQLWrapper is None:
+        logger.debug("SPARQLWrapper niedostepny - pomijam metadane SPARQL")
+        return {}
 
-    sparql = SPARQLWrapper(CELLAR_SPARQL_ENDPOINT)
-    sparql.addCustomHttpHeader("User-Agent", USER_AGENT)
-
-    query = build_sparql_query(celex, language)
-    sparql.setQuery(query)
-    sparql.setReturnFormat(JSON)
+    logger.debug(f"Probuje pobrac metadane SPARQL dla CELEX: {celex}")
 
     try:
+        sparql = SPARQLWrapper(CELLAR_SPARQL_ENDPOINT)
+        sparql.addCustomHttpHeader("User-Agent", USER_AGENT)
+
+        query = f"""
+        PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+        SELECT DISTINCT ?title ?date
+        WHERE {{
+            ?work cdm:resource_legal_id_celex "{celex}"^^xsd:string .
+            ?work cdm:work_date_document ?date .
+            ?expression cdm:expression_belongs_to_work ?work .
+            ?expression cdm:expression_uses_language <http://publications.europa.eu/resource/authority/language/{language}> .
+            ?expression cdm:expression_title ?title .
+        }}
+        LIMIT 1
+        """
+
+        sparql.setQuery(query)
+        sparql.setReturnFormat(JSON)
+
         results = sparql.query().convert()
         bindings = results.get("results", {}).get("bindings", [])
 
         if not bindings:
-            logger.warning(f"Brak wynikow SPARQL dla CELEX: {celex}")
+            logger.debug(f"Brak wynikow SPARQL dla CELEX: {celex}")
             return {}
 
         first = bindings[0]
         metadata = {
-            "celex": celex,
             "title": first.get("title", {}).get("value", ""),
             "date": first.get("date", {}).get("value", ""),
-            "expression_uri": first.get("expression", {}).get("value", ""),
-            "manifestation_uri": first.get("manifestation", {}).get("value", ""),
         }
-
-        logger.debug(f"Metadane: {metadata}")
+        logger.debug(f"Metadane SPARQL: {metadata}")
         return metadata
 
     except Exception as e:
-        logger.error(f"Blad SPARQL dla CELEX {celex}: {e}")
+        logger.debug(f"Blad SPARQL dla CELEX {celex} (nieblokujacy): {e}")
         return {}
-
-
-def fetch_html_content(celex: str, language: str = "PL") -> str:
-    """
-    Pobiera tresc HTML dokumentu z EUR-Lex REST.
-
-    Args:
-        celex: Numer CELEX
-        language: Kod jezyka
-
-    Returns:
-        Tresc HTML jako string
-    """
-    url = f"{EURLEX_REST_BASE}?uri=CELEX:{celex}"
-    logger.info(f"Pobieranie HTML z: {url}")
-
-    headers = {
-        "User-Agent": USER_AGENT,
-        "Accept": "text/html",
-        "Accept-Language": f"{language.lower()},en;q=0.5",
-    }
-
-    try:
-        response = requests.get(url, headers=headers, timeout=60)
-        response.raise_for_status()
-        return response.text
-
-    except requests.exceptions.Timeout:
-        logger.error(f"Timeout przy pobieraniu CELEX {celex}")
-        return ""
-    except requests.exceptions.HTTPError as e:
-        logger.error(f"Blad HTTP {e.response.status_code} dla CELEX {celex}: {e}")
-        return ""
-    except requests.exceptions.ConnectionError as e:
-        logger.error(f"Blad polaczenia dla CELEX {celex}: {e}")
-        return ""
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Blad zadania dla CELEX {celex}: {e}")
-        return ""
 
 
 def save_document(celex: str, content: str, metadata: dict, output_dir: Path) -> Path:
@@ -193,8 +215,8 @@ def save_document(celex: str, content: str, metadata: dict, output_dir: Path) ->
 
     Args:
         celex: Numer CELEX
-        content: Tresc HTML
-        metadata: Metadane dokumentu
+        content: Tresc XHTML/HTML
+        metadata: Metadane dokumentu (opcjonalne)
         output_dir: Katalog wyjsciowy
 
     Returns:
@@ -210,40 +232,40 @@ def save_document(celex: str, content: str, metadata: dict, output_dir: Path) ->
 
     logger.info(f"Zapisano: {filepath} ({len(content)} bajtow)")
 
-    # Zapisz metadane
-    meta_path = output_dir / f"{celex}.meta.txt"
-    with open(meta_path, "w", encoding="utf-8") as f:
-        for key, value in metadata.items():
-            f.write(f"{key}: {value}\n")
+    # Zapisz metadane jesli dostepne
+    if metadata:
+        meta_path = output_dir / f"{celex}.meta.txt"
+        with open(meta_path, "w", encoding="utf-8") as f:
+            f.write(f"celex: {celex}\n")
+            for key, value in metadata.items():
+                f.write(f"{key}: {value}\n")
 
     return filepath
 
 
-def fetch_document(celex: str, output_dir: Path, language: str = "PL",
+def fetch_document(celex: str, output_dir: Path, language: str = "pl",
                    delay: float = 2.0) -> bool:
     """
-    Pobiera pojedynczy dokument (metadane + tresc).
+    Pobiera pojedynczy dokument za pomoca CELLAR content negotiation.
 
     Args:
         celex: Numer CELEX
         output_dir: Katalog wyjsciowy
-        language: Kod jezyka
+        language: Kod jezyka (lowercase dla Accept-Language)
         delay: Opoznienie miedzy zadaniami (sekundy)
 
     Returns:
         True jesli sukces, False w przypadku bledu
     """
-    # Pobierz metadane z CELLAR SPARQL
-    metadata = fetch_metadata_sparql(celex, language)
-
-    time.sleep(delay)
-
-    # Pobierz tresc HTML
-    content = fetch_html_content(celex, language)
+    # Metoda glowna: CELLAR content negotiation
+    content = fetch_cellar_content(celex, language)
 
     if not content:
         logger.warning(f"Brak tresci dla CELEX {celex} - pomijam")
         return False
+
+    # Opcjonalnie: wzbogac metadanymi z SPARQL (nieblokujace)
+    metadata = fetch_metadata_sparql(celex, language.upper())
 
     save_document(celex, content, metadata, output_dir)
     return True
@@ -252,7 +274,7 @@ def fetch_document(celex: str, output_dir: Path, language: str = "PL",
 def main():
     """Glowna funkcja - parsuje argumenty i uruchamia pobieranie."""
     parser = argparse.ArgumentParser(
-        description="Pobiera rozporzadzenia UE z EUR-Lex (CELLAR SPARQL + REST API). "
+        description="Pobiera rozporzadzenia UE z EUR-Lex za pomoca CELLAR content negotiation. "
                     "Domyslnie pobiera 21 kluczowych rozporzadzen prawa zywnosciowego "
                     "w polskiej wersji jezykowej.",
         epilog="Przyklad: python fetch_eurlex.py --celex 32002R0178 32011R1169 --output ./data/",
@@ -261,7 +283,7 @@ def main():
         "--celex",
         nargs="+",
         default=DEFAULT_CELEX_NUMBERS,
-        help="Numery CELEX do pobrania (domyslnie: 21 rozporzadzen prawa zywnosciowego)",
+        help=f"Numery CELEX do pobrania (domyslnie: {len(DEFAULT_CELEX_NUMBERS)} rozporzadzen prawa zywnosciowego)",
     )
     parser.add_argument(
         "--output", "-o",
@@ -272,9 +294,9 @@ def main():
     parser.add_argument(
         "--language", "-l",
         type=str,
-        default="PL",
-        choices=["PL", "EN", "DE", "FR", "ES", "IT"],
-        help="Jezyk dokumentu (domyslnie: PL)",
+        default="pl",
+        choices=["pl", "en", "de", "fr", "es", "it"],
+        help="Jezyk dokumentu (domyslnie: pl)",
     )
     parser.add_argument(
         "--delay",
@@ -287,18 +309,32 @@ def main():
         action="store_true",
         help="Wlacz szczegolowe logowanie (DEBUG)",
     )
+    parser.add_argument(
+        "--skip-existing",
+        action="store_true",
+        help="Pomin dokumenty juz pobrane (plik .html istnieje w katalogu wyjsciowym)",
+    )
 
     args = parser.parse_args()
     setup_logging(args.verbose)
 
     output_dir = Path(args.output)
-    logger.info(f"Start pobierania {len(args.celex)} dokumentow z EUR-Lex")
+    logger.info(f"Start pobierania {len(args.celex)} dokumentow z EUR-Lex (CELLAR)")
     logger.info(f"Jezyk: {args.language}, Katalog wyjsciowy: {output_dir}")
 
     success_count = 0
     error_count = 0
+    skipped_count = 0
 
     for i, celex in enumerate(args.celex, 1):
+        # Sprawdz czy juz pobrano
+        if args.skip_existing:
+            existing = output_dir / f"{celex}.html"
+            if existing.exists() and existing.stat().st_size > 0:
+                logger.info(f"[{i}/{len(args.celex)}] Pomijam CELEX {celex} (juz istnieje)")
+                skipped_count += 1
+                continue
+
         logger.info(f"[{i}/{len(args.celex)}] Przetwarzanie CELEX: {celex}")
 
         if fetch_document(celex, output_dir, args.language, args.delay):
@@ -306,13 +342,13 @@ def main():
         else:
             error_count += 1
 
-        # Opoznienie miedzy dokumentami
+        # Opoznienie miedzy dokumentami (uprzejmosc wobec serwera)
         if i < len(args.celex):
             time.sleep(args.delay)
 
     logger.info(
-        f"Zakonczono: {success_count} sukces(ow), {error_count} blad(ow) "
-        f"z {len(args.celex)} dokumentow"
+        f"Zakonczono: {success_count} pobrano, {error_count} bledow, "
+        f"{skipped_count} pominieto z {len(args.celex)} dokumentow"
     )
 
     if error_count > 0:
