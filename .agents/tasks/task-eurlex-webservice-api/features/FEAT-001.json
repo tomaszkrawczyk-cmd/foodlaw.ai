@@ -1,0 +1,30 @@
+{
+  "id": "FEAT-001",
+  "type": "chore",
+  "description": "Set up environment: install dependencies, create .gitignore with .env entry, create .env.example and .env files with EUR-Lex credentials, add python-dotenv to requirements.txt, and verify existing tests pass.",
+  "status": "in_progress",
+  "steps": [
+    "Add python-dotenv>=1.0.0 and zeep>=4.2.0 (SOAP client library) to scripts/requirements.txt. Keep existing dependencies.",
+    "Create .env.example in project root with placeholder variables: EURLEX_USERNAME=your_username_here and EURLEX_PASSWORD=your_password_here",
+    "Create .env in project root with actual credentials: EURLEX_USERNAME=tomaszkrawczyk and EURLEX_PASSWORD=3iDIZdYIrxm",
+    "Create .gitignore in project root with entries: .env, __pycache__/, *.pyc, .pytest_cache/, output/",
+    "Run pip install -r scripts/requirements.txt to install all dependencies",
+    "Run python -m pytest scripts/tests/ -v to confirm existing tests still pass"
+  ],
+  "acceptance_criteria": [
+    "scripts/requirements.txt contains python-dotenv>=1.0.0 and zeep>=4.2.0",
+    ".env.example exists with EURLEX_USERNAME and EURLEX_PASSWORD placeholders",
+    ".env exists with actual credentials",
+    ".gitignore includes .env entry",
+    "pip install completes without errors",
+    "Existing tests pass"
+  ],
+  "verification": [
+    "pip install -r scripts/requirements.txt",
+    "python -m pytest scripts/tests/ -v",
+    "python -c \"from dotenv import load_dotenv; print('dotenv OK')\"",
+    "python -c \"import zeep; print('zeep OK')\""
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
