@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "chore",
   "description": "Set up environment: install dependencies, create .gitignore with .env entry, create .env.example and .env files with EUR-Lex credentials, add python-dotenv to requirements.txt, and verify existing tests pass.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Add python-dotenv>=1.0.0 and zeep>=4.2.0 (SOAP client library) to scripts/requirements.txt. Keep existing dependencies.",
     "Create .env.example in project root with placeholder variables: EURLEX_USERNAME=your_username_here and EURLEX_PASSWORD=your_password_here",
@@ -26,5 +26,5 @@
     "python -c \"import zeep; print('zeep OK')\""
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Python 3.9.25 available as python3 (not python). All 15 existing tests pass. Both python-dotenv and zeep install and import without issues. .env is correctly excluded by .gitignore."
 }
