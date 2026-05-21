@@ -1,0 +1,34 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Rewrite scripts/fetch_eurlex.py to use the EUR-Lex SOAP Web Service API with WS-Security authentication for fetching EU regulations and CJEU judgments. The script should load credentials from environment variables (python-dotenv), search for documents by CELEX number using the expert query syntax, download full texts in HTML format, convert them to Markdown using the existing convert_to_markdown.py logic, and save to appropriate directories. Add a new mode for fetching CJEU judgments related to food law.",
+  "status": "completed",
+  "steps": [
+    "Rewrite scripts/fetch_eurlex.py preserving the same argparse CLI interface but replacing the HTTP scraping approach with EUR-Lex SOAP Web Service calls. Key changes: (a) Load credentials from .env using python-dotenv at script startup. (b) Use the zeep library to build SOAP requests to https://eur-lex.europa.eu/EURLexWebService with WS-Security UsernameToken (username/password from env vars). (c) The SOAP operation is 'doQuery' with parameters: expertQuery (string), page (int), pageSize (int), searchLanguage (string e.g. 'pl'). (d) For regulations, use expert query: 'SELECT DN WHERE DN = {celex}' for each CELEX number. (e) For CJEU judgments, add a --type argument (regulation|judgment) to control which mode to use. For judgments, use expert queries like 'SELECT DN WHERE DN = {celex}' for known CELEX numbers (62012CJ0299, 62018CJ0663, 62012CJ0609, 62014CJ0195, 62009CJ0382) and also search by subject matter using 'SELECT CT WHERE CT = 6 AND DD = 03.65' (food legislation directory code) to find additional food law judgments up to 30-50 total.",
+    "Parse the SOAP response XML: extract CONTENT_URL/DRECONTENT elements to get document download URLs, and extract metadata from NOTICE/WORK elements (title, date, CELEX). The response contains document_link elements with URLs for different formats (HTML, PDF, etc.).",
+    "Download the full HTML content from the URLs found in SOAP response. Use requests with proper User-Agent and rate limiting (respect the 2-second delay between requests).",
+    "After downloading HTML, call the conversion logic from convert_to_markdown.py (process_eurlex_html function) to convert to Markdown. Generate a proper front-matter header with CELEX, title, date, source URL per CONTRIBUTING.md standards.",
+    "For regulations (--type regulation): save Markdown files to the --output directory (default: przepisy/unijne/pelne-teksty/). Filename pattern: {celex}.md",
+    "For judgments (--type judgment): save Markdown files to the --output directory (default: orzecznictwo/tsue/). Filename pattern based on date and case number following existing convention in orzecznictwo/tsue/ (e.g., 2012-09-06-C-544-10-health-claims-wine.md).",
+    "Add proper error handling: (a) If credentials are missing, exit with clear error message. (b) If SOAP request fails (auth error, rate limit WS_MAXIMUM_NB_OF_WS_CALLS), log and handle gracefully. (c) If document URL returns error, skip and continue. (d) Track success/failure counts and report at end.",
+    "Preserve backward compatibility: the script should still accept --celex, --output, --language, --delay, --verbose arguments. Add new arguments: --type (regulation|judgment, default: regulation), --max-judgments (default: 50, max CJEU judgments to fetch).",
+    "Keep the CELLAR SPARQL approach as a fallback: if SOAP authentication fails or the service is unavailable, fall back to the existing SPARQL + direct HTML download method with a warning logged."
+  ],
+  "acceptance_criteria": [
+    "Running 'python scripts/fetch_eurlex.py --help' shows the updated interface with --type argument",
+    "The script loads EURLEX_USERNAME and EURLEX_PASSWORD from .env file",
+    "The script constructs valid SOAP 1.2 requests with WS-Security UsernameToken",
+    "For --type regulation: fetches regulations by CELEX number and saves as Markdown",
+    "For --type judgment: fetches CJEU judgments and saves as Markdown",
+    "Rate limiting respects the --delay parameter (default 2 seconds between requests)",
+    "Error handling covers: missing credentials, auth failures, network errors, empty responses",
+    "The script reports success/failure statistics at the end"
+  ],
+  "verification": [
+    "python scripts/fetch_eurlex.py --help",
+    "python -c \"import sys; sys.path.insert(0, 'scripts'); from fetch_eurlex import build_soap_request; print('Import OK')\"",
+    "python -m pytest scripts/tests/ -v"
+  ],
+  "blocked_reason": null,
+  "findings": "All verification commands pass: --help shows updated CLI with --type arg, import of build_soap_request works, pytest 15/15 pass. Added zeep and python-dotenv to requirements.txt. Script uses heredoc-safe string concatenation for front-matter generation."
+}
