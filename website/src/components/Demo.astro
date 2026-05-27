@@ -1,0 +1,32 @@
+---
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<section id="demo" class="py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-primary-700 mb-4">
+        {t.demo.title}
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        {t.demo.subtitle}
+      </p>
+    </div>
+    <div class="bg-gray-100 rounded-2xl border-2 border-dashed border-gray-300 p-12 text-center">
+      <div class="max-w-md mx-auto">
+        <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-primary-100 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+          </svg>
+        </div>
+        <p class="text-gray-500 text-lg">{t.demo.placeholder}</p>
+      </div>
+    </div>
+  </div>
+</section>

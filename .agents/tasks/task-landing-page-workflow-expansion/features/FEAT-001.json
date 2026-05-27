@@ -1,0 +1,35 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Create bilingual (PL/EN) landing page for FOODLAW.ai using Astro + Tailwind CSS in website/ directory. Includes hero, features, demo placeholder, pricing teaser, waitlist form, footer, and language switcher.",
+  "status": "in_progress",
+  "steps": [
+    "Initialize Astro project in website/ directory with pnpm: run `pnpm create astro@latest website -- --template minimal --no-install` then cd website && pnpm install && pnpm add tailwindcss @astrojs/tailwind",
+    "Configure Tailwind CSS with Astro integration in website/astro.config.mjs. Create website/tailwind.config.mjs with dark mode support and custom color palette (legal-tech aesthetic: deep blues, whites, accent golds/greens)",
+    "Create i18n system: website/src/i18n/translations.ts with PL and EN translation objects covering all page sections (hero headline, features, pricing, waitlist, footer). Create a language utility to detect/switch locale.",
+    "Create main layout: website/src/layouts/Layout.astro with HTML boilerplate, Tailwind imports, meta tags, responsive design, language html attribute",
+    "Create language switcher component: website/src/components/LanguageSwitcher.astro - PL/EN toggle button in the header/nav area",
+    "Create Hero section component: website/src/components/Hero.astro - communicates AI-powered food law assistant, bilingual headline/subheadline, CTA button",
+    "Create Features section component: website/src/components/Features.astro - cards/grid showing: knowledge base of 19+ areas of food law, automated legal research, EU and Polish regulations coverage",
+    "Create Demo section component: website/src/components/Demo.astro - screenshot/demo placeholder with placeholder image area and descriptive text",
+    "Create Pricing section component: website/src/components/Pricing.astro - freemium concept teaser with planned tiers hint",
+    "Create Waitlist section component: website/src/components/Waitlist.astro - email signup form with placeholder action (form posts to # or shows success message via JS)",
+    "Create Footer component: website/src/components/Footer.astro - links to supplemental.pl, copyright, legal disclaimer",
+    "Create index pages: website/src/pages/index.astro (default PL) and website/src/pages/en/index.astro (EN version) assembling all components with proper translations",
+    "Add global CSS styles in website/src/styles/global.css for custom styling beyond Tailwind (gradients, transitions, dark/light mode toggle)",
+    "Run `pnpm build` in website/ to verify the site builds without errors"
+  ],
+  "acceptance_criteria": [
+    "website/ directory contains a complete Astro project that builds successfully with `pnpm build`",
+    "Both PL (index.astro) and EN (en/index.astro) pages exist with correct translations",
+    "Language switcher links between PL and EN versions",
+    "All sections present: hero, features (19+ areas, automated research, EU+PL regs), demo placeholder, pricing teaser, waitlist form, footer with supplemental.pl link",
+    "Design uses Tailwind CSS with professional legal-tech aesthetic",
+    "Site is fully static (no server-side rendering needed)"
+  ],
+  "verification": [
+    "Run `cd /projects/sandbox/foodlaw.ai/website && pnpm build` and confirm exit code 0 and dist/ directory created with HTML files"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

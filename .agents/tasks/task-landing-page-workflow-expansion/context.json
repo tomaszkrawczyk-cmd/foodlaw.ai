@@ -1,0 +1,29 @@
+{
+  "project_type": "Knowledge base repository for food law AI assistant with Python scraping scripts and Markdown content",
+  "language": "Python (scripts), Markdown (content), will add TypeScript/Astro (website)",
+  "build_system": "pip for Python scripts, will use pnpm + Astro for website",
+  "test_framework": "pytest with tests in scripts/tests/",
+  "build_command": "cd website && pnpm build (for website); pip install -r scripts/requirements.txt (for scripts)",
+  "test_command": "cd scripts && python -m pytest tests/ -v",
+  "verification_instructions": "1. For website: run pnpm build in website/ and confirm static output generated. 2. For scripts: run pytest in scripts/ directory. 3. For workflow: validate YAML syntax.",
+  "snapshot_or_generated_files": null,
+  "setup_instructions": "1. pip install -r scripts/requirements.txt (Python scripts). 2. For website: cd website && pnpm install",
+  "environment_constraints": "OPEN_INTERNET - full network access. Node.js 22 available, Python 3.11 default, pnpm available. No Docker needed.",
+  "contribution_requirements": "Python scripts: PEP 8, argparse CLI, docstrings, error handling with logging. Dependencies in scripts/requirements.txt. Branch-based workflow preferred.",
+  "key_patterns": "Scripts follow pattern: argparse CLI, logging setup, requests-based HTTP with retry logic, BeautifulSoup for parsing, JSON/Markdown output. User-Agent header: foodlaw-ai/1.0. Existing scripts have retry with exponential backoff in fetch_eurlex_judgments.py and fetch_cbosa.py. CONTRIBUTING.md requires PEP 8, argparse interface, error handling.",
+  "relevant_files": [
+    ".github/workflows/update-laws.yml",
+    "scripts/fetch_eurlex.py",
+    "scripts/fetch_isap.py",
+    "scripts/fetch_cbosa.py",
+    "scripts/fetch_curia.py",
+    "scripts/fetch_eurlex_judgments.py",
+    "scripts/convert_to_markdown.py",
+    "scripts/requirements.txt",
+    "scripts/tests/test_fetch_eurlex_judgments.py",
+    "scripts/tests/test_parsing.py",
+    "README.md",
+    "CONTRIBUTING.md"
+  ],
+  "directory_structure": "Root: README.md, CONTRIBUTING.md, LICENSE, .gitignore, .env.example. scripts/: Python scrapers + requirements.txt + tests/. .github/workflows/: update-laws.yml. guidance/: Q&A markdown files. orzecznictwo/: case law (nsa/, wsa/, tsue/, gis-decyzje/). przepisy/: legislation references. skills/: AI skill definitions. docs/: technical documentation. website/ (to be created): Astro landing page."
+}
