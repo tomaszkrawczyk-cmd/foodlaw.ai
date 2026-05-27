@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "feat",
   "description": "Create bilingual (PL/EN) landing page for FOODLAW.ai using Astro + Tailwind CSS in website/ directory. Includes hero, features, demo placeholder, pricing teaser, waitlist form, footer, and language switcher.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Initialize Astro project in website/ directory with pnpm: run `pnpm create astro@latest website -- --template minimal --no-install` then cd website && pnpm install && pnpm add tailwindcss @astrojs/tailwind",
     "Configure Tailwind CSS with Astro integration in website/astro.config.mjs. Create website/tailwind.config.mjs with dark mode support and custom color palette (legal-tech aesthetic: deep blues, whites, accent golds/greens)",
@@ -31,5 +31,5 @@
     "Run `cd /projects/sandbox/foodlaw.ai/website && pnpm build` and confirm exit code 0 and dist/ directory created with HTML files"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Used @tailwindcss/vite instead of @astrojs/tailwind due to peer dependency incompatibility (Astro 6 + Tailwind 4). The @astrojs/tailwind package expects Astro 3-5 and Tailwind 3. Tailwind v4 uses CSS-based configuration via @theme directive instead of tailwind.config.mjs. Build produces dist/ with index.html and en/index.html. pnpm approve-builds warning for esbuild/sharp is cosmetic and does not affect the build."
 }
