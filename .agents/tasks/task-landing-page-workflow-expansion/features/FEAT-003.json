@@ -2,7 +2,7 @@
   "id": "FEAT-003",
   "type": "feat",
   "description": "Improve the GitHub Actions workflow: switch from direct push to peter-evans/create-pull-request, add content validation step, add error reporting/notification summary, and improve script resilience with retry logic and user-agent rotation.",
-  "status": "pending",
+  "status": "completed",
   "steps": [
     "Update .github/workflows/update-laws.yml: replace the 'Commit i push zmian' step with peter-evans/create-pull-request@v6 action. Configure: branch name (auto-update/laws-YYYY-MM-DD), PR title, PR body with summary of changes, auto-merge label",
     "Add a 'Walidacja pobranych plikow' step after all fetch steps and before the PR step: check that output files are non-empty, validate markdown structure (has content), report counts of fetched documents",
@@ -28,5 +28,5 @@
     "Run `cd /projects/sandbox/foodlaw.ai/scripts && python -m pytest tests/ -v` to verify existing tests still pass"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "All 50 existing tests pass. YAML validated. HTTP client module importable from scripts/utils/. validate_content.py runs with --help. Both fetch_eurlex.py and fetch_isap.py still work standalone with --help. Used pyenv global 3.11.15 to activate Python. The shared http_client uses urllib3 Retry with HTTPAdapter for automatic retries on 5xx, and a custom RetrySession subclass for user-agent rotation per request."
 }
