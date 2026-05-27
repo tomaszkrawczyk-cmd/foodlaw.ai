@@ -1,0 +1,32 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Improve the GitHub Actions workflow: switch from direct push to peter-evans/create-pull-request, add content validation step, add error reporting/notification summary, and improve script resilience with retry logic and user-agent rotation.",
+  "status": "completed",
+  "steps": [
+    "Update .github/workflows/update-laws.yml: replace the 'Commit i push zmian' step with peter-evans/create-pull-request@v6 action. Configure: branch name (auto-update/laws-YYYY-MM-DD), PR title, PR body with summary of changes, auto-merge label",
+    "Add a 'Walidacja pobranych plikow' step after all fetch steps and before the PR step: check that output files are non-empty, validate markdown structure (has content), report counts of fetched documents",
+    "Add a job summary step using $GITHUB_STEP_SUMMARY to report: number of files fetched per source, any errors encountered, validation results",
+    "Add permissions for pull-requests: write to the workflow permissions block",
+    "Create scripts/utils/__init__.py and scripts/utils/http_client.py: a shared HTTP client module with retry logic (exponential backoff, configurable max_retries), user-agent rotation (list of 5+ realistic browser user-agents), request rate limiting, and proper logging. This consolidates the retry pattern already in fetch_eurlex_judgments.py and fetch_cbosa.py into a reusable module.",
+    "Update scripts/fetch_eurlex.py to use the new utils/http_client.py: replace the single requests.get call in fetch_cellar_content() with the retry-capable client",
+    "Update scripts/fetch_isap.py to use the new utils/http_client.py: replace requests.get calls in fetch_act_details() and fetch_act_text() with the retry-capable client",
+    "Add a scripts/validate_content.py script that the workflow calls: takes an output directory, checks each .md and .html file for minimum size (>100 bytes), valid UTF-8, and basic structure. Exits with error code if validation fails. Outputs a summary to stdout."
+  ],
+  "acceptance_criteria": [
+    "Workflow YAML is valid and uses peter-evans/create-pull-request instead of direct push",
+    "Workflow includes a content validation step",
+    "Workflow includes a summary/reporting step",
+    "scripts/utils/http_client.py exists with retry logic and user-agent rotation",
+    "scripts/validate_content.py exists and is callable with --input argument",
+    "fetch_eurlex.py and fetch_isap.py import and use the shared http_client"
+  ],
+  "verification": [
+    "Run `python -c \"import yaml; yaml.safe_load(open('.github/workflows/update-laws.yml'))\"` to validate YAML (install pyyaml if needed)",
+    "Run `cd /projects/sandbox/foodlaw.ai && python -c \"from scripts.utils.http_client import create_http_client\"` to verify the module is importable",
+    "Run `cd /projects/sandbox/foodlaw.ai && python scripts/validate_content.py --help` to verify the script runs",
+    "Run `cd /projects/sandbox/foodlaw.ai/scripts && python -m pytest tests/ -v` to verify existing tests still pass"
+  ],
+  "blocked_reason": null,
+  "findings": "All 50 existing tests pass. YAML validated. HTTP client module importable from scripts/utils/. validate_content.py runs with --help. Both fetch_eurlex.py and fetch_isap.py still work standalone with --help. Used pyenv global 3.11.15 to activate Python. The shared http_client uses urllib3 Retry with HTTPAdapter for automatic retries on 5xx, and a custom RetrySession subclass for user-agent rotation per request."
+}

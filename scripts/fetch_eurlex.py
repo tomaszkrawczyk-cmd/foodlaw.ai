@@ -26,6 +26,11 @@ except ImportError:
     print("Brak modulu 'requests'. Zainstaluj: pip install requests")
     sys.exit(1)
 
+# Add scripts directory to path for utils import
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from utils.http_client import create_http_client
+
 try:
     from SPARQLWrapper import SPARQLWrapper, JSON
 except ImportError:
@@ -76,7 +81,7 @@ def setup_logging(verbose: bool = False) -> None:
     )
 
 
-def fetch_cellar_content(celex: str, language: str = "pl") -> str:
+def fetch_cellar_content(celex: str, language: str = "pl", client: requests.Session = None) -> str:
     """
     Pobiera tresc dokumentu z CELLAR za pomoca content negotiation.
 
@@ -89,10 +94,14 @@ def fetch_cellar_content(celex: str, language: str = "pl") -> str:
     Args:
         celex: Numer CELEX dokumentu
         language: Kod jezyka (domyslnie 'pl')
+        client: Optional configured requests.Session (uses shared http_client if None)
 
     Returns:
         Tresc HTML/XHTML jako string, pusty string w przypadku bledu
     """
+    if client is None:
+        client = create_http_client(max_retries=3, backoff_factor=2.0, timeout=120)
+
     url = f"{CELLAR_RESOURCE_BASE}{celex}"
 
     # Try XHTML first (preferred - structured format), then HTML fallback
@@ -104,11 +113,10 @@ def fetch_cellar_content(celex: str, language: str = "pl") -> str:
         headers = {
             "Accept": accept_type,
             "Accept-Language": language,
-            "User-Agent": USER_AGENT,
         }
 
         try:
-            response = requests.get(url, headers=headers, timeout=120, allow_redirects=True)
+            response = client.get(url, headers=headers, timeout=120, allow_redirects=True)
 
             if response.status_code == 200:
                 content = response.text

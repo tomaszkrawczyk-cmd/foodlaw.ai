@@ -1,0 +1,14 @@
+{
+  "task_id": "task-landing-page-workflow-expansion",
+  "task_description": "Create bilingual FOODLAW.ai landing page (Astro+Tailwind), supplemental.pl AI tools page, improve GitHub Actions workflow (PR-based, validation, reporting), and add new data source scrapers (RASFF, health claims, novel food).",
+  "status": "completed",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003", "FEAT-004"],
+  "blocked_reason": null,
+  "verification": {
+    "build": "pass",
+    "tests": "pass",
+    "test_quality": "pass",
+    "docker_build": "skipped",
+    "summary": "Website builds successfully (3 pages: PL, EN, supplemental). All 98 pytest tests pass. YAML workflow validates. All scripts respond to --help. Shared HTTP client module works. Semantic review v3: APPROVED."
+  }
+}

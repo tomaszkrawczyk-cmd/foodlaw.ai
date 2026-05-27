@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   update-laws:
@@ -29,6 +30,7 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Pobieranie rozporzadzen UE z EUR-Lex
+        id: fetch_eurlex
         run: |
           python scripts/fetch_eurlex.py \
             --output ./output/eurlex/ \
@@ -38,6 +40,7 @@ jobs:
         continue-on-error: true
 
       - name: Pobieranie ustaw z ISAP
+        id: fetch_isap
         run: |
           python scripts/fetch_isap.py \
             --output ./output/isap/ \
@@ -45,6 +48,7 @@ jobs:
         continue-on-error: true
 
       - name: Pobieranie orzeczen NSA/WSA z CBOSA
+        id: fetch_cbosa
         run: |
           python scripts/fetch_cbosa.py \
             --court-type nsa \
@@ -59,11 +63,27 @@ jobs:
         continue-on-error: true
 
       - name: Pobieranie orzeczen TSUE z CURIA
+        id: fetch_curia
         run: |
           python scripts/fetch_curia.py \
             --output ./orzecznictwo/tsue/ \
             --delay 5.0 \
             --verbose
+        continue-on-error: true
+
+      - name: Pobieranie powiadomien RASFF
+        id: fetch_rasff
+        run: python scripts/fetch_rasff.py --output ./output/rasff/ --verbose
+        continue-on-error: true
+
+      - name: Pobieranie rejestru oswiadczen zdrowotnych
+        id: fetch_health_claims
+        run: python scripts/fetch_health_claims.py --output ./output/health-claims/ --verbose
+        continue-on-error: true
+
+      - name: Pobieranie katalogu novel food
+        id: fetch_novel_food
+        run: python scripts/fetch_novel_food.py --output ./output/novel-food/ --verbose
         continue-on-error: true
 
       - name: Konwersja na Markdown
@@ -82,6 +102,46 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Walidacja pobranych plikow
+        id: validate
+        run: |
+          python scripts/validate_content.py \
+            --input ./output/ \
+            --input ./orzecznictwo/ \
+            --fail-on-empty \
+            --verbose
+
+      - name: Podsumowanie wynikow
+        run: |
+          echo "## Aktualizacja aktow prawnych - $(date +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Status pobierania" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Zrodlo | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| EUR-Lex | ${{ steps.fetch_eurlex.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ISAP | ${{ steps.fetch_isap.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| CBOSA (NSA/WSA) | ${{ steps.fetch_cbosa.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| CURIA (TSUE) | ${{ steps.fetch_curia.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| RASFF | ${{ steps.fetch_rasff.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Health Claims | ${{ steps.fetch_health_claims.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Novel Food | ${{ steps.fetch_novel_food.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Statystyki plikow" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- EUR-Lex HTML: $(find ./output/eurlex -name '*.html' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "- ISAP HTML: $(find ./output/isap -name '*.html' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "- Orzecznictwo NSA: $(find ./orzecznictwo/nsa -name '*.md' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "- Orzecznictwo WSA: $(find ./orzecznictwo/wsa -name '*.md' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "- Orzecznictwo TSUE: $(find ./orzecznictwo/tsue -name '*.md' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "- RASFF: $(find ./output/rasff -name '*.json' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "- Health Claims: $(find ./output/health-claims -name '*.json' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "- Novel Food: $(find ./output/novel-food -name '*.json' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Walidacja" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Status walidacji: ${{ steps.validate.outcome }}" >> $GITHUB_STEP_SUMMARY
+
       - name: Sprawdzenie zmian
         id: check_changes
         run: |
@@ -92,15 +152,26 @@ jobs:
             echo "changes=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Commit i push zmian
-        if: steps.check_changes.outputs.changes == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "chore: automatyczna aktualizacja aktow prawnych $(date +%Y-%m-%d)"
-          git push
-        # UWAGA: Jesli branch 'main' jest chroniony (wymaga PR review), ten krok
-        # nie powiedzie sie. W takim przypadku nalezy zmienic strategie na tworzenie
-        # brancha i PR (np. peter-evans/create-pull-request action) zamiast
-        # bezposredniego push na main.
+      - name: Utworzenie Pull Request
+        if: steps.check_changes.outputs.changes == 'true' && steps.validate.outcome == 'success'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: auto-update/laws-${{ github.run_id }}
+          title: "chore: automatyczna aktualizacja aktow prawnych"
+          body: |
+            ## Automatyczna aktualizacja aktow prawnych
+
+            Workflow pobrania zakonczony. Podsumowanie:
+
+            - EUR-Lex: ${{ steps.fetch_eurlex.outcome }}
+            - ISAP: ${{ steps.fetch_isap.outcome }}
+            - CBOSA: ${{ steps.fetch_cbosa.outcome }}
+            - CURIA: ${{ steps.fetch_curia.outcome }}
+            - RASFF: ${{ steps.fetch_rasff.outcome }}
+            - Health Claims: ${{ steps.fetch_health_claims.outcome }}
+            - Novel Food: ${{ steps.fetch_novel_food.outcome }}
+            - Walidacja: ${{ steps.validate.outcome }}
+
+            Utworzono automatycznie przez GitHub Actions.
+          commit-message: "chore: automatyczna aktualizacja aktow prawnych"
+          delete-branch: true

@@ -1,0 +1,30 @@
+{
+  "id": "FEAT-004",
+  "type": "feat",
+  "description": "Add new data source scrapers: RASFF notifications, EU health claims register updates, and Novel Food catalogue/Union List monitor. Follow existing script patterns (argparse, logging, requests, BeautifulSoup).",
+  "status": "completed",
+  "steps": [
+    "Create scripts/fetch_rasff.py: RASFF (Rapid Alert System for Food and Feed) notifications scraper. Use the RASFF portal search API (https://webgate.ec.europa.eu/rasff-window/backend/public/notification/search) which returns JSON. Filter by food category. Save notifications as JSON and optionally convert to Markdown summaries. Follow existing script patterns: argparse CLI, logging setup, user-agent header, delay between requests. Use the new utils/http_client.py for HTTP requests.",
+    "Create scripts/fetch_health_claims.py: EU Commission register of health claims scraper. Target the EU Register of nutrition and health claims (https://ec.europa.eu/food/food-feed-portal/frontend/claims). Fetch the list of authorized/non-authorized claims. Save as JSON with claim ID, wording, conditions of use, status. Follow existing patterns.",
+    "Create scripts/fetch_novel_food.py: Novel Food catalogue and Union List monitor. Target the Novel Food catalogue (https://ec.europa.eu/food/food-feed-portal/screen/novel-food-catalogue/search) and Union List. Fetch entries, status, and any recent changes. Save as JSON. Follow existing patterns.",
+    "Add new dependencies to scripts/requirements.txt if needed (likely none beyond existing requests + beautifulsoup4)",
+    "Add the new scripts to the GitHub Actions workflow (.github/workflows/update-laws.yml): add steps for RASFF, health claims, and novel food fetching with continue-on-error: true, placed after existing fetch steps",
+    "Create scripts/tests/test_new_scrapers.py with unit tests for the parsing/data-extraction functions of each new script (mock HTTP responses, test data parsing, test CLI arguments)"
+  ],
+  "acceptance_criteria": [
+    "scripts/fetch_rasff.py exists with argparse CLI, --output, --verbose, --delay flags and runs with --help",
+    "scripts/fetch_health_claims.py exists with argparse CLI and runs with --help",
+    "scripts/fetch_novel_food.py exists with argparse CLI and runs with --help",
+    "All three scripts use the shared utils/http_client.py module",
+    "Workflow YAML includes steps for the three new scrapers",
+    "scripts/tests/test_new_scrapers.py exists and passes with pytest"
+  ],
+  "verification": [
+    "Run `python /projects/sandbox/foodlaw.ai/scripts/fetch_rasff.py --help` and confirm it shows usage",
+    "Run `python /projects/sandbox/foodlaw.ai/scripts/fetch_health_claims.py --help` and confirm it shows usage",
+    "Run `python /projects/sandbox/foodlaw.ai/scripts/fetch_novel_food.py --help` and confirm it shows usage",
+    "Run `cd /projects/sandbox/foodlaw.ai/scripts && python -m pytest tests/ -v` and confirm all tests pass"
+  ],
+  "blocked_reason": null,
+  "findings": "All 98 tests pass (63 new + 35 existing). All three scripts respond correctly to --help. No new dependencies needed - existing requests library supports POST with JSON natively. Used 0-indexed pagination for EU food/feed portal APIs (health claims, novel food) and 1-indexed for RASFF API to match their respective backends."
+}

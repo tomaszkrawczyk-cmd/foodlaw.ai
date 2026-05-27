@@ -1,0 +1,49 @@
+---
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+
+const tiers = [t.pricing.free, t.pricing.pro, t.pricing.enterprise];
+---
+
+<section id="pricing" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl font-bold text-primary-700 mb-4">
+        {t.pricing.title}
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        {t.pricing.subtitle}
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      {tiers.map((tier, index) => (
+        <div class={`rounded-xl p-8 border ${index === 1 ? 'bg-primary-700 text-white border-primary-700 shadow-xl scale-105' : 'bg-white border-gray-200 shadow-sm'} transition-smooth`}>
+          <h3 class={`text-xl font-bold mb-2 ${index === 1 ? 'text-white' : 'text-gray-900'}`}>
+            {tier.name}
+          </h3>
+          <p class={`text-sm mb-4 ${index === 1 ? 'text-primary-100' : 'text-gray-500'}`}>
+            {tier.description}
+          </p>
+          <div class={`text-3xl font-bold mb-6 ${index === 1 ? 'text-accent-400' : 'text-primary-700'}`}>
+            {tier.price}
+          </div>
+          <ul class="space-y-3">
+            {tier.features.map((feature) => (
+              <li class={`flex items-start gap-2 text-sm ${index === 1 ? 'text-primary-100' : 'text-gray-600'}`}>
+                <svg class={`w-5 h-5 shrink-0 ${index === 1 ? 'text-accent-400' : 'text-accent-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

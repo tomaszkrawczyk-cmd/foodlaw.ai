@@ -1,0 +1,33 @@
+---
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href={t.lang === 'pl' ? '/' : '/en/'} class="text-xl font-bold text-primary-700">
+        FOODLAW<span class="text-accent-500">.ai</span>
+      </a>
+      <div class="flex items-center gap-6">
+        <div class="hidden md:flex items-center gap-6">
+          <a href="#features" class="text-sm text-gray-600 hover:text-primary-700 transition-smooth">{t.nav.features}</a>
+          <a href="#demo" class="text-sm text-gray-600 hover:text-primary-700 transition-smooth">{t.nav.demo}</a>
+          <a href="#pricing" class="text-sm text-gray-600 hover:text-primary-700 transition-smooth">{t.nav.pricing}</a>
+          <a href="#waitlist" class="text-sm text-gray-600 hover:text-primary-700 transition-smooth">{t.nav.waitlist}</a>
+        </div>
+        <a
+          href={t.otherLangUrl}
+          class="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium rounded-md border border-primary-200 text-primary-700 hover:bg-primary-50 transition-smooth"
+        >
+          {t.otherLang}
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

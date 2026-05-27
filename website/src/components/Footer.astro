@@ -1,0 +1,48 @@
+---
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<footer class="bg-primary-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <div>
+        <h3 class="text-xl font-bold mb-3">
+          FOODLAW<span class="text-accent-400">.ai</span>
+        </h3>
+        <p class="text-primary-200 text-sm">{t.footer.description}</p>
+        <p class="text-primary-300 text-sm mt-2">{t.footer.author}</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">{t.footer.links}</h4>
+        <ul class="space-y-2 text-sm text-primary-200">
+          <li><a href="#features" class="hover:text-white transition-smooth">{t.nav.features}</a></li>
+          <li><a href="#pricing" class="hover:text-white transition-smooth">{t.nav.pricing}</a></li>
+          <li><a href="#waitlist" class="hover:text-white transition-smooth">{t.nav.waitlist}</a></li>
+          <li>
+            <a href="/supplemental" class="hover:text-white transition-smooth">
+              Narzedzia AI
+            </a>
+          </li>
+          <li>
+            <a href="https://supplemental.pl" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-smooth">
+              {t.footer.authorSite}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">{t.footer.legal}</h4>
+        <p class="text-sm text-primary-200">{t.footer.disclaimer}</p>
+      </div>
+    </div>
+    <div class="border-t border-primary-700 pt-6 text-center text-sm text-primary-300">
+      &copy; {t.footer.copyright}
+    </div>
+  </div>
+</footer>
