@@ -50,7 +50,7 @@ def _get_random_user_agent() -> str:
 class RetrySession(requests.Session):
     """A requests.Session subclass that rotates user-agent per request if configured."""
 
-    def __init__(self, user_agent_rotate: bool = True, default_timeout: int = 30):
+    def __init__(self, user_agent_rotate: bool = False, default_timeout: int = 30):
         super().__init__()
         self._user_agent_rotate = user_agent_rotate
         self._default_timeout = default_timeout
@@ -93,7 +93,7 @@ class RetryWithLogging(Retry):
 def create_http_client(
     max_retries: int = 3,
     backoff_factor: float = 2.0,
-    user_agent_rotate: bool = True,
+    user_agent_rotate: bool = False,
     timeout: int = 30,
 ) -> requests.Session:
     """
@@ -105,7 +105,7 @@ def create_http_client(
             Delays will be: backoff_factor * (2 ** (retry_number - 1))
             e.g., with factor=2.0: 2s, 4s, 8s
         user_agent_rotate: If True, rotate user-agents per request from a pool
-            of realistic browser user-agents. If False, use the foodlaw-ai
+            of realistic browser user-agents. If False (default), use the foodlaw-ai
             identification user-agent.
         timeout: Default request timeout in seconds (default: 30)
 

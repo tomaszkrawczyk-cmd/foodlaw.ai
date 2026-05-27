@@ -16,7 +16,7 @@ const { t } = Astro.props;
     <p class="text-lg text-gray-600 mb-8">
       {t.waitlist.subtitle}
     </p>
-    <form action="#" method="POST" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+    <form id="waitlist-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
       <input
         type="email"
         name="email"
@@ -31,6 +31,19 @@ const { t } = Astro.props;
         {t.waitlist.submit}
       </button>
     </form>
-    <p class="text-sm text-gray-500 mt-4">{t.waitlist.success}</p>
+    <p id="waitlist-success" class="text-sm text-gray-500 mt-4 hidden">{t.waitlist.success}</p>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('waitlist-form') as HTMLFormElement | null;
+  const successMsg = document.getElementById('waitlist-success');
+
+  if (form && successMsg) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.classList.add('hidden');
+      successMsg.classList.remove('hidden');
+    });
+  }
+</script>

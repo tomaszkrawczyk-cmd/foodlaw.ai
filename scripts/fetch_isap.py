@@ -184,7 +184,7 @@ def fetch_act_text(act_id: str, text_type: str = "T", client: requests.Session =
         return ""
 
 
-def search_acts(keyword: str, publisher: str = "WDU", limit: int = 20) -> list:
+def search_acts(keyword: str, publisher: str = "WDU", limit: int = 20, client: requests.Session = None) -> list:
     """
     Wyszukuje akty prawne w ISAP.
 
@@ -192,10 +192,14 @@ def search_acts(keyword: str, publisher: str = "WDU", limit: int = 20) -> list:
         keyword: Slowo kluczowe
         publisher: Wydawca (WDU - Dziennik Ustaw, MMP - Monitor Polski)
         limit: Maksymalna liczba wynikow
+        client: Optional configured requests.Session (uses shared http_client if None)
 
     Returns:
         Lista znalezionych aktow
     """
+    if client is None:
+        client = create_http_client(max_retries=3, backoff_factor=2.0, timeout=30)
+
     url = f"{ISAP_API_BASE}/deeds/search"
     params = {
         "publisher": publisher,
@@ -206,12 +210,11 @@ def search_acts(keyword: str, publisher: str = "WDU", limit: int = 20) -> list:
     logger.info(f"Wyszukiwanie aktow: '{keyword}' w {publisher}")
 
     headers = {
-        "User-Agent": USER_AGENT,
         "Accept": "application/json",
     }
 
     try:
-        response = requests.get(url, params=params, headers=headers, timeout=30)
+        response = client.get(url, params=params, headers=headers, timeout=30)
         response.raise_for_status()
         data = response.json()
         items = data.get("items", data) if isinstance(data, dict) else data

@@ -109,7 +109,6 @@ jobs:
             --input ./output/ \
             --input ./orzecznictwo/ \
             --verbose
-        continue-on-error: true
 
       - name: Podsumowanie wynikow
         run: |
@@ -153,7 +152,7 @@ jobs:
           fi
 
       - name: Utworzenie Pull Request
-        if: steps.check_changes.outputs.changes == 'true'
+        if: steps.check_changes.outputs.changes == 'true' && steps.validate.outcome == 'success'
         uses: peter-evans/create-pull-request@v6
         with:
           branch: auto-update/laws-${{ github.run_id }}

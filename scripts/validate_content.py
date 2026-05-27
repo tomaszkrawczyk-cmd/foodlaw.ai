@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Validates fetched content files (.md and .html) for basic quality checks.
+Validates fetched content files (.md, .html, and .json) for basic quality checks.
 
 Checks:
 - File is at least 100 bytes (minimum meaningful content)
@@ -8,10 +8,12 @@ Checks:
 
 Outputs a summary with total files checked and pass/fail counts.
 Exits with code 1 if any files fail validation.
+Warns when a specified directory contains zero matching files.
 
 Usage:
     python validate_content.py --input ./output/ --input ./orzecznictwo/
     python validate_content.py --input ./output/ --verbose
+    python validate_content.py --input ./output/ --fail-on-empty
 """
 
 import argparse
@@ -70,7 +72,7 @@ def validate_file(filepath: Path, verbose: bool = False) -> bool:
 
 def find_content_files(directories: list) -> list:
     """
-    Find all .md and .html files in the given directories.
+    Find all .md, .html, and .json files in the given directories.
 
     Args:
         directories: List of directory paths to scan
@@ -79,7 +81,7 @@ def find_content_files(directories: list) -> list:
         List of Path objects for found files
     """
     files = []
-    extensions = {".md", ".html"}
+    extensions = {".md", ".html", ".json"}
 
     for dir_path in directories:
         path = Path(dir_path)
@@ -99,7 +101,7 @@ def find_content_files(directories: list) -> list:
 def main():
     """Main function - parse arguments and run validation."""
     parser = argparse.ArgumentParser(
-        description="Validate fetched content files (.md and .html) for minimum "
+        description="Validate fetched content files (.md, .html, and .json) for minimum "
                     "size and valid UTF-8 encoding.",
         epilog="Example: python validate_content.py --input ./output/ --input ./orzecznictwo/",
     )
@@ -112,6 +114,11 @@ def main():
         help="Input directory to validate (can be specified multiple times)",
     )
     parser.add_argument(
+        "--fail-on-empty",
+        action="store_true",
+        help="Exit with code 1 if any specified directory has zero matching files",
+    )
+    parser.add_argument(
         "--verbose", "-v",
         action="store_true",
         help="Enable verbose output (show each file result)",
@@ -120,13 +127,34 @@ def main():
     args = parser.parse_args()
     setup_logging(args.verbose)
 
+    # Check for empty directories and warn
+    empty_dirs = []
+    extensions = {".md", ".html", ".json"}
+    for dir_path in args.input_dirs:
+        path = Path(dir_path)
+        if path.exists() and path.is_dir():
+            dir_files = []
+            for ext in extensions:
+                dir_files.extend(path.rglob(f"*{ext}"))
+            if not dir_files:
+                logger.warning(
+                    "Directory '%s' contains zero .md/.html/.json files", dir_path
+                )
+                empty_dirs.append(dir_path)
+
     # Find all content files
     files = find_content_files(args.input_dirs)
 
     if not files:
-        print("No .md or .html files found in specified directories.")
+        print("No .md, .html, or .json files found in specified directories.")
         print(f"Directories checked: {', '.join(args.input_dirs)}")
+        if args.fail_on_empty:
+            print("\nFAILED: --fail-on-empty specified and no files found.")
+            sys.exit(1)
         sys.exit(0)
+
+    if empty_dirs and args.fail_on_empty:
+        print(f"\nWARNING: Empty directories (no matching files): {', '.join(empty_dirs)}")
 
     # Validate each file
     pass_count = 0
@@ -145,8 +173,14 @@ def main():
     print(f"  Passed: {pass_count}")
     print(f"  Failed: {fail_count}")
 
+    if empty_dirs:
+        print(f"  Empty directories: {', '.join(empty_dirs)}")
+
     if fail_count > 0:
         print(f"\nValidation FAILED: {fail_count} file(s) did not pass checks.")
+        sys.exit(1)
+    elif empty_dirs and args.fail_on_empty:
+        print(f"\nValidation FAILED: {len(empty_dirs)} directory(ies) had zero matching files.")
         sys.exit(1)
     else:
         print("\nAll files passed validation.")
