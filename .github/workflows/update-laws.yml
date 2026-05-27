@@ -71,6 +71,21 @@ jobs:
             --verbose
         continue-on-error: true
 
+      - name: Pobieranie powiadomien RASFF
+        id: fetch_rasff
+        run: python scripts/fetch_rasff.py --output ./output/rasff/ --verbose
+        continue-on-error: true
+
+      - name: Pobieranie rejestru oswiadczen zdrowotnych
+        id: fetch_health_claims
+        run: python scripts/fetch_health_claims.py --output ./output/health-claims/ --verbose
+        continue-on-error: true
+
+      - name: Pobieranie katalogu novel food
+        id: fetch_novel_food
+        run: python scripts/fetch_novel_food.py --output ./output/novel-food/ --verbose
+        continue-on-error: true
+
       - name: Konwersja na Markdown
         run: |
           if [ -d "./output/eurlex" ] && [ "$(ls -A ./output/eurlex/*.html 2>/dev/null)" ]; then
@@ -108,6 +123,9 @@ jobs:
           echo "| ISAP | ${{ steps.fetch_isap.outcome }} |" >> $GITHUB_STEP_SUMMARY
           echo "| CBOSA (NSA/WSA) | ${{ steps.fetch_cbosa.outcome }} |" >> $GITHUB_STEP_SUMMARY
           echo "| CURIA (TSUE) | ${{ steps.fetch_curia.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| RASFF | ${{ steps.fetch_rasff.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Health Claims | ${{ steps.fetch_health_claims.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Novel Food | ${{ steps.fetch_novel_food.outcome }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Statystyki plikow" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -116,6 +134,9 @@ jobs:
           echo "- Orzecznictwo NSA: $(find ./orzecznictwo/nsa -name '*.md' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
           echo "- Orzecznictwo WSA: $(find ./orzecznictwo/wsa -name '*.md' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
           echo "- Orzecznictwo TSUE: $(find ./orzecznictwo/tsue -name '*.md' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "- RASFF: $(find ./output/rasff -name '*.json' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "- Health Claims: $(find ./output/health-claims -name '*.json' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
+          echo "- Novel Food: $(find ./output/novel-food -name '*.json' 2>/dev/null | wc -l) plikow" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Walidacja" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -146,6 +167,9 @@ jobs:
             - ISAP: ${{ steps.fetch_isap.outcome }}
             - CBOSA: ${{ steps.fetch_cbosa.outcome }}
             - CURIA: ${{ steps.fetch_curia.outcome }}
+            - RASFF: ${{ steps.fetch_rasff.outcome }}
+            - Health Claims: ${{ steps.fetch_health_claims.outcome }}
+            - Novel Food: ${{ steps.fetch_novel_food.outcome }}
             - Walidacja: ${{ steps.validate.outcome }}
 
             Utworzono automatycznie przez GitHub Actions.
