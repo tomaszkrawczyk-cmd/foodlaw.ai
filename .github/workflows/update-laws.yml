@@ -108,6 +108,7 @@ jobs:
           python scripts/validate_content.py \
             --input ./output/ \
             --input ./orzecznictwo/ \
+            --fail-on-empty \
             --verbose
 
       - name: Podsumowanie wynikow
