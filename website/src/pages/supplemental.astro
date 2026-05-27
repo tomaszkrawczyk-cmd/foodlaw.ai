@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import { translations } from '../i18n/translations';
+
+const t = translations.pl;
+---
+
+<Layout t={t}>
+  <!-- Header / Nav -->
+  <nav class="absolute top-0 left-0 right-0 z-10 py-6 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="/" class="text-xl font-bold text-white">
+        FOODLAW<span class="text-accent-400">.ai</span>
+      </a>
+      <a
+        href="/"
+        class="text-sm text-white/80 hover:text-white transition-smooth"
+      >
+        &larr; Strona glowna
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-gradient pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-accent-400 font-semibold text-sm uppercase tracking-wider mb-4">supplemental.pl</p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+        Narzedzia AI dla prawa zywnosciowego
+      </h1>
+      <p class="text-lg sm:text-xl text-primary-100 mb-10 max-w-2xl mx-auto">
+        Wykorzystaj sztuczna inteligencje do analizy przepisow, monitorowania zmian regulacyjnych i automatyzacji badan prawnych w branzy spozywczej.
+      </p>
+      <a
+        href="/"
+        class="inline-flex items-center px-8 py-3 text-base font-semibold rounded-lg bg-accent-500 text-white hover:bg-accent-600 transition-smooth shadow-lg"
+      >
+        Przejdz do FOODLAW.ai
+      </a>
+    </div>
+  </section>
+
+  <!-- Messaging Pillars -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-primary-50">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-primary-900 mb-4">Dlaczego AI w prawie zywnosciowym?</h2>
+      <p class="text-center text-primary-600 mb-12 max-w-2xl mx-auto">
+        Polaczenie ponad 15 lat doswiadczenia w prawie zywnosciowym z najnowszymi technologiami AI.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Pillar 1: Speed -->
+        <div class="bg-white rounded-xl p-8 shadow-sm card-hover">
+          <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-primary-900 mb-3">Szybkosc dzialania</h3>
+          <p class="text-primary-600">
+            AI przetwarza przepisy natychmiastowo. Analiza, ktora dotychczas zajmowala godziny, teraz trwa sekundy. Automatyczne przeszukiwanie bazy ponad 20 rozporzadzen UE i polskich aktow prawnych.
+          </p>
+        </div>
+
+        <!-- Pillar 2: Confidence & Experience -->
+        <div class="bg-white rounded-xl p-8 shadow-sm card-hover">
+          <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-primary-900 mb-3">Pewnosc i doswiadczenie</h3>
+          <p class="text-primary-600">
+            Ponad 15 lat specjalizacji w prawie zywnosciowym polaczone z AI. Narzedzia oparte na wiedzy obejmujacej 19+ obszarow prawa zywnosciowego - od suplementow diety po novel food.
+          </p>
+        </div>
+
+        <!-- Pillar 3: Competitive Pricing -->
+        <div class="bg-white rounded-xl p-8 shadow-sm card-hover">
+          <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-primary-900 mb-3">Konkurencyjne ceny</h3>
+          <p class="text-primary-600">
+            Dzieki opanowaniu technologii AI oferujemy uslugi w bardzo konkurencyjnych cenach. Automatyzacja procesow pozwala na obnizenie kosztow bez utraty jakosci.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Tools Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-primary-900 mb-4">Nasze narzedzia AI</h2>
+      <p class="text-center text-primary-600 mb-12 max-w-2xl mx-auto">
+        Zestaw specjalistycznych narzedzi wspomagajacych prace z prawem zywnosciowym.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Tool 1: Automated Legal Research -->
+        <div class="border border-primary-100 rounded-xl p-6 card-hover">
+          <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-primary-900 mb-2">Zautomatyzowane badania prawne</h3>
+          <p class="text-primary-600 text-sm">
+            Automatyczne przeszukiwanie i analiza przepisow prawa zywnosciowego UE i polskiego. AI identyfikuje odpowiednie regulacje i przedstawia kluczowe wymagania.
+          </p>
+        </div>
+
+        <!-- Tool 2: Regulatory Monitoring -->
+        <div class="border border-primary-100 rounded-xl p-6 card-hover">
+          <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-primary-900 mb-2">Monitoring regulacyjny</h3>
+          <p class="text-primary-600 text-sm">
+            Sledzenie zmian w przepisach prawa zywnosciowego. Automatyczne powiadomienia o nowych regulacjach, nowelizacjach i orzeczeniach wplywajacych na Twoja dzialalnosc.
+          </p>
+        </div>
+
+        <!-- Tool 3: Document Analysis -->
+        <div class="border border-primary-100 rounded-xl p-6 card-hover">
+          <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-primary-900 mb-2">Analiza dokumentow</h3>
+          <p class="text-primary-600 text-sm">
+            AI analizuje etykiety, specyfikacje produktow i dokumentacje pod katem zgodnosci z przepisami prawa zywnosciowego. Szybka identyfikacja potencjalnych niezgodnosci.
+          </p>
+        </div>
+
+        <!-- Tool 4: Case Law Database -->
+        <div class="border border-primary-100 rounded-xl p-6 card-hover">
+          <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-primary-900 mb-2">Baza orzecznictwa</h3>
+          <p class="text-primary-600 text-sm">
+            Dostep do orzeczen NSA, WSA, TSUE oraz decyzji GIS z zakresu prawa zywnosciowego. AI wyszukuje i analizuje relewantne orzeczenia dla Twojej sprawy.
+          </p>
+        </div>
+
+        <!-- Tool 5: EU Regulations -->
+        <div class="border border-primary-100 rounded-xl p-6 card-hover">
+          <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-primary-900 mb-2">Rozporzadzenia UE</h3>
+          <p class="text-primary-600 text-sm">
+            Pelna baza ponad 20 rozporzadzen UE dotyczacych prawa zywnosciowego. Od ogolnego prawa zywnosciowego po szczegolowe regulacje branzy suplementow diety.
+          </p>
+        </div>
+
+        <!-- Tool 6: Expert Consultations -->
+        <div class="border border-primary-100 rounded-xl p-6 card-hover">
+          <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-primary-900 mb-2">Wsparcie eksperckie</h3>
+          <p class="text-primary-600 text-sm">
+            AI wspomagane wiedza eksperta z 15+ letnim doswiadczeniem. Odpowiedzi uwzgledniajace praktyczne aspekty stosowania prawa zywnosciowego w Polsce.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 hero-gradient">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">Gotowy na AI w prawie zywnosciowym?</h2>
+      <p class="text-primary-100 mb-8 text-lg">
+        Sprawdz FOODLAW.ai i przekonaj sie, jak sztuczna inteligencja moze usprawnic Twoja prace z przepisami prawa zywnosciowego.
+      </p>
+      <a
+        href="/"
+        class="inline-flex items-center px-8 py-4 text-lg font-semibold rounded-lg bg-accent-500 text-white hover:bg-accent-600 transition-smooth shadow-lg"
+      >
+        Przejdz do FOODLAW.ai
+      </a>
+    </div>
+  </section>
+
+  <Footer t={t} />
+</Layout>
