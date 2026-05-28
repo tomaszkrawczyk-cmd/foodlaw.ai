@@ -1,4 +1,4 @@
-name: Deploy Website to Cloudflare Pages
+name: Deploy Website to Cloudflare Workers
 
 on:
   push:
@@ -37,9 +37,9 @@ jobs:
         working-directory: website
         run: pnpm build
 
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy to Cloudflare Workers
         working-directory: website
-        run: npx wrangler pages deploy ./dist/client --project-name=foodlaw-ai --branch=main
+        run: npx wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
