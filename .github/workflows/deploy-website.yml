@@ -25,11 +25,13 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: latest
+          version: 10
 
       - name: Install dependencies
         working-directory: website
-        run: pnpm install
+        run: |
+          pnpm approve-builds esbuild sharp workerd
+          pnpm install
 
       - name: Build website
         working-directory: website
