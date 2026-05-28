@@ -12,13 +12,12 @@ export const translations = {
       features: 'Funkcje',
       demo: 'Demo',
       pricing: 'Cennik',
-      waitlist: 'Lista oczekujących',
       projects: 'Projekty',
     },
     hero: {
       headline: 'Twój asystent AI prawa żywnościowego',
       subheadline: 'Zautomatyzowane badania prawne w zakresie prawa żywnościowego UE i polskiego. Baza wiedzy obejmująca 19+ obszarów regulacji.',
-      cta: 'Dołącz do listy oczekujących',
+      cta: 'Zobacz projekty',
       ctaSecondary: 'Dowiedz się więcej',
     },
     features: {
@@ -56,9 +55,9 @@ export const translations = {
       subtitle: 'Ekosystem narzędzi i usług dla prawa żywnościowego',
       items: [
         {
-          title: 'Asystent AI',
-          description: 'Główny asystent AI prawa żywnościowego - odpowiedzi na pytania prawne, analiza przepisów i orzecznictwa.',
-          url: '/',
+          title: 'app.foodlaw.ai',
+          description: 'Oświadczenia zdrowotne (Claims) - wyszukiwarka i analiza oświadczeń żywieniowych i zdrowotnych.',
+          url: 'https://app.foodlaw.ai',
         },
         {
           title: 'Nutrimetr',
@@ -66,8 +65,8 @@ export const translations = {
           url: 'https://nutrimetr.foodlaw.ai',
         },
         {
-          title: 'www.supplemental.pl',
-          description: 'Usługi prawne dla branży spożywczej - szybko, profesjonalnie i w konkurencyjnych cenach dzięki AI.',
+          title: 'Asystent AI na www.supplemental.pl',
+          description: 'Asystent AI dostępny na stronie supplemental.pl - szybkie odpowiedzi na pytania z zakresu prawa żywnościowego.',
           url: 'https://www.supplemental.pl',
         },
         {
@@ -85,7 +84,7 @@ export const translations = {
     demo: {
       title: 'Zobacz FOODLAW.ai w działaniu',
       subtitle: 'Sprawdź jak AI asystent pomaga w codziennej pracy z prawem żywnościowym',
-      placeholder: 'Demo w przygotowaniu - dołącz do listy oczekujących, aby uzyskać wczesny dostęp.',
+      placeholder: 'Demo w przygotowaniu - sprawdź nasze projekty powyżej.',
     },
     pricing: {
       title: 'Cennik',
@@ -108,13 +107,6 @@ export const translations = {
         description: 'Rozwiązanie szyte na miarę',
         features: ['Dedykowana instancja', 'Integracja z systemami', 'Szkolenie zespołu', 'SLA'],
       },
-    },
-    waitlist: {
-      title: 'Dołącz do listy oczekujących',
-      subtitle: 'Bądź wśród pierwszych użytkowników FOODLAW.ai. Otrzymaj wczesny dostęp i specjalne warunki.',
-      emailPlaceholder: 'Twój adres email',
-      submit: 'Zapisz się',
-      success: 'Dziękujemy! Powiadomimy Cię o uruchomieniu.',
     },
     footer: {
       description: 'FOODLAW.ai - inteligentny asystent prawa żywnościowego oparty na AI.',
@@ -139,13 +131,12 @@ export const translations = {
       features: 'Features',
       demo: 'Demo',
       pricing: 'Pricing',
-      waitlist: 'Waitlist',
       projects: 'Projects',
     },
     hero: {
       headline: 'Your AI Food Law Assistant',
       subheadline: 'Automated legal research in EU and Polish food law. Knowledge base covering 19+ areas of food regulation.',
-      cta: 'Join the Waitlist',
+      cta: 'View Projects',
       ctaSecondary: 'Learn More',
     },
     features: {
@@ -183,9 +174,9 @@ export const translations = {
       subtitle: 'Ecosystem of tools and services for food law',
       items: [
         {
-          title: 'AI Assistant',
-          description: 'The main AI food law assistant - answers to legal questions, regulation analysis, and case law research.',
-          url: '/en/',
+          title: 'app.foodlaw.ai',
+          description: 'Health Claims - search and analysis of nutrition and health claims.',
+          url: 'https://app.foodlaw.ai',
         },
         {
           title: 'Nutrimetr',
@@ -193,8 +184,8 @@ export const translations = {
           url: 'https://nutrimetr.foodlaw.ai',
         },
         {
-          title: 'www.supplemental.pl',
-          description: 'Legal services for the food industry - fast, professional, and competitively priced thanks to AI.',
+          title: 'AI Assistant on www.supplemental.pl',
+          description: 'AI assistant available on supplemental.pl - quick answers to food law questions.',
           url: 'https://www.supplemental.pl',
         },
         {
@@ -212,7 +203,7 @@ export const translations = {
     demo: {
       title: 'See FOODLAW.ai in Action',
       subtitle: 'Discover how the AI assistant helps with daily food law work',
-      placeholder: 'Demo coming soon - join the waitlist for early access.',
+      placeholder: 'Demo coming soon - check out our projects above.',
     },
     pricing: {
       title: 'Pricing',
@@ -235,13 +226,6 @@ export const translations = {
         description: 'Custom solution',
         features: ['Dedicated instance', 'System integration', 'Team training', 'SLA'],
       },
-    },
-    waitlist: {
-      title: 'Join the Waitlist',
-      subtitle: 'Be among the first users of FOODLAW.ai. Get early access and special conditions.',
-      emailPlaceholder: 'Your email address',
-      submit: 'Sign Up',
-      success: 'Thank you! We will notify you at launch.',
     },
     footer: {
       description: 'FOODLAW.ai - AI-powered food law assistant.',
