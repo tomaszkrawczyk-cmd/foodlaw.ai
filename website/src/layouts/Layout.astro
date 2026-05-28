@@ -4,9 +4,16 @@ import type { Translation } from '../i18n/translations';
 
 interface Props {
   t: Translation;
+  pageTitle?: string;
+  pageDescription?: string;
+  canonical?: string;
 }
 
-const { t } = Astro.props;
+const { t, pageTitle, pageDescription, canonical } = Astro.props;
+const title = pageTitle || t.meta.title;
+const description = pageDescription || t.meta.description;
+const canonicalUrl = canonical || t.meta.canonical;
+const ogLocale = t.lang === 'pl' ? 'pl_PL' : 'en_US';
 ---
 
 <!doctype html>
@@ -14,9 +21,113 @@ const { t } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={t.meta.description} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={t.meta.keywords} />
+    <meta name="ai-description" content={t.meta.aiDescription} />
+    <meta name="author" content="Tomasz Krawczyk" />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{t.meta.title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={t.meta.ogImage} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content="FOODLAW.ai" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FOODLAW.ai",
+      "url": "https://foodlaw.ai",
+      "founder": {
+        "@type": "Person",
+        "name": "Tomasz Krawczyk"
+      },
+      "description": "AI-powered platform for food law professionals, combining over 15 years of legal expertise with artificial intelligence for regulatory analysis, case law research, and compliance monitoring.",
+      "sameAs": [
+        "https://github.com/tomaszkrawczyk-cmd/foodlaw.ai",
+        "https://www.supplemental.pl"
+      ]
+    })} />
+
+    <!-- Structured Data: WebSite with SearchAction -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "FOODLAW.ai",
+      "url": "https://foodlaw.ai",
+      "description": "AI-powered food law assistant covering 19+ areas of EU and Polish food regulation.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://app.foodlaw.ai/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    })} />
+
+    <!-- Structured Data: BreadcrumbList -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "FOODLAW.ai",
+          "item": "https://foodlaw.ai"
+        },
+        ...(t.lang === 'en' ? [{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "English",
+          "item": "https://foodlaw.ai/en/"
+        }] : [])
+      ]
+    })} />
+
+    <!-- Structured Data: SoftwareApplication (projects) -->
+    <script type="application/ld+json" set:html={JSON.stringify([
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "app.foodlaw.ai (Claims)",
+        "url": "https://app.foodlaw.ai",
+        "applicationCategory": "LegalApplication",
+        "description": "Search engine and analysis tool for EU nutrition and health claims regulated under Regulation 1924/2006.",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "PLN"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Nutrimetr",
+        "url": "https://nutrimetr.foodlaw.ai",
+        "applicationCategory": "LegalApplication",
+        "description": "Food and food law analysis tool for ingredient verification, label checks, and regulatory compliance assessment.",
+        "operatingSystem": "Web"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ODS AI",
+        "applicationCategory": "LegalApplication",
+        "description": "AI assistant for preparing appeals against Polish sanitary inspection authority (Sanepid) decisions in food law matters.",
+        "operatingSystem": "Web"
+      }
+    ])} />
   </head>
   <body class="bg-white text-gray-900 antialiased">
     <slot />

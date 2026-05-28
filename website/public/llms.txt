@@ -1,0 +1,73 @@
+# FOODLAW.ai
+
+> AI-powered platform for food law professionals, combining over 15 years of legal expertise with artificial intelligence.
+
+## About
+
+FOODLAW.ai is created by Tomasz Krawczyk, a Polish lawyer specializing in food law with over 15 years of professional experience. The platform provides AI-assisted tools for analyzing EU and Polish food law regulations, case law, and health claims.
+
+## Core Facts
+
+- Founded by: Tomasz Krawczyk (lawyer, food law specialist)
+- Domain: foodlaw.ai
+- Specialization: EU and Polish food law
+- Coverage: 19+ areas of food law regulation
+- Regulations processed: over 20 EU regulations, Polish statutes, and executive acts
+- Case law sources: NSA, WSA, CJEU (TSUE), GIS decisions
+- Languages: Polish (primary), English
+
+## Projects
+
+### app.foodlaw.ai (Claims)
+URL: https://app.foodlaw.ai
+Description: Search engine and analysis tool for EU nutrition and health claims regulated under Regulation 1924/2006.
+
+### Nutrimetr
+URL: https://nutrimetr.foodlaw.ai
+Description: Food and food law analysis tool for ingredient verification, label compliance checks, and regulatory compliance assessment.
+
+### AI Assistant (supplemental.pl)
+URL: https://www.supplemental.pl
+Description: AI assistant providing answers to food law questions, available on supplemental.pl.
+
+### ODS AI
+Description: AI assistant for preparing appeals against Polish sanitary inspection authority (Sanepid) decisions in food law matters.
+
+### foodlaw.ai GitHub Repository
+URL: https://github.com/tomaszkrawczyk-cmd/foodlaw.ai
+Description: Open-source collection of food law resources including EU regulations, Polish statutes, case law, and AI skill definitions.
+
+## Areas of Expertise
+
+- Dietary supplements (suplementy diety)
+- Novel food (nowa zywnosc)
+- Health and nutrition claims (oswiadczenia zdrowotne i zywieniowe)
+- Food labeling (znakowanie zywnosci)
+- Food safety (bezpieczenstwo zywnosci)
+- RASFF (Rapid Alert System for Food and Feed)
+- Food additives (dodatki do zywnosci)
+- Food contact materials
+- GMO regulations
+- Organic food regulations
+- Food fraud prevention
+- Import/export regulations
+- HACCP and food hygiene
+- Allergen management
+- Infant and baby food
+- Food supplements notification (Poland)
+- EU food law (General Food Law Regulation 178/2002)
+- Polish food law (ustawa o bezpieczenstwie zywnosci i zywienia)
+- Regulation 1924/2006 (health claims)
+- Regulation 2015/2283 (novel food)
+
+## Key Differentiators
+
+- Speed: AI processes regulations instantly, reducing research time from hours to seconds.
+- Experience: Over 15 years of specialized food law practice combined with AI.
+- Competitive pricing: AI automation enables lower costs without sacrificing quality.
+- Comprehensive coverage: 19+ areas of food law, EU and Polish regulations.
+
+## Contact
+
+Website: https://foodlaw.ai
+Related: https://www.supplemental.pl
