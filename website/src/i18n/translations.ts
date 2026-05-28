@@ -86,7 +86,7 @@ export const translations = {
         },
         {
           title: 'ODS AI',
-          description: 'Odwołaj się od decyzji Sanepidu - asystent AI pomagający w przygotowaniu odwołań od decyzji organów inspekcji sanitarnej.',
+          description: 'ODS AI to nasz wielki projekt. AI oparte na rzeczywistych decyzjach i odwołaniach oraz skargach do WSA. Zawsze najlepszy model AI. Gotowe odwołanie w kilka minut po uploadzie decyzji.',
           url: '#',
         },
       ],
@@ -244,7 +244,7 @@ export const translations = {
         },
         {
           title: 'ODS AI',
-          description: 'Appeal Sanepid decisions - AI assistant helping prepare appeals against sanitary inspection authority decisions.',
+          description: 'ODS AI is our big project. AI based on real decisions, real appeals and complaints to WSA (Administrative Court). Always the best AI model. Ready appeal in minutes after uploading the decision.',
           url: '#',
         },
       ],
