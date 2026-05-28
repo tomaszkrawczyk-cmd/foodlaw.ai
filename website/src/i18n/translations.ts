@@ -14,7 +14,7 @@ export const translations = {
     },
     nav: {
       features: 'Funkcje',
-      demo: 'Demo',
+      gallery: 'Galeria',
       pricing: 'Cennik',
       projects: 'Projekty',
     },
@@ -91,10 +91,14 @@ export const translations = {
         },
       ],
     },
-    demo: {
-      title: 'Zobacz FOODLAW.ai w działaniu',
-      subtitle: 'Sprawdź jak AI asystent pomaga w codziennej pracy z prawem żywnościowym',
-      placeholder: 'Demo w przygotowaniu - sprawdź nasze projekty powyżej.',
+    gallery: {
+      title: 'Nasze narzędzia w akcji',
+      subtitle: 'Zobacz jak wyglądają nasze aplikacje wspierające pracę z prawem żywnościowym',
+      items: [
+        'app.foodlaw.ai - Oświadczenia zdrowotne / Health Claims',
+        'Nutrimetr - Analiza składu żywności / Food Composition Analysis',
+        'Asystent AI na supplemental.pl / AI Assistant on supplemental.pl',
+      ],
     },
     pricing: {
       title: 'Cennik',
@@ -168,7 +172,7 @@ export const translations = {
     },
     nav: {
       features: 'Features',
-      demo: 'Demo',
+      gallery: 'Gallery',
       pricing: 'Pricing',
       projects: 'Projects',
     },
@@ -245,10 +249,14 @@ export const translations = {
         },
       ],
     },
-    demo: {
-      title: 'See FOODLAW.ai in Action',
-      subtitle: 'Discover how the AI assistant helps with daily food law work',
-      placeholder: 'Demo coming soon - check out our projects above.',
+    gallery: {
+      title: 'Our Tools in Action',
+      subtitle: 'See how our applications support food law professionals',
+      items: [
+        'app.foodlaw.ai - Oświadczenia zdrowotne / Health Claims',
+        'Nutrimetr - Analiza składu żywności / Food Composition Analysis',
+        'Asystent AI na supplemental.pl / AI Assistant on supplemental.pl',
+      ],
     },
     pricing: {
       title: 'Pricing',

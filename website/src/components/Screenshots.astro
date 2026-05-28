@@ -1,0 +1,105 @@
+---
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+
+const screenshots = [
+  {
+    src: '/images/app-claims.png',
+    caption: t.gallery.items[0],
+    alt: 'app.foodlaw.ai - Health Claims',
+    overlayText: 'app.foodlaw.ai',
+  },
+  {
+    src: '/images/nutrimetr.png',
+    caption: t.gallery.items[1],
+    alt: 'Nutrimetr - Food Composition Analysis',
+    overlayText: 'Nutrimetr',
+  },
+  {
+    src: '/images/supplemental-ai.png',
+    caption: t.gallery.items[2],
+    alt: 'AI Assistant on supplemental.pl',
+    overlayText: 'supplemental.pl',
+  },
+];
+---
+
+<section id="gallery" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-primary-700 mb-4">
+        {t.gallery.title}
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        {t.gallery.subtitle}
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {screenshots.map((item) => (
+        <div class="screenshot-card">
+          <div class="screenshot-container">
+            <span class="screenshot-overlay">{item.overlayText}</span>
+            <img
+              src={item.src}
+              alt={item.alt}
+              loading="lazy"
+              class="screenshot-img"
+            />
+          </div>
+          <p class="mt-3 text-sm text-gray-600 text-center font-medium">
+            {item.caption}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .screenshot-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .screenshot-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 50%, #64748b 100%);
+  }
+
+  .screenshot-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #475569;
+    text-shadow: 0 1px 2px rgb(255 255 255 / 0.5);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .screenshot-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+  }
+
+  .screenshot-img[src] {
+    background: transparent;
+  }
+</style>
