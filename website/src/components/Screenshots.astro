@@ -13,18 +13,21 @@ const screenshots = [
     caption: t.gallery.items[0],
     alt: 'app.foodlaw.ai - Health Claims',
     overlayText: 'app.foodlaw.ai',
+    url: 'https://app.foodlaw.ai',
   },
   {
     src: '/images/nutrimetr.png',
     caption: t.gallery.items[1],
     alt: 'Nutrimetr - Food Composition Analysis',
     overlayText: 'Nutrimetr',
+    url: 'https://nutrimetr.foodlaw.ai',
   },
   {
     src: '/images/supplemental-ai.png',
     caption: t.gallery.items[2],
     alt: 'AI Assistant on supplemental.pl',
     overlayText: 'supplemental.pl',
+    url: 'https://www.supplemental.pl',
   },
 ];
 ---
@@ -41,7 +44,7 @@ const screenshots = [
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {screenshots.map((item) => (
-        <div class="screenshot-card">
+        <a href={item.url} target="_blank" rel="noopener noreferrer" class="screenshot-card group">
           <div class="screenshot-container">
             <span class="screenshot-overlay">{item.overlayText}</span>
             <img
@@ -51,10 +54,10 @@ const screenshots = [
               class="screenshot-img"
             />
           </div>
-          <p class="mt-3 text-sm text-gray-600 text-center font-medium">
+          <p class="mt-3 text-sm text-gray-600 text-center font-medium group-hover:text-primary-700 transition-colors">
             {item.caption}
           </p>
-        </div>
+        </a>
       ))}
     </div>
   </div>
