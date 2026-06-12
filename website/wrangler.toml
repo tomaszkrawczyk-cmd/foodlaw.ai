@@ -1,6 +1,18 @@
 name = "foodlawaaai"
 compatibility_date = "2025-05-27"
-pages_build_output_dir = "./dist/client"
 
+# Assets-only Worker serving the statically built Astro site (marketing site).
 [assets]
 directory = "./dist/client"
+
+# Custom domains for the marketing website.
+# NOTE: foodlaw.ai (root) + www = marketing site (this Worker).
+# The Claims app (app.foodlaw.ai) is a SEPARATE Cloudflare Pages project
+# (foodlaw-frontend) in the Supplemental repo - do NOT add app.foodlaw.ai here.
+[[routes]]
+pattern = "foodlaw.ai"
+custom_domain = true
+
+[[routes]]
+pattern = "www.foodlaw.ai"
+custom_domain = true
