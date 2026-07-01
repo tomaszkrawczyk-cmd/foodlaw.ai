@@ -22,5 +22,5 @@
     "python -m pytest scripts/tests/ -v"
   ],
   "blocked_reason": null,
-  "findings": "All 109 tests pass (98 existing + 11 new). The fix adds JSON-specific logic inside the MIN_FILE_SIZE check in validate_file(). Used python3 command (not python) due to pyenv setup requiring explicit version."
+  "findings": "All 111 tests pass (98 existing + 13 new). The fix adds JSON-specific logic inside the MIN_FILE_SIZE check in validate_file(). Used python3 command (not python) due to pyenv setup requiring explicit version. Post-review fix: tightened the results key check to require isinstance(data.get('results'), list) so that corrupted files with results=null or results='error' are rejected. Added 2 additional test cases for this edge case."
 }

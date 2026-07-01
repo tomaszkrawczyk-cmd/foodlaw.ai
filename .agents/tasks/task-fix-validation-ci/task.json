@@ -9,6 +9,6 @@
     "tests": "pass",
     "test_quality": "pass",
     "docker_build": "skipped",
-    "summary": "All 109 tests pass (98 existing + 11 new). Manual verification confirms small JSON files with 'results' key pass validation, while small files without 'results' key still fail."
+    "summary": "All 111 tests pass (98 existing + 13 new). Manual verification confirms small JSON files with 'results' key (list value) pass validation, while small files without 'results' key or with non-list results value still fail. Post-review: added isinstance check for list type on results value."
   }
 }
