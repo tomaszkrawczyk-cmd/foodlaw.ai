@@ -1,0 +1,7 @@
+{
+  "task_id": "task-fix-validation-ci",
+  "task_description": "Fix the failing CI workflow by making validate_content.py recognize per-keyword search-result JSON files (containing a 'results' key) as valid regardless of file size, so that empty-results JSON files from CURIA and CBOSA scrapers do not trigger validation failure.",
+  "status": "in_progress",
+  "feature_order": ["FEAT-001"],
+  "blocked_reason": null
+}

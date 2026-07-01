@@ -1,0 +1,26 @@
+{
+  "id": "FEAT-001",
+  "type": "fix",
+  "description": "Fix validate_content.py to recognize search-result JSON files as valid regardless of size, and add tests for the new behavior.",
+  "status": "in_progress",
+  "steps": [
+    "In scripts/validate_content.py, modify the validate_file() function to add JSON-specific logic: if the file has a .json extension, attempt to parse it as JSON. If parsing succeeds and the parsed object is a dict containing a 'results' key (even if the value is an empty list), the file should be considered a valid search-result file and pass validation regardless of its size.",
+    "The existing MIN_FILE_SIZE=100 check should still apply to: (a) .md and .html files, (b) JSON files that fail to parse as valid JSON, (c) JSON files that do NOT contain a 'results' key (these are summary/aggregate files like cbosa_wyniki.json, curia_wyniki.json).",
+    "Add a new import for the json module at the top of validate_content.py.",
+    "Create a new test file scripts/tests/test_validate_content.py with pytest tests covering: (1) A small JSON file with {\"keyword\": \"test\", \"results\": []} passes validation. (2) A small JSON file without a 'results' key fails validation (under 100 bytes). (3) A normal-size JSON file without 'results' key passes. (4) A small .md file still fails. (5) A small .html file still fails. (6) An invalid JSON file (not parseable) still fails the size check. (7) A JSON file with {\"keyword\": \"x\", \"results\": [{\"item\": 1}]} passes even if small.",
+    "Ensure the test file imports validate_file from scripts/validate_content and uses tmp_path fixture to create temporary test files."
+  ],
+  "acceptance_criteria": [
+    "Running `python -m pytest scripts/tests/test_validate_content.py -v` passes all new tests",
+    "Running `python -m pytest scripts/tests/ -v` passes all tests (existing + new)",
+    "A JSON file containing {\"keyword\": \"test\", \"results\": []} that is under 100 bytes is reported as PASS by validate_content.py",
+    "A JSON file under 100 bytes that does NOT have a 'results' key is still reported as FAIL",
+    ".md and .html files under 100 bytes are still reported as FAIL"
+  ],
+  "verification": [
+    "python -m pytest scripts/tests/test_validate_content.py -v",
+    "python -m pytest scripts/tests/ -v"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
