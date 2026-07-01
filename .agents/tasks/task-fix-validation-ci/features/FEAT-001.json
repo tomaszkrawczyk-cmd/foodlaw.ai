@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "fix",
   "description": "Fix validate_content.py to recognize search-result JSON files as valid regardless of size, and add tests for the new behavior.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "In scripts/validate_content.py, modify the validate_file() function to add JSON-specific logic: if the file has a .json extension, attempt to parse it as JSON. If parsing succeeds and the parsed object is a dict containing a 'results' key (even if the value is an empty list), the file should be considered a valid search-result file and pass validation regardless of its size.",
     "The existing MIN_FILE_SIZE=100 check should still apply to: (a) .md and .html files, (b) JSON files that fail to parse as valid JSON, (c) JSON files that do NOT contain a 'results' key (these are summary/aggregate files like cbosa_wyniki.json, curia_wyniki.json).",
@@ -22,5 +22,5 @@
     "python -m pytest scripts/tests/ -v"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "All 109 tests pass (98 existing + 11 new). The fix adds JSON-specific logic inside the MIN_FILE_SIZE check in validate_file(). Used python3 command (not python) due to pyenv setup requiring explicit version."
 }
