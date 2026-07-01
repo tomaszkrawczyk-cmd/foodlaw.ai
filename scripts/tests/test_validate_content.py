@@ -51,6 +51,22 @@ class TestValidateFileJsonWithoutResults:
         assert filepath.stat().st_size < 100
         assert validate_file(filepath) is False
 
+    def test_small_json_with_results_null_fails(self, tmp_path):
+        """A small JSON file with {"results": null} fails validation (null is not a list)."""
+        data = {"keyword": "test", "results": None}
+        filepath = tmp_path / "corrupted.json"
+        filepath.write_text(json.dumps(data), encoding="utf-8")
+        assert filepath.stat().st_size < 100
+        assert validate_file(filepath) is False
+
+    def test_small_json_with_results_string_fails(self, tmp_path):
+        """A small JSON file with {"results": "error"} fails validation (string is not a list)."""
+        data = {"keyword": "test", "results": "error"}
+        filepath = tmp_path / "broken.json"
+        filepath.write_text(json.dumps(data), encoding="utf-8")
+        assert filepath.stat().st_size < 100
+        assert validate_file(filepath) is False
+
     def test_normal_size_json_without_results_key_passes(self, tmp_path):
         """A normal-size JSON file without 'results' key passes (over 100 bytes)."""
         data = {"keyword_" + str(i): ["result"] * 5 for i in range(20)}

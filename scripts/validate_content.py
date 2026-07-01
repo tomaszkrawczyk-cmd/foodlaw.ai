@@ -57,7 +57,7 @@ def validate_file(filepath: Path, verbose: bool = False) -> bool:
             try:
                 with open(filepath, "r", encoding="utf-8") as f:
                     data = json.load(f)
-                if isinstance(data, dict) and "results" in data:
+                if isinstance(data, dict) and isinstance(data.get("results"), list):
                     if verbose:
                         logger.debug(
                             "PASS: %s (%d bytes, valid search-result JSON)",
