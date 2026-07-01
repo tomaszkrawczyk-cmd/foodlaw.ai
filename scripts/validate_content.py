@@ -17,6 +17,7 @@ Usage:
 """
 
 import argparse
+import json
 import logging
 import sys
 from pathlib import Path
@@ -50,6 +51,22 @@ def validate_file(filepath: Path, verbose: bool = False) -> bool:
     # Check minimum size
     file_size = filepath.stat().st_size
     if file_size < MIN_FILE_SIZE:
+        # For JSON files, check if it's a valid search-result file
+        # (contains a "results" key) - these are valid even when small
+        if filepath.suffix == ".json":
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, dict) and isinstance(data.get("results"), list):
+                    if verbose:
+                        logger.debug(
+                            "PASS: %s (%d bytes, valid search-result JSON)",
+                            filepath, file_size
+                        )
+                    return True
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                pass
+
         logger.warning(
             "FAIL: %s - too small (%d bytes, minimum %d)",
             filepath, file_size, MIN_FILE_SIZE

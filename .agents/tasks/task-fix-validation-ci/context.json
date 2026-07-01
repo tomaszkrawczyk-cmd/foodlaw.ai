@@ -1,0 +1,24 @@
+{
+  "project_type": "Python scraper/knowledge-base project with GitHub Actions CI",
+  "language": "Python 3.11",
+  "build_system": "pip with requirements.txt, no Makefile or build system beyond pip install",
+  "test_framework": "pytest (scripts/tests/ directory, test files use pytest fixtures and classes)",
+  "build_command": "pip install -r scripts/requirements.txt",
+  "test_command": "cd /projects/sandbox/foodlaw.ai && python -m pytest scripts/tests/ -v",
+  "verification_instructions": "1. Install deps: pip install -r scripts/requirements.txt. 2. Run pytest: python -m pytest scripts/tests/ -v. 3. Run validate_content.py with a test directory containing small JSON files with 'results' key to confirm they pass.",
+  "snapshot_or_generated_files": null,
+  "setup_instructions": "pip install -r scripts/requirements.txt",
+  "environment_constraints": "OPEN_INTERNET network mode. GitHub Power available for push/PR.",
+  "contribution_requirements": "No CONTRIBUTING.md with specific rules beyond standard practices.",
+  "key_patterns": "Scrapers (fetch_cbosa.py, fetch_curia.py) save per-keyword JSON with format {\"keyword\": \"...\", \"results\": [...]}. Summary files (cbosa_wyniki.json, curia_wyniki.json) use a different format (dict of keyword -> results list). validate_content.py checks all .json/.md/.html files for MIN_FILE_SIZE=100 bytes. Tests live in scripts/tests/ and use pytest classes, mocks, and tmp_path fixtures.",
+  "relevant_files": [
+    "scripts/validate_content.py",
+    "scripts/fetch_cbosa.py",
+    "scripts/fetch_curia.py",
+    "scripts/fetch_eurlex_judgments.py",
+    "scripts/tests/test_parsing.py",
+    "scripts/tests/test_new_scrapers.py",
+    ".github/workflows/update-laws.yml"
+  ],
+  "directory_structure": "scripts/ - Python scrapers and validate_content.py; scripts/tests/ - pytest tests; .github/workflows/ - CI workflow; orzecznictwo/ - court decisions output; output/ - fetched data output"
+}
