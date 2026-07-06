@@ -89,6 +89,11 @@ export const translations = {
           description: 'ODS AI to nasz wielki projekt. AI oparte na rzeczywistych decyzjach i odwołaniach oraz skargach do WSA. Zawsze najlepszy model AI. Gotowe odwołanie w kilka minut po uploadzie decyzji.',
           url: '#',
         },
+        {
+          title: 'REJ \u00B7 Rapid Enforcement Justice',
+          description: 'Narzędzie AI wspierające przygotowanie środka zaskarżenia od decyzji Rzecznika Praw Pacjenta wydanych na podstawie „Lex szarlatan". Analizuje treść decyzji, generuje kontrargumenty prawne oparte na aktualnym orzecznictwie i składa projekt skargi do WSA w Warszawie. Eksport do Word, PDF i wysyłka przez ePUAP.',
+          url: '#',
+        },
       ],
     },
     gallery: {
@@ -245,6 +250,11 @@ export const translations = {
         {
           title: 'ODS AI',
           description: 'ODS AI is our big project. AI based on real decisions, real appeals and complaints to WSA (Administrative Court). Always the best AI model. Ready appeal in minutes after uploading the decision.',
+          url: '#',
+        },
+        {
+          title: 'REJ \u00B7 Rapid Enforcement Justice',
+          description: 'AI tool for preparing legal appeals against decisions by the Patient Rights Ombudsman under "Lex szarlatan". Analyzes decisions, generates legal counterarguments based on current case law, and drafts a complaint to the Warsaw Administrative Court. Export to Word, PDF, and submission via ePUAP.',
           url: '#',
         },
       ],
