@@ -75,8 +75,8 @@ export const translations = {
           url: 'https://nutrimetr.foodlaw.ai',
         },
         {
-          title: 'Asystent AI na www.supplemental.pl',
-          description: 'Asystent AI dostępny na stronie supplemental.pl - szybkie odpowiedzi na pytania z zakresu prawa żywnościowego.',
+          title: 'LL LEM na www.supplemental.pl',
+          description: 'LL LEM dostępny na stronie supplemental.pl - szybkie odpowiedzi na pytania z zakresu prawa żywnościowego.',
           url: 'https://www.supplemental.pl',
         },
         {
@@ -102,7 +102,7 @@ export const translations = {
       items: [
         'app.foodlaw.ai - Oświadczenia zdrowotne / Health Claims',
         'Nutrimetr - Analiza składu żywności / Food Composition Analysis',
-        'Asystent AI na supplemental.pl / AI Assistant on supplemental.pl',
+        'LL LEM na supplemental.pl / LL LEM on supplemental.pl',
       ],
     },
     pricing: {
@@ -238,8 +238,8 @@ export const translations = {
           url: 'https://nutrimetr.foodlaw.ai',
         },
         {
-          title: 'AI Assistant on www.supplemental.pl',
-          description: 'AI assistant available on supplemental.pl - quick answers to food law questions.',
+          title: 'LL LEM on www.supplemental.pl',
+          description: 'LL LEM available on supplemental.pl - quick answers to food law questions.',
           url: 'https://www.supplemental.pl',
         },
         {
@@ -265,7 +265,7 @@ export const translations = {
       items: [
         'app.foodlaw.ai - Oświadczenia zdrowotne / Health Claims',
         'Nutrimetr - Analiza składu żywności / Food Composition Analysis',
-        'Asystent AI na supplemental.pl / AI Assistant on supplemental.pl',
+        'LL LEM na supplemental.pl / LL LEM on supplemental.pl',
       ],
     },
     pricing: {
