@@ -92,7 +92,7 @@ export const translations = {
         {
           title: 'REJ \u00B7 Rapid Enforcement Justice',
           description: 'Narzędzie AI wspierające przygotowanie środka zaskarżenia od decyzji Rzecznika Praw Pacjenta wydanych na podstawie „Lex szarlatan". Analizuje treść decyzji, generuje kontrargumenty prawne oparte na aktualnym orzecznictwie i składa projekt skargi do WSA w Warszawie. Eksport do Word, PDF i wysyłka przez ePUAP.',
-          url: '#',
+          url: '/rej',
         },
       ],
     },
@@ -256,7 +256,7 @@ export const translations = {
         {
           title: 'REJ \u00B7 Rapid Enforcement Justice',
           description: 'AI tool for preparing legal appeals against decisions by the Patient Rights Ombudsman under "Lex szarlatan". Analyzes decisions, generates legal counterarguments based on current case law, and drafts a complaint to the Warsaw Administrative Court. Export to Word, PDF, and submission via ePUAP.',
-          url: '#',
+          url: '/rej',
         },
       ],
     },

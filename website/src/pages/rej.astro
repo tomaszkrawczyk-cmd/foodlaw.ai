@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import { translations } from '../i18n/translations';
+
+const t = translations.pl;
+---
+
+<Layout
+  t={t}
+  pageTitle="REJ · Rapid Enforcement Justice - FOODLAW.ai"
+  pageDescription="Narzędzie AI wspierające przygotowanie środka zaskarżenia od decyzji Rzecznika Praw Pacjenta wydanych na podstawie Lex szarlatan."
+  canonical="https://foodlaw.ai/rej/"
+>
+  <!-- Header / Nav -->
+  <nav class="absolute top-0 left-0 right-0 z-10 py-6 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="/" class="text-xl font-bold text-white">
+        FOODLAW<span class="text-accent-400">.ai</span>
+      </a>
+      <a
+        href="/"
+        class="text-sm text-white/80 hover:text-white transition-smooth"
+      >
+        &larr; Powr&oacute;t
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Image -->
+  <section class="hero-gradient pt-28 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-10">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
+          REJ &middot; Rapid Enforcement Justice
+        </h1>
+        <p class="text-primary-100 text-lg max-w-2xl mx-auto">
+          Narzędzie AI wspierające przygotowanie środka zaskarżenia od decyzji Rzecznika Praw Pacjenta
+        </p>
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-2xl border border-primary-600/30">
+        <img
+          src="/images/rej-hero.png"
+          alt="REJ - Rapid Enforcement Justice - podgląd interfejsu"
+          class="w-full h-auto"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Description Section -->
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-2xl sm:text-3xl font-bold text-primary-700 mb-8">
+        O projekcie
+      </h2>
+      <div class="prose prose-lg text-gray-700 leading-relaxed space-y-6">
+        <p>
+          <strong>REJ &middot; Rapid Enforcement Justice</strong> to narzędzie AI wspierające przygotowanie środka zaskarżenia od decyzji Rzecznika Praw Pacjenta wydanych na podstawie tzw. &bdquo;Lex szarlatan&rdquo;.
+        </p>
+        <p>
+          Narzędzie będzie dostępne od razu po wejściu ustawy w życie.
+        </p>
+        <p>
+          REJ analizuje treść decyzji (tekst lub skan), wyodrębnia poszczególne zarzuty i do każdego z nich generuje osobny kontrargument prawny, oparty na zweryfikowanych na bieżąco źródłach - aktualnym orzecznictwie sądów administracyjnych i Trybunału Sprawiedliwości UE.
+        </p>
+        <p>
+          Całość składa w projekt skargi do Wojewódzkiego Sądu Administracyjnego w Warszawie, z prawidłowym trybem, terminem i orientacyjnym wpisem sądowym, w wariancie działania osobistego lub przez pełnomocnika.
+        </p>
+        <p>
+          Ponieważ przed WSA nie obowiązuje przymus adwokacko-radcowski, wygenerowane pismo można zweryfikować samodzielnie, bez udziału prawnika, i złożyć je we własnym imieniu.
+        </p>
+        <p>
+          Eksport do Word i PDF oraz bezpośrednie przejście do wysyłki przez ePUAP domykają cały proces w jednym miejscu.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="py-8 px-4 sm:px-6 lg:px-8 bg-primary-50 border-t border-primary-100">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-sm text-primary-600 italic">
+        prototyp &middot; druk 2598 &middot; projekt roboczy &mdash; wymaga weryfikacji prawniczej
+      </p>
+    </div>
+  </section>
+
+  <!-- Back Link -->
+  <section class="py-12 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <a
+        href="/"
+        class="inline-flex items-center px-6 py-3 text-base font-semibold rounded-lg border-2 border-primary-600 text-primary-700 hover:bg-primary-700 hover:text-white transition-smooth"
+      >
+        &larr; Powr&oacute;t do strony głównej
+      </a>
+    </div>
+  </section>
+
+  <Footer t={t} />
+</Layout>
