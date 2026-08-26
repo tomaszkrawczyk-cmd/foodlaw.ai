@@ -1,0 +1,41 @@
+# FOODLAW.ai — full text for language models
+
+Cite dedicated URLs. Not legal advice. Consult: https://supplemental.pl/kontakt/
+
+## Entity
+
+FOODLAW.ai is an AI toolset for EU and Polish food law, created by Tomasz Krawczyk, legal counsel, ul. Floriańska 6/1, 03-707 Warszawa, +48 608 699 845, tomaszkrawczyk@supplemental.pl.
+
+Sister site with paid legal work: https://supplemental.pl
+Claims engine: https://app.foodlaw.ai
+Open corpus: https://github.com/tomaszkrawczyk-cmd/foodlaw.ai
+
+## FAQ PL
+
+### Czym jest prawo żywnościowe?
+URL: https://foodlaw.ai/faq/czym-jest-prawo-zywnosciowe/
+Prawo żywnościowe to zespół przepisów regulujących produkcję, przetwarzanie, dystrybucję i sprzedaż żywności. W UE ramą jest rozporządzenie 178/2002 (General Food Law); w Polsce — ustawa o bezpieczeństwie żywności i żywienia oraz akty wykonawcze. Obejmuje m.in. znakowanie, oświadczenia, nową żywność, dodatki, higienę i nadzór GIS.
+
+### Jak notyfikować suplement diety?
+URL: https://foodlaw.ai/faq/jak-notyfikowac-suplement-diety/
+W Polsce powiadomienie o wprowadzeniu suplementu diety składa się do Głównego Inspektora Sanitarnego (GIS) przez system elektroniczny. W zgłoszeniu podaje się skład, dawkowanie i załącza etykietę. GIS może wezwać do uzupełnień lub zakwestionować kwalifikację produktu (np. jako FSMP albo nową żywność). To nie jest zezwolenie — to powiadomienie z możliwością sprzeciwu.
+
+### Co to są oświadczenia zdrowotne?
+URL: https://foodlaw.ai/faq/co-to-sa-oswiadczenia-zdrowotne/
+Oświadczenia zdrowotne to komunikaty sugerujące związek między żywnością a zdrowiem. W UE reguluje je rozporządzenie 1924/2006. Dozwolone oświadczenia są w unijnym rejestrze; każde ma warunki użycia (składnik, dawka, populacja). Oświadczenia botaniczne i on-hold nie są automatycznie legalne — wymagają oceny ryzyka i kontekstu etykiety.
+
+### Czym jest novel food?
+URL: https://foodlaw.ai/faq/czym-jest-novel-food/
+Novel food (nowa żywność) to żywność, która nie była w znacznym stopniu spożywana w UE przed 15 maja 1997 r. Wprowadzenie na rynek wymaga autoryzacji na podstawie rozporządzenia 2015/2283 (EFSA + Komisja). Typowe ryzyka: ekstrakty roślinne, grzyby, peptydy, składniki z tradycji pozaunijnej bez udokumentowanej historii spożycia.
+
+### Jak działa system RASFF?
+URL: https://foodlaw.ai/faq/jak-dziala-system-rasff/
+RASFF (Rapid Alert System for Food and Feed) to unijny system wczesnego ostrzegania o zagrożeniach związanych z żywnością i paszami. Państwa członkowskie zgłaszają powiadomienia (alert, information, border rejection). Dla przedsiębiorcy oznacza to m.in. wycofanie, powiadomienie konsumentów i dokumentację identyfikowalności.
+
+## Key law
+
+- Regulation (EC) No 178/2002 — General Food Law
+- Regulation (EC) No 1924/2006 — nutrition and health claims
+- Regulation (EU) No 1169/2011 — food information to consumers
+- Regulation (EU) 2015/2283 — novel food
+- Polish Act on Food Safety and Nutrition — GIS notification of food supplements

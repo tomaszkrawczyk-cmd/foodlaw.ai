@@ -1,11 +1,16 @@
 ---
 import type { Translation } from '../i18n/translations';
+import { NAP } from '../data/geo';
 
 interface Props {
   t: Translation;
 }
 
 const { t } = Astro.props;
+const lang = t.lang === 'en' ? 'en' : 'pl';
+const home = lang === 'pl' ? '/' : '/en/';
+const faqHref = lang === 'pl' ? '/faq/' : '/en/faq/';
+const hubsHref = lang === 'pl' ? '/huby/' : '/en/hubs/';
 ---
 
 <footer class="bg-primary-900 text-white py-12 px-4 sm:px-6 lg:px-8">
@@ -17,23 +22,28 @@ const { t } = Astro.props;
         </h3>
         <p class="text-primary-200 text-sm">{t.footer.description}</p>
         <p class="text-primary-300 text-sm mt-2">{t.footer.author}</p>
+        <p class="text-primary-200 text-sm mt-4">
+          {NAP.name}<br />
+          {NAP.streetAddress}, {NAP.postalCode} {NAP.addressLocality}<br />
+          <a class="hover:text-white" href={`tel:${NAP.phone}`}>{NAP.phoneDisplay}</a><br />
+          <a class="hover:text-white" href={`mailto:${NAP.email}`}>{NAP.email}</a>
+        </p>
       </div>
       <div>
         <h4 class="font-semibold mb-3">{t.footer.links}</h4>
         <ul class="space-y-2 text-sm text-primary-200">
-          <li><a href="#features" class="hover:text-white transition-smooth">{t.nav.features}</a></li>
-          <li><a href="#projects" class="hover:text-white transition-smooth">{t.nav.projects}</a></li>
-          <li><a href="#pricing" class="hover:text-white transition-smooth">{t.nav.pricing}</a></li>
-          <li>
-            <a href="/supplemental" class="hover:text-white transition-smooth">
-              Narzędzia AI
-            </a>
-          </li>
+          <li><a href={`${home}#features`} class="hover:text-white transition-smooth">{t.nav.features}</a></li>
+          <li><a href={`${home}#projects`} class="hover:text-white transition-smooth">{t.nav.projects}</a></li>
+          <li><a href={`${home}#pricing`} class="hover:text-white transition-smooth">{t.nav.pricing}</a></li>
+          <li><a href={faqHref} class="hover:text-white transition-smooth">FAQ</a></li>
+          <li><a href={hubsHref} class="hover:text-white transition-smooth">{lang === 'pl' ? 'Huby' : 'Hubs'}</a></li>
+          <li><a href="/supplemental/" class="hover:text-white transition-smooth">{lang === 'pl' ? 'Narzędzia AI' : 'AI tools'}</a></li>
           <li>
             <a href="https://supplemental.pl" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-smooth">
               {t.footer.authorSite}
             </a>
           </li>
+          <li><a href="/llms.txt" class="hover:text-white transition-smooth">llms.txt</a></li>
         </ul>
       </div>
       <div>

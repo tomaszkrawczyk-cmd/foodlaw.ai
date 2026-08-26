@@ -1,4 +1,42 @@
+# GEO: AI crawlers may cite this site. Training is allowed.
+# Cloudflare managed robots.txt must stay DISABLED for this zone
+# (otherwise GPTBot/ClaudeBot/Google-Extended are Disallow).
+
 User-agent: *
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=yes
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
 Allow: /
 
 Sitemap: https://foodlaw.ai/sitemap.xml

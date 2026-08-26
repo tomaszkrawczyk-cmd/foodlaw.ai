@@ -1,0 +1,30 @@
+---
+import InnerChrome from '../../../components/InnerChrome.astro';
+import { translations } from '../../../i18n/translations';
+import { hubs, hubIndexUrl } from '../../../data/geo';
+
+const t = translations.en;
+---
+
+<InnerChrome
+  t={t}
+  pageTitle="Food law topic hubs | FOODLAW.ai"
+  pageDescription="Topics: health claims, food supplements, novel food, labelling — EU and Polish law."
+  canonical={hubIndexUrl('en')}
+  hreflangPl={hubIndexUrl('pl')}
+  hreflangEn={hubIndexUrl('en')}
+>
+  <p class="text-sm text-primary-600 mb-4">
+    <a href="/en/" class="hover:underline">FOODLAW.ai</a> / Hubs
+  </p>
+  <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-4">Topic hubs</h1>
+  <p class="text-gray-600 mb-10">Short landing pages for a specific query (AEO/GEO). Each one leads to a tool or a consult.</p>
+  <ul class="space-y-5">
+    {hubs.en.map((hub) => (
+      <li class="border border-gray-100 rounded-xl p-5">
+        <a href={`/en/hubs/${hub.slug}/`} class="text-lg font-semibold text-primary-900 hover:underline">{hub.title}</a>
+        <p class="text-gray-600 mt-2">{hub.description}</p>
+      </li>
+    ))}
+  </ul>
+</InnerChrome>

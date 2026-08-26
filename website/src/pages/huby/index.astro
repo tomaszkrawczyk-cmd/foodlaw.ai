@@ -1,0 +1,30 @@
+---
+import InnerChrome from '../../components/InnerChrome.astro';
+import { translations } from '../../i18n/translations';
+import { hubs, hubIndexUrl } from '../../data/geo';
+
+const t = translations.pl;
+---
+
+<InnerChrome
+  t={t}
+  pageTitle="Huby prawa żywnościowego | FOODLAW.ai"
+  pageDescription="Tematy: oświadczenia zdrowotne, suplementy diety, nowa żywność, znakowanie — prawo UE i Polski."
+  canonical={hubIndexUrl('pl')}
+  hreflangPl={hubIndexUrl('pl')}
+  hreflangEn={hubIndexUrl('en')}
+>
+  <p class="text-sm text-primary-600 mb-4">
+    <a href="/" class="hover:underline">FOODLAW.ai</a> / Huby
+  </p>
+  <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-4">Huby tematyczne</h1>
+  <p class="text-gray-600 mb-10">Krótkie strony startowe pod konkretne zapytanie (AEO/GEO). Każda prowadzi do narzędzia albo do konsultacji.</p>
+  <ul class="space-y-5">
+    {hubs.pl.map((hub) => (
+      <li class="border border-gray-100 rounded-xl p-5">
+        <a href={`/huby/${hub.slug}/`} class="text-lg font-semibold text-primary-900 hover:underline">{hub.title}</a>
+        <p class="text-gray-600 mt-2">{hub.description}</p>
+      </li>
+    ))}
+  </ul>
+</InnerChrome>

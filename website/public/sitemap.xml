@@ -1,21 +1,204 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://foodlaw.ai/</loc>
-    <lastmod>2025-05-28</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://foodlaw.ai/" />
   </url>
   <url>
     <loc>https://foodlaw.ai/en/</loc>
-    <lastmod>2025-05-28</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://foodlaw.ai/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/faq/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/faq/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/faq/czym-jest-prawo-zywnosciowe/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/czym-jest-prawo-zywnosciowe/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/what-is-food-law/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/faq/what-is-food-law/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/czym-jest-prawo-zywnosciowe/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/what-is-food-law/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/faq/jak-notyfikowac-suplement-diety/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/jak-notyfikowac-suplement-diety/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/how-to-notify-a-food-supplement/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/faq/how-to-notify-a-food-supplement/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/jak-notyfikowac-suplement-diety/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/how-to-notify-a-food-supplement/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/faq/co-to-sa-oswiadczenia-zdrowotne/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/co-to-sa-oswiadczenia-zdrowotne/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/what-are-health-claims/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/faq/what-are-health-claims/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/co-to-sa-oswiadczenia-zdrowotne/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/what-are-health-claims/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/faq/czym-jest-novel-food/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/czym-jest-novel-food/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/what-is-novel-food/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/faq/what-is-novel-food/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/czym-jest-novel-food/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/what-is-novel-food/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/faq/jak-dziala-system-rasff/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/jak-dziala-system-rasff/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/how-does-rasff-work/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/faq/how-does-rasff-work/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/faq/jak-dziala-system-rasff/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/faq/how-does-rasff-work/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/huby/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/hubs/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/huby/oswiadczenia-zdrowotne/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/oswiadczenia-zdrowotne/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/health-claims/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/hubs/health-claims/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/oswiadczenia-zdrowotne/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/health-claims/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/huby/suplementy-diety/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/suplementy-diety/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/dietary-supplements/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/hubs/dietary-supplements/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/suplementy-diety/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/dietary-supplements/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/huby/nowa-zywnosc/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/nowa-zywnosc/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/novel-food/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/hubs/novel-food/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/nowa-zywnosc/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/novel-food/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/huby/znakowanie-zywnosci/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/znakowanie-zywnosci/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/food-labelling/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/hubs/food-labelling/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/znakowanie-zywnosci/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/food-labelling/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/huby/prawo-zywnosciowe/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/prawo-zywnosciowe/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/food-law/" />
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/en/hubs/food-law/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://foodlaw.ai/huby/prawo-zywnosciowe/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://foodlaw.ai/en/hubs/food-law/" />
   </url>
   <url>
     <loc>https://foodlaw.ai/supplemental/</loc>
-    <lastmod>2025-05-28</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://foodlaw.ai/rej/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

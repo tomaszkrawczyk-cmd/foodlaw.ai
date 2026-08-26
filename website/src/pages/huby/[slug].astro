@@ -1,0 +1,46 @@
+---
+import InnerChrome from '../../components/InnerChrome.astro';
+import { translations } from '../../i18n/translations';
+import { hubs, hubUrl, faqs } from '../../data/geo';
+
+export function getStaticPaths() {
+  return hubs.pl.map((hub) => ({ params: { slug: hub.slug }, props: { hub } }));
+}
+
+const { hub } = Astro.props;
+const t = translations.pl;
+const relatedFaqs = faqs.pl.filter((f) => hub.related.includes(f.slug));
+---
+
+<InnerChrome
+  t={t}
+  pageTitle={`${hub.title} | FOODLAW.ai`}
+  pageDescription={hub.description}
+  canonical={hubUrl('pl', hub.slug)}
+  hreflangPl={hubUrl('pl', hub.slug)}
+  hreflangEn={hubUrl('en', hub.altSlug)}
+>
+  <p class="text-sm text-primary-600 mb-4">
+    <a href="/" class="hover:underline">FOODLAW.ai</a> /
+    <a href="/huby/" class="hover:underline">Huby</a>
+  </p>
+  <article>
+    <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-6">{hub.title}</h1>
+    {hub.body.map((p) => (
+      <p class="text-gray-700 leading-relaxed mb-4">{p}</p>
+    ))}
+    {relatedFaqs.length > 0 && (
+      <section class="mt-10">
+        <h2 class="text-xl font-semibold text-primary-800 mb-3">Powiązane FAQ</h2>
+        <ul class="list-disc pl-5 space-y-2">
+          {relatedFaqs.map((f) => (
+            <li><a class="text-primary-700 hover:underline" href={`/faq/${f.slug}/`}>{f.question}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+    <p class="mt-10">
+      <a class="inline-flex items-center px-6 py-3 rounded-lg bg-accent-500 text-white font-semibold hover:bg-accent-600" href={hub.ctaHref}>{hub.ctaLabel}</a>
+    </p>
+  </article>
+</InnerChrome>

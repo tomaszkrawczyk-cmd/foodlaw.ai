@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Footer from './Footer.astro';
+import type { Translation } from '../i18n/translations';
+
+interface Props {
+  t: Translation;
+  pageTitle: string;
+  pageDescription: string;
+  canonical: string;
+  hreflangPl: string;
+  hreflangEn: string;
+}
+
+const props = Astro.props;
+const altUrl = (props.t.lang === 'pl' ? props.hreflangEn : props.hreflangPl).replace('https://foodlaw.ai', '') || '/';
+---
+
+<Layout
+  t={props.t}
+  pageTitle={props.pageTitle}
+  pageDescription={props.pageDescription}
+  canonical={props.canonical}
+  hreflangPl={props.hreflangPl}
+  hreflangEn={props.hreflangEn}
+>
+  <LanguageSwitcher t={props.t} altUrl={altUrl} />
+  <main class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+      <slot />
+    </div>
+  </main>
+  <Footer t={props.t} />
+</Layout>

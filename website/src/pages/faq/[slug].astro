@@ -1,0 +1,51 @@
+---
+import InnerChrome from '../../components/InnerChrome.astro';
+import { translations } from '../../i18n/translations';
+import { faqs, faqUrl, hubUrl, hubs } from '../../data/geo';
+
+export function getStaticPaths() {
+  return faqs.pl.map((item) => ({ params: { slug: item.slug }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const t = translations.pl;
+const hub = hubs.pl.find((h) => h.slug === item.hubSlug);
+---
+
+<InnerChrome
+  t={t}
+  pageTitle={`${item.question} | FOODLAW.ai`}
+  pageDescription={item.answer.slice(0, 160)}
+  canonical={faqUrl('pl', item.slug)}
+  hreflangPl={faqUrl('pl', item.slug)}
+  hreflangEn={faqUrl('en', item.altSlug)}
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": item.question,
+      "url": faqUrl('pl', item.slug),
+      "acceptedAnswer": { "@type": "Answer", "text": item.answer }
+    }]
+  })} />
+
+  <p class="text-sm text-primary-600 mb-4">
+    <a href="/" class="hover:underline">FOODLAW.ai</a> /
+    <a href="/faq/" class="hover:underline">FAQ</a>
+  </p>
+  <article>
+    <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-6">{item.question}</h1>
+    <p class="text-lg text-gray-700 leading-relaxed mb-8">{item.answer}</p>
+    {hub && (
+      <p class="mb-6 text-gray-700">
+        Więcej w hubie:
+        <a class="font-semibold text-primary-700 hover:underline" href={`/huby/${hub.slug}/`}>{hub.title}</a>
+      </p>
+    )}
+    <p>
+      <a class="inline-flex items-center px-6 py-3 rounded-lg bg-accent-500 text-white font-semibold hover:bg-accent-600" href="https://supplemental.pl/kontakt/">Umów konsultację</a>
+    </p>
+  </article>
+</InnerChrome>

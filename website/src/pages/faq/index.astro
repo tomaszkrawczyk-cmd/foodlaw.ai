@@ -1,0 +1,46 @@
+---
+import InnerChrome from '../../components/InnerChrome.astro';
+import { translations } from '../../i18n/translations';
+import { faqs, faqUrl, faqIndexUrl, hubUrl } from '../../data/geo';
+
+const t = translations.pl;
+const items = faqs.pl;
+---
+
+<InnerChrome
+  t={t}
+  pageTitle="FAQ — prawo żywnościowe UE i Polski | FOODLAW.ai"
+  pageDescription="Odpowiedzi na pytania: notyfikacja suplementu, oświadczenia zdrowotne 1924/2006, novel food, RASFF, GIS."
+  canonical={faqIndexUrl('pl')}
+  hreflangPl={faqIndexUrl('pl')}
+  hreflangEn={faqIndexUrl('en')}
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "url": faqIndexUrl('pl'),
+    "mainEntity": items.map((item) => ({
+      "@type": "Question",
+      "name": item.question,
+      "url": faqUrl('pl', item.slug),
+      "acceptedAnswer": { "@type": "Answer", "text": item.answer }
+    }))
+  })} />
+
+  <p class="text-sm text-primary-600 mb-4">
+    <a href="/" class="hover:underline">FOODLAW.ai</a> / FAQ
+  </p>
+  <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-4">Najczęściej zadawane pytania</h1>
+  <p class="text-gray-600 mb-10">
+    Każde pytanie ma własny URL — do cytowania przez Google i modele AI. Huby tematyczne:
+    <a class="text-primary-700 font-semibold hover:underline" href="/huby/">/huby/</a>.
+  </p>
+  <ul class="space-y-5">
+    {items.map((item) => (
+      <li class="border border-gray-100 rounded-xl p-5 bg-primary-50/50">
+        <a href={`/faq/${item.slug}/`} class="text-lg font-semibold text-primary-900 hover:underline">{item.question}</a>
+        <p class="text-gray-600 mt-2">{item.answer.slice(0, 200)}…</p>
+      </li>
+    ))}
+  </ul>
+</InnerChrome>

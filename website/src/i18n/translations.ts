@@ -75,9 +75,9 @@ export const translations = {
           url: 'https://nutrimetr.foodlaw.ai',
         },
         {
-          title: 'LL LEM na www.supplemental.pl',
+          title: 'LL LEM na supplemental.pl',
           description: 'LL LEM dostępny na stronie supplemental.pl - szybkie odpowiedzi na pytania z zakresu prawa żywnościowego.',
-          url: 'https://www.supplemental.pl',
+          url: 'https://supplemental.pl',
         },
         {
           title: 'foodlaw.ai na GitHub',
@@ -160,7 +160,7 @@ export const translations = {
       links: 'Linki',
       legal: 'Informacje prawne',
       disclaimer: 'FOODLAW.ai nie stanowi porady prawnej. Informacje mają charakter wyłącznie edukacyjny.',
-      copyright: '2025 FOODLAW.ai. Wszelkie prawa zastrzeżone.',
+      copyright: '2026 FOODLAW.ai. Wszelkie prawa zastrzeżone.',
     },
   },
   en: {
@@ -239,9 +239,9 @@ export const translations = {
           url: 'https://nutrimetr.foodlaw.ai',
         },
         {
-          title: 'LL LEM on www.supplemental.pl',
+          title: 'LL LEM on supplemental.pl',
           description: 'LL LEM available on supplemental.pl - quick answers to food law questions.',
-          url: 'https://www.supplemental.pl',
+          url: 'https://supplemental.pl',
         },
         {
           title: 'foodlaw.ai on GitHub',
@@ -324,7 +324,7 @@ export const translations = {
       links: 'Links',
       legal: 'Legal Information',
       disclaimer: 'FOODLAW.ai does not constitute legal advice. Information is for educational purposes only.',
-      copyright: '2025 FOODLAW.ai. All rights reserved.',
+      copyright: '2026 FOODLAW.ai. All rights reserved.',
     },
   },
 } as const;
