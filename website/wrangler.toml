@@ -8,8 +8,8 @@ directory = "./dist/client"
 binding = "ASSETS"
 
 # Custom domains for the marketing website.
-# NOTE: foodlaw.ai (root) + www = marketing site (this Worker).
-# www is 301 → apex in worker.js.
+# foodlaw.ai and www.foodlaw.ai are separate hostnames for this site;
+# supplemental.pl is a separate site and must not be used as a redirect target.
 # The Claims app (app.foodlaw.ai) is a SEPARATE Cloudflare Pages project
 # (foodlaw-frontend) in the Supplemental repo - do NOT add app.foodlaw.ai here.
 [[routes]]
