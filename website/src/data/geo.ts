@@ -10,10 +10,18 @@ export const NAP = {
   addressRegion: 'Mazowieckie',
   addressCountry: 'PL',
   url: 'https://foodlaw.ai',
+  // sameAs asserts identity. FOODLAW.ai is not the kancelaria and not C.L.A.I.M.S.
   sameAs: [
-    'https://supplemental.pl',
-    'https://app.foodlaw.ai',
     'https://github.com/tomaszkrawczyk-cmd/foodlaw.ai',
+  ],
+  legalService: {
+    name: 'Supple Mental',
+    url: 'https://supplemental.pl',
+    id: 'https://supplemental.pl/#org',
+  },
+  personSameAs: [
+    'https://www.linkedin.com/in/tomasz-krawczyk-23059a245',
+    'https://x.com/tomasztadeo',
   ],
 } as const;
 
@@ -134,11 +142,11 @@ export const hubs = {
       body: [
         'Rozporządzenie 1924/2006 zakazuje oświadczeń żywieniowych i zdrowotnych, które nie są dozwolone i nie spełniają warunków użycia. Rejestr unijny jest źródłem „co wolno”, nie „co brzmi wiarygodnie”.',
         'Najczęstsze błędy: parafraza oświadczenia spoza rejestru, dawka poniżej warunku, oświadczenie botaniczne na etykiecie PL bez oceny ryzyka, mylenie oświadczenia zdrowotnego z oświadczeniem żywieniowym.',
-        'Do weryfikacji konkretnego składnika służy app.foodlaw.ai (Claims). Opinia prawna i etykieta: supplemental.pl.',
+        'Do weryfikacji konkretnego składnika służy app.foodlaw.ai (C.L.A.I.M.S.). Opinia prawna i etykieta: supplemental.pl. C.L.A.I.M.S. nie jest urzędowym rejestrem KE (2318 = 2078 SANCO on-hold + 240 rozp. 432/2012).',
       ],
       related: ['co-to-sa-oswiadczenia-zdrowotne'],
       ctaHref: 'https://app.foodlaw.ai',
-      ctaLabel: 'Sprawdź oświadczenie w app.foodlaw.ai',
+      ctaLabel: 'Sprawdź oświadczenie w C.L.A.I.M.S.',
     },
     {
       slug: 'suplementy-diety',
@@ -192,7 +200,7 @@ export const hubs = {
       description:
         'Hub: 178/2002, ustawa o bezpieczeństwie żywności i żywienia, nadzór GIS, orzecznictwo.',
       body: [
-        'FOODLAW.ai zbiera narzędzia AI do prawa żywnościowego UE i polskiego: oświadczenia, skład, notyfikacje, odwołania. Twórca: Tomasz Krawczyk (supplemental.pl).',
+        'FOODLAW.ai zbiera narzędzia AI do prawa żywnościowego UE i polskiego: oświadczenia, skład, notyfikacje, odwołania. Twórca: Tomasz Krawczyk. Kancelaria (encja odrębna): supplemental.pl.',
         'Źródła: rozporządzenia UE, polskie ustawy i akty wykonawcze, orzecznictwo NSA/WSA/TSUE, decyzje GIS. Baza otwarta: github.com/tomaszkrawczyk-cmd/foodlaw.ai.',
         'To nie jest porada prawna. Do sprawy indywidualnej — konsultacja na supplemental.pl albo 15 min w kalendarzu.',
       ],
@@ -211,11 +219,11 @@ export const hubs = {
       body: [
         'Regulation 1924/2006 prohibits nutrition and health claims that are not authorised and do not meet conditions of use. The Union register is the source of “what is allowed”, not “what sounds plausible”.',
         'Typical failures: paraphrasing a claim outside the register, dose below the condition, a botanical claim on a PL label without risk assessment, mixing health and nutrition claims.',
-        'To check a specific substance use app.foodlaw.ai (Claims). Legal opinion and label: supplemental.pl.',
+        'To check a specific substance use C.L.A.I.M.S. at app.foodlaw.ai (2318 records: 2078 SANCO on-hold + 240 Reg. 432/2012). Not the official EU Register. Legal opinion: supplemental.pl.',
       ],
       related: ['what-are-health-claims'],
       ctaHref: 'https://app.foodlaw.ai',
-      ctaLabel: 'Check a claim on app.foodlaw.ai',
+      ctaLabel: 'Check a claim in C.L.A.I.M.S.',
     },
     {
       slug: 'dietary-supplements',
@@ -269,7 +277,7 @@ export const hubs = {
       description:
         'Hub: 178/2002, the Polish Food Safety and Nutrition Act, GIS supervision, case law.',
       body: [
-        'FOODLAW.ai is a set of AI tools for EU and Polish food law: claims, composition, notifications, appeals. Author: Tomasz Krawczyk (supplemental.pl).',
+        'FOODLAW.ai is a set of AI tools for EU and Polish food law: claims, composition, notifications, appeals. Author: Tomasz Krawczyk. The law firm (separate entity) is supplemental.pl.',
         'Sources: EU regulations, Polish statutes and implementing acts, NSA/WSA/CJEU case law, GIS decisions. Open collection: github.com/tomaszkrawczyk-cmd/foodlaw.ai.',
         'This is not legal advice. For an individual matter — consult supplemental.pl or book a 15-minute slot.',
       ],

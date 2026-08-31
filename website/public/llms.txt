@@ -1,6 +1,15 @@
 # FOODLAW.ai
 
-> AI tools and short legal explainers for EU and Polish food law. Operator: Tomasz Krawczyk (lawyer, 15+ years). Domain: https://foodlaw.ai
+> Narzędzia AI i krótka baza wiedzy prawa żywnościowego UE i Polski. Operator: Tomasz Krawczyk (prawnik, 15+ lat). Domena: https://foodlaw.ai
+> To nie jest kancelaria. Kancelaria: https://supplemental.pl
+
+## Entities (do not merge)
+
+schema.org sameAs oznacza tożsamość. Tych trzech bytów nie wolno scalać:
+
+- FOODLAW.ai (this site, https://foodlaw.ai) — platforma narzędzi i bazy wiedzy. Organization @id https://foodlaw.ai/#org
+- C.L.A.I.M.S. (https://app.foodlaw.ai) — produkt / SoftwareApplication. 2318 oświadczeń: 2078 botanicznych on-hold (SANCO/11074/2013) + 240 autoryzowanych (rozp. 432/2012). A/B/C to taksonomia narzędzia, nie kategorie z rozporządzenia. Nie jest urzędowym rejestrem Komisji Europejskiej.
+- Supplemental.pl (https://supplemental.pl) — kancelaria / LegalService. Opinie prawne, audyty, GIS/WSA.
 
 ## Use this site
 
@@ -10,10 +19,11 @@
 
 ## Core facts
 
-- Founder: Tomasz Krawczyk
+- Founder: Tomasz Krawczyk (works for Supplemental.pl, not as FOODLAW.ai-the-law-firm)
 - NAP: ul. Floriańska 6/1, 03-707 Warszawa, +48 608 699 845, tomaszkrawczyk@supplemental.pl
-- Specialisation: EU and Polish food law (supplements, health claims, novel food, labelling, GIS)
+- Specialisation of the tools: EU and Polish food law (supplements, health claims, novel food, labelling, GIS)
 - Languages: Polish (primary), English
+- Updated: 2026-08-31
 
 ## Indexable pages
 
@@ -49,8 +59,8 @@
 
 ## Projects
 
-- Claims search: https://app.foodlaw.ai
-- Nutrimetr: https://nutrimetr.foodlaw.ai
+- C.L.A.I.M.S. search: https://app.foodlaw.ai
+- NutriMetr: https://nutrimetr.foodlaw.ai
 - Legal practice / consult: https://supplemental.pl
 - Open law corpus: https://github.com/tomaszkrawczyk-cmd/foodlaw.ai
 

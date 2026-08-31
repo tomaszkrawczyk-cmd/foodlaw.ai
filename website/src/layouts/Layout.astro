@@ -54,87 +54,97 @@ const hlEn = hreflangEn || 'https://foodlaw.ai/en/';
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
+    {/* Entity graph: FOODLAW.ai ≠ Supplemental.pl (kancelaria) ≠ C.L.A.I.M.S. (produkt).
+        schema.org sameAs asserts identity — never point FOODLAW.ai sameAs at supplemental.pl. */}
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": NAP.org,
-      "url": NAP.url,
-      "email": NAP.email,
-      "telephone": NAP.phone,
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": NAP.streetAddress,
-        "postalCode": NAP.postalCode,
-        "addressLocality": NAP.addressLocality,
-        "addressRegion": NAP.addressRegion,
-        "addressCountry": NAP.addressCountry
-      },
-      "founder": {
-        "@type": "Person",
-        "name": NAP.name,
-        "url": "https://supplemental.pl/o-mnie/"
-      },
-      "description": "AI-powered platform for EU and Polish food law: health claims, notifications, labelling, novel food.",
-      "sameAs": NAP.sameAs
-    })} />
-
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": NAP.name,
-      "jobTitle": "Legal counsel — EU and Polish food law",
-      "url": "https://supplemental.pl/o-mnie/",
-      "email": NAP.email,
-      "telephone": NAP.phone,
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": NAP.streetAddress,
-        "postalCode": NAP.postalCode,
-        "addressLocality": NAP.addressLocality,
-        "addressCountry": NAP.addressCountry
-      },
-      "worksFor": { "@type": "Organization", "name": NAP.org, "url": NAP.url },
-      "sameAs": NAP.sameAs
-    })} />
-
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": NAP.org,
-      "url": NAP.url,
-      "image": "https://foodlaw.ai/favicon.svg",
-      "telephone": NAP.phone,
-      "email": NAP.email,
-      "areaServed": ["PL", "EU"],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": NAP.streetAddress,
-        "postalCode": NAP.postalCode,
-        "addressLocality": NAP.addressLocality,
-        "addressRegion": NAP.addressRegion,
-        "addressCountry": NAP.addressCountry
-      },
-      "founder": { "@type": "Person", "name": NAP.name },
-      "knowsAbout": [
-        "food law",
-        "health claims Regulation 1924/2006",
-        "novel food Regulation 2015/2283",
-        "dietary supplements GIS notification",
-        "food labelling Regulation 1169/2011"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://foodlaw.ai/#org",
+          "name": "FOODLAW.ai",
+          "url": "https://foodlaw.ai",
+          "email": NAP.email,
+          "telephone": NAP.phone,
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": NAP.streetAddress,
+            "postalCode": NAP.postalCode,
+            "addressLocality": NAP.addressLocality,
+            "addressRegion": NAP.addressRegion,
+            "addressCountry": NAP.addressCountry
+          },
+          "founder": { "@id": "https://supplemental.pl/#tomasz-krawczyk" },
+          "description": "Platforma narzędzi i bazy wiedzy prawa żywnościowego UE i Polski. Nie jest kancelarią. Kancelaria: supplemental.pl. Produkt C.L.A.I.M.S.: app.foodlaw.ai.",
+          "sameAs": NAP.sameAs,
+          "makesOffer": [
+            { "@id": "https://app.foodlaw.ai/#app" },
+            { "@id": "https://nutrimetr.foodlaw.ai/#app" }
+          ]
+        },
+        {
+          "@type": "LegalService",
+          "@id": "https://supplemental.pl/#org",
+          "name": NAP.legalService.name,
+          "alternateName": "Supplemental.pl",
+          "url": NAP.legalService.url,
+          "description": "Kancelaria prawa żywnościowego UE i Polski. Encja odrębna od FOODLAW.ai i od C.L.A.I.M.S."
+        },
+        {
+          "@type": "Person",
+          "@id": "https://supplemental.pl/#tomasz-krawczyk",
+          "name": NAP.name,
+          "jobTitle": "Prawnik — prawo żywnościowe UE i Polski",
+          "url": "https://supplemental.pl/o-mnie/",
+          "email": NAP.email,
+          "telephone": NAP.phone,
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": NAP.streetAddress,
+            "postalCode": NAP.postalCode,
+            "addressLocality": NAP.addressLocality,
+            "addressCountry": NAP.addressCountry
+          },
+          "worksFor": { "@id": "https://supplemental.pl/#org" },
+          "sameAs": NAP.personSameAs
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://app.foodlaw.ai/#app",
+          "name": "C.L.A.I.M.S.",
+          "alternateName": "Classification & Legal Assessment Intelligent Mapping System",
+          "url": "https://app.foodlaw.ai",
+          "applicationCategory": "LegalApplication",
+          "operatingSystem": "Web",
+          "isPartOf": { "@id": "https://foodlaw.ai/#org" },
+          "description": "Wyszukiwarka 2318 oświadczeń zdrowotnych UE: 2078 botanicznych on-hold (SANCO/11074/2013) + 240 autoryzowanych (rozp. 432/2012). A/B/C to taksonomia narzędzia, nie kategorie z rozporządzenia. Nie jest urzędowym rejestrem Komisji Europejskiej.",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PLN" }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://nutrimetr.foodlaw.ai/#app",
+          "name": "NutriMetr",
+          "url": "https://nutrimetr.foodlaw.ai",
+          "applicationCategory": "LegalApplication",
+          "operatingSystem": "Web",
+          "isPartOf": { "@id": "https://foodlaw.ai/#org" },
+          "description": "Analiza tabeli odżywczej i zgodności z rozp. 1169/2011. Produkt FOODLAW.ai, nie kancelaria."
+        }
       ]
     })} />
 
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": "https://foodlaw.ai/#website",
       "name": "FOODLAW.ai",
       "url": "https://foodlaw.ai",
       "inLanguage": ["pl", "en"],
-      "description": "AI-powered food law assistant covering 19+ areas of EU and Polish food regulation.",
-      "publisher": { "@type": "Organization", "name": NAP.org, "url": NAP.url },
+      "description": "Narzędzia AI i baza wiedzy prawa żywnościowego UE i Polski. Nie jest kancelarią i nie jest urzędowym rejestrem oświadczeń zdrowotnych.",
+      "publisher": { "@id": "https://foodlaw.ai/#org" },
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://app.foodlaw.ai/search?q={search_term_string}",
+        "target": "https://app.foodlaw.ai/?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     })} />
@@ -157,36 +167,6 @@ const hlEn = hreflangEn || 'https://foodlaw.ai/en/';
         }] : [])
       ]
     })} />
-
-    <script type="application/ld+json" set:html={JSON.stringify([
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "app.foodlaw.ai (Claims)",
-        "url": "https://app.foodlaw.ai",
-        "applicationCategory": "LegalApplication",
-        "description": "Search engine and analysis tool for EU nutrition and health claims regulated under Regulation 1924/2006.",
-        "operatingSystem": "Web",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PLN" }
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Nutrimetr",
-        "url": "https://nutrimetr.foodlaw.ai",
-        "applicationCategory": "LegalApplication",
-        "description": "Food and food law analysis tool for ingredient verification, label checks, and regulatory compliance assessment.",
-        "operatingSystem": "Web"
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "ODS AI",
-        "applicationCategory": "LegalApplication",
-        "description": "AI assistant for preparing appeals against Polish sanitary inspection authority (Sanepid) decisions in food law matters.",
-        "operatingSystem": "Web"
-      }
-    ])} />
   </head>
   <body class="bg-white text-gray-900 antialiased">
     <slot />
