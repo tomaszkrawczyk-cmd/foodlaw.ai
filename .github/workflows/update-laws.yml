@@ -34,7 +34,7 @@ jobs:
         run: |
           python scripts/fetch_eurlex.py \
             --output ./output/eurlex/ \
-            --language PL \
+            --language pl \
             --delay 3.0 \
             --verbose
         continue-on-error: true
