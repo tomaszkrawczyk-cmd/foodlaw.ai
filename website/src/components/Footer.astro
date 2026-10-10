@@ -28,6 +28,9 @@ const hubsHref = lang === 'pl' ? '/huby/' : '/en/hubs/';
           <a class="hover:text-white" href={`tel:${NAP.phone}`}>{NAP.phoneDisplay}</a><br />
           <a class="hover:text-white" href={`mailto:${NAP.email}`}>{NAP.email}</a>
         </p>
+        <p class="text-primary-200 text-sm mt-2">
+          {t.footer.assistantLabel}: <a class="hover:text-white" href={`mailto:${NAP.assistantEmail}`}>{NAP.assistantEmail}</a> — {t.footer.assistantNote}
+        </p>
       </div>
       <div>
         <h4 class="font-semibold mb-3">{t.footer.links}</h4>

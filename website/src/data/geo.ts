@@ -4,6 +4,7 @@ export const NAP = {
   phone: '+48608699845',
   phoneDisplay: '+48 608 699 845',
   email: 'tomaszkrawczyk@supplemental.pl',
+  assistantEmail: 'tomaszkrawczyk@mail.grokbot.com',
   streetAddress: 'ul. Floriańska 6/1',
   postalCode: '03-707',
   addressLocality: 'Warszawa',
