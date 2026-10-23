@@ -10,7 +10,7 @@ export const translations = {
       keywords: 'prawo żywnościowe, food law, AI, asystent prawny, suplementy diety, novel food, oświadczenia zdrowotne, znakowanie żywności, regulacje UE, GIS, RASFF, bezpieczeństwo żywności',
       aiDescription: 'FOODLAW.ai to platforma AI wspierająca specjalistów prawa żywnościowego w analizie regulacji UE i polskich, orzecznictwa oraz oświadczeń zdrowotnych. Stworzona przez Tomasza Krawczyka - prawnika z ponad 15-letnim doświadczeniem w prawie żywnościowym.',
       canonical: 'https://foodlaw.ai/',
-      ogImage: 'https://foodlaw.ai/favicon.svg',
+      ogImage: 'https://foodlaw.ai/og-image.png',
     },
     nav: {
       features: 'Funkcje',
@@ -63,6 +63,7 @@ export const translations = {
     projects: {
       title: 'Nasze projekty',
       subtitle: 'Ekosystem narzędzi i usług dla prawa żywnościowego',
+      comingSoon: 'Wkrótce',
       items: [
         {
           title: 'app.foodlaw.ai',
@@ -92,7 +93,7 @@ export const translations = {
         {
           title: 'REJ \u00B7 Rapid Enforcement Justice',
           description: 'Narzędzie AI wspierające przygotowanie środka zaskarżenia od decyzji Rzecznika Praw Pacjenta wydanych na podstawie „Lex szarlatan". Analizuje treść decyzji, generuje kontrargumenty prawne oparte na aktualnym orzecznictwie i składa projekt skargi do WSA w Warszawie. Eksport do Word, PDF i wysyłka przez ePUAP.',
-          url: '/rej',
+          url: '/rej/',
         },
       ],
     },
@@ -130,28 +131,6 @@ export const translations = {
     },
     faq: {
       title: 'Najczęściej zadawane pytania',
-      items: [
-        {
-          question: 'Czym jest prawo żywnościowe?',
-          answer: 'Prawo żywnościowe to zespół przepisów regulujących produkcję, przetwarzanie, dystrybucję i sprzedaż żywności. Obejmuje regulacje UE (np. rozporządzenie 178/2002) oraz prawo krajowe (ustawa o bezpieczeństwie żywności i żywienia).',
-        },
-        {
-          question: 'Jak notyfikować suplement diety?',
-          answer: 'Notyfikacja suplementu diety w Polsce wymaga złożenia powiadomienia do Głównego Inspektora Sanitarnego (GIS) za pośrednictwem elektronicznego systemu powiadamiania. Należy podać skład, dawkowanie oraz załączyć etykietę produktu.',
-        },
-        {
-          question: 'Co to są oświadczenia zdrowotne?',
-          answer: 'Oświadczenia zdrowotne to komunikaty sugerujące związek między żywnością a zdrowiem. W UE reguluje je rozporządzenie 1924/2006. Dozwolone oświadczenia znajdują się w rejestrze UE, a ich stosowanie wymaga spełnienia określonych warunków.',
-        },
-        {
-          question: 'Czym jest novel food?',
-          answer: 'Novel food (nowa żywność) to żywność, która nie była w znacznym stopniu spożywana w UE przed 15 maja 1997 roku. Wprowadzenie novel food na rynek UE wymaga autoryzacji zgodnie z rozporządzeniem 2015/2283.',
-        },
-        {
-          question: 'Jak działa system RASFF?',
-          answer: 'RASFF (Rapid Alert System for Food and Feed) to unijny system wczesnego ostrzegania o zagrożeniach związanych z żywnością i paszami. Umożliwia szybką wymianę informacji między państwami członkowskimi UE o produktach stanowiących zagrożenie dla zdrowia.',
-        },
-      ],
     },
     footer: {
       description: 'FOODLAW.ai - inteligentny asystent prawa żywnościowego oparty na AI.',
@@ -176,7 +155,7 @@ export const translations = {
       keywords: 'food law, AI, legal assistant, dietary supplements, novel food, health claims, food labeling, EU regulations, food safety, RASFF, regulatory compliance',
       aiDescription: 'FOODLAW.ai is an AI platform supporting food law professionals in analyzing EU and Polish regulations, case law, and health claims. Created by Tomasz Krawczyk, a lawyer with over 15 years of experience in food law.',
       canonical: 'https://foodlaw.ai/en/',
-      ogImage: 'https://foodlaw.ai/favicon.svg',
+      ogImage: 'https://foodlaw.ai/og-image.png',
     },
     nav: {
       features: 'Features',
@@ -229,6 +208,7 @@ export const translations = {
     projects: {
       title: 'Our Projects',
       subtitle: 'Ecosystem of tools and services for food law',
+      comingSoon: 'Coming soon',
       items: [
         {
           title: 'app.foodlaw.ai',
@@ -258,7 +238,7 @@ export const translations = {
         {
           title: 'REJ \u00B7 Rapid Enforcement Justice',
           description: 'AI tool for preparing legal appeals against decisions by the Patient Rights Ombudsman under "Lex szarlatan". Analyzes decisions, generates legal counterarguments based on current case law, and drafts a complaint to the Warsaw Administrative Court. Export to Word, PDF, and submission via ePUAP.',
-          url: '/rej',
+          url: '/rej/',
         },
       ],
     },
@@ -296,28 +276,6 @@ export const translations = {
     },
     faq: {
       title: 'Frequently Asked Questions',
-      items: [
-        {
-          question: 'What is food law?',
-          answer: 'Food law is a set of regulations governing the production, processing, distribution, and sale of food. It encompasses EU regulations (e.g., Regulation 178/2002) and national legislation.',
-        },
-        {
-          question: 'How to notify a dietary supplement?',
-          answer: 'Dietary supplement notification in Poland requires submitting a notification to the Chief Sanitary Inspector (GIS) through the electronic notification system. You must provide composition, dosage, and attach the product label.',
-        },
-        {
-          question: 'What are health claims?',
-          answer: 'Health claims are messages suggesting a relationship between food and health. In the EU, they are regulated by Regulation 1924/2006. Permitted claims are listed in the EU register, and their use requires meeting specific conditions.',
-        },
-        {
-          question: 'What is novel food?',
-          answer: 'Novel food is food that was not consumed to a significant degree in the EU before May 15, 1997. Placing novel food on the EU market requires authorization under Regulation 2015/2283.',
-        },
-        {
-          question: 'How does the RASFF system work?',
-          answer: 'RASFF (Rapid Alert System for Food and Feed) is the EU early warning system for food and feed safety hazards. It enables rapid exchange of information between EU member states about products posing health risks.',
-        },
-      ],
     },
     footer: {
       description: 'FOODLAW.ai - AI-powered food law assistant.',

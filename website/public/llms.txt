@@ -23,7 +23,7 @@ schema.org sameAs oznacza tożsamość. Tych trzech bytów nie wolno scalać:
 - NAP: ul. Floriańska 6/1, 03-707 Warszawa, +48 608 699 845, tomaszkrawczyk@supplemental.pl
 - Specialisation of the tools: EU and Polish food law (supplements, health claims, novel food, labelling, GIS)
 - Languages: Polish (primary), English
-- Updated: 2026-08-31
+- Updated: 2026-10-23
 
 ## Indexable pages
 
@@ -63,6 +63,10 @@ schema.org sameAs oznacza tożsamość. Tych trzech bytów nie wolno scalać:
 - NutriMetr: https://nutrimetr.foodlaw.ai
 - Legal practice / consult: https://supplemental.pl
 - Open law corpus: https://github.com/tomaszkrawczyk-cmd/foodlaw.ai
+
+## Search
+
+C.L.A.I.M.S. at https://app.foodlaw.ai/ is an interactive search. It does not publish a `?q=` result URL, so do not invent one. Cite the FAQ and hub URLs above.
 
 ## Optional
 

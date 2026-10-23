@@ -1,7 +1,7 @@
 ---
 import InnerChrome from '../../../components/InnerChrome.astro';
 import { translations } from '../../../i18n/translations';
-import { hubs, hubUrl, faqs } from '../../../data/geo';
+import { hubs, hubUrl, faqs, articleLd, crumbs } from '../../../data/geo';
 
 export function getStaticPaths() {
   return hubs.en.map((hub) => ({ params: { slug: hub.slug }, props: { hub } }));
@@ -19,11 +19,17 @@ const relatedFaqs = faqs.en.filter((f) => hub.related.includes(f.slug));
   canonical={hubUrl('en', hub.slug)}
   hreflangPl={hubUrl('pl', hub.altSlug)}
   hreflangEn={hubUrl('en', hub.slug)}
+  crumbs={crumbs('en', [
+    { name: 'Hubs', item: 'https://foodlaw.ai/en/hubs/' },
+    { name: hub.title, item: hubUrl('en', hub.slug) },
+  ])}
 >
-  <p class="text-sm text-primary-600 mb-4">
+  <script type="application/ld+json" set:html={JSON.stringify(articleLd('en', hubUrl('en', hub.slug), hub.title, hub.description))} />
+
+  <nav class="text-sm text-primary-600 mb-4" aria-label="Breadcrumb">
     <a href="/en/" class="hover:underline">FOODLAW.ai</a> /
     <a href="/en/hubs/" class="hover:underline">Hubs</a>
-  </p>
+  </nav>
   <article>
     <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-6">{hub.title}</h1>
     {hub.body.map((p) => (
@@ -32,15 +38,20 @@ const relatedFaqs = faqs.en.filter((f) => hub.related.includes(f.slug));
     {relatedFaqs.length > 0 && (
       <section class="mt-10">
         <h2 class="text-xl font-semibold text-primary-800 mb-3">Related FAQ</h2>
-        <ul class="list-disc pl-5 space-y-2">
+        <div class="space-y-6">
           {relatedFaqs.map((f) => (
-            <li><a class="text-primary-700 hover:underline" href={`/en/faq/${f.slug}/`}>{f.question}</a></li>
+            <article>
+              <h3 class="text-lg font-semibold text-primary-900">
+                <a class="hover:underline" href={`/en/faq/${f.slug}/`}>{f.question}</a>
+              </h3>
+              <p class="text-gray-700 mt-2 leading-relaxed">{f.answer}</p>
+            </article>
           ))}
-        </ul>
+        </div>
       </section>
     )}
     <p class="mt-10">
-      <a class="inline-flex items-center px-6 py-3 rounded-lg bg-accent-500 text-white font-semibold hover:bg-accent-600" href={hub.ctaHref}>{hub.ctaLabel}</a>
+      <a class="inline-flex items-center px-6 py-3 rounded-lg bg-accent-500 text-primary-900 font-semibold hover:bg-accent-400" href={hub.ctaHref}>{hub.ctaLabel}</a>
     </p>
   </article>
 </InnerChrome>

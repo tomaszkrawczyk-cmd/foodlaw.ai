@@ -1,7 +1,7 @@
 ---
 import InnerChrome from '../../../components/InnerChrome.astro';
 import { translations } from '../../../i18n/translations';
-import { faqs, faqUrl, faqIndexUrl } from '../../../data/geo';
+import { faqs, faqPageLd, faqIndexUrl, crumbs } from '../../../data/geo';
 
 const t = translations.en;
 const items = faqs.en;
@@ -14,22 +14,13 @@ const items = faqs.en;
   canonical={faqIndexUrl('en')}
   hreflangPl={faqIndexUrl('pl')}
   hreflangEn={faqIndexUrl('en')}
+  crumbs={crumbs('en', [{ name: 'FAQ', item: faqIndexUrl('en') }])}
 >
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "url": faqIndexUrl('en'),
-    "mainEntity": items.map((item) => ({
-      "@type": "Question",
-      "name": item.question,
-      "url": faqUrl('en', item.slug),
-      "acceptedAnswer": { "@type": "Answer", "text": item.answer }
-    }))
-  })} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqPageLd('en', faqIndexUrl('en'), items))} />
 
-  <p class="text-sm text-primary-600 mb-4">
+  <nav class="text-sm text-primary-600 mb-4" aria-label="Breadcrumb">
     <a href="/en/" class="hover:underline">FOODLAW.ai</a> / FAQ
-  </p>
+  </nav>
   <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-4">Frequently asked questions</h1>
   <p class="text-gray-600 mb-10">
     Each question has its own URL for search and AI citation. Topic hubs:
@@ -39,7 +30,7 @@ const items = faqs.en;
     {items.map((item) => (
       <li class="border border-gray-100 rounded-xl p-5 bg-primary-50/50">
         <a href={`/en/faq/${item.slug}/`} class="text-lg font-semibold text-primary-900 hover:underline">{item.question}</a>
-        <p class="text-gray-600 mt-2">{item.answer.slice(0, 200)}…</p>
+        <p class="text-gray-700 mt-2 leading-relaxed">{item.answer}</p>
       </li>
     ))}
   </ul>

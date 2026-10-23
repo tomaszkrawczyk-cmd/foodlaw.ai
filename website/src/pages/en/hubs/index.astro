@@ -1,7 +1,7 @@
 ---
 import InnerChrome from '../../../components/InnerChrome.astro';
 import { translations } from '../../../i18n/translations';
-import { hubs, hubIndexUrl } from '../../../data/geo';
+import { hubs, hubIndexUrl, crumbs } from '../../../data/geo';
 
 const t = translations.en;
 ---
@@ -13,10 +13,11 @@ const t = translations.en;
   canonical={hubIndexUrl('en')}
   hreflangPl={hubIndexUrl('pl')}
   hreflangEn={hubIndexUrl('en')}
+  crumbs={crumbs('en', [{ name: 'Hubs', item: hubIndexUrl('en') }])}
 >
-  <p class="text-sm text-primary-600 mb-4">
+  <nav class="text-sm text-primary-600 mb-4" aria-label="Breadcrumb">
     <a href="/en/" class="hover:underline">FOODLAW.ai</a> / Hubs
-  </p>
+  </nav>
   <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-4">Topic hubs</h1>
   <p class="text-gray-600 mb-10">Short landing pages for a specific query (AEO/GEO). Each one leads to a tool or a consult.</p>
   <ul class="space-y-5">

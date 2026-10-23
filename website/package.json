@@ -7,13 +7,14 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/check-seo.mjs",
     "preview": "astro preview",
+    "test": "node --test scripts/worker.test.mjs",
     "astro": "astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.3.8",
+    "astro": "^7.4.2",
     "tailwindcss": "^4.3.0"
   },
   "pnpm": {

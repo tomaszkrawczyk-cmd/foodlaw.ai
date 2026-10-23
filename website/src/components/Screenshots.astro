@@ -9,32 +9,36 @@ const { t } = Astro.props;
 
 const screenshots = [
   {
-    src: '/images/app-claims.png',
+    src: '/images/app-claims.webp',
+    width: 1280,
+    height: 720,
     caption: t.gallery.items[0],
-    alt: 'app.foodlaw.ai - Health Claims',
     overlayText: 'app.foodlaw.ai',
     url: 'https://app.foodlaw.ai',
   },
   {
-    src: '/images/nutrimetr.png',
+    src: '/images/nutrimetr.webp',
+    width: 1280,
+    height: 720,
     caption: t.gallery.items[1],
-    alt: 'Nutrimetr - Food Composition Analysis',
     overlayText: 'Nutrimetr',
     url: 'https://nutrimetr.foodlaw.ai',
   },
   {
-    src: '/images/supplemental-ai.png',
+    src: '/images/supplemental-ai.webp',
+    width: 1280,
+    height: 720,
     caption: t.gallery.items[2],
-    alt: 'LL LEM on supplemental.pl',
     overlayText: 'supplemental.pl',
     url: 'https://supplemental.pl',
   },
   {
-    src: '/images/rej-hero.png',
+    src: '/images/rej-hero.webp',
+    width: 1600,
+    height: 840,
     caption: t.gallery.items[3],
-    alt: 'REJ - Rapid Enforcement Justice',
     overlayText: 'REJ',
-    url: '#',
+    url: '/rej/',
   },
 ];
 ---
@@ -49,67 +53,34 @@ const screenshots = [
         {t.gallery.subtitle}
       </p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {screenshots.map((item) => (
-        <a href={item.url} target="_blank" rel="noopener noreferrer" class="screenshot-card group">
-          <div class="screenshot-container">
-            <span class="screenshot-overlay">{item.overlayText}</span>
-            <img
-              src={item.src}
-              alt={item.alt}
-              loading="lazy"
-              class="screenshot-img"
-            />
-          </div>
-          <p class="mt-3 text-sm text-gray-600 text-center font-medium group-hover:text-primary-700 transition-colors">
-            {item.caption}
-          </p>
-        </a>
-      ))}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {screenshots.map((item) => {
+        const external = item.url.startsWith('http');
+        return (
+          <a
+            href={item.url}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noopener noreferrer' : undefined}
+            class="screenshot-card group"
+          >
+            <div class="screenshot-container">
+              <span class="screenshot-overlay" aria-hidden="true">{item.overlayText}</span>
+              <img
+                src={item.src}
+                alt={item.caption}
+                width={item.width}
+                height={item.height}
+                loading="lazy"
+                decoding="async"
+                class="screenshot-img"
+              />
+            </div>
+            <p class="mt-3 text-sm text-gray-600 text-center font-medium group-hover:text-primary-700 transition-colors">
+              {item.caption}
+            </p>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>
-
-<style>
-  .screenshot-card {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .screenshot-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 50%, #64748b 100%);
-  }
-
-  .screenshot-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #475569;
-    text-shadow: 0 1px 2px rgb(255 255 255 / 0.5);
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .screenshot-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 2;
-  }
-
-  .screenshot-img[src] {
-    background: transparent;
-  }
-</style>
