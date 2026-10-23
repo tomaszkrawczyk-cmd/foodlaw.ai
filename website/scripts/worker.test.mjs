@@ -1,6 +1,12 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { handleRequest, SECURITY_HEADERS } from '../worker.js';
+
+test('wrangler runs the worker before static assets so www can 301', () => {
+  const toml = readFileSync(new URL('../wrangler.toml', import.meta.url), 'utf8');
+  assert.match(toml, /run_worker_first\s*=\s*true/);
+});
 
 test('www.foodlaw.ai redirects to the apex and keeps path and query', async () => {
   let fetched = false;

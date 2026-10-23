@@ -1,7 +1,7 @@
 // foodlaw.ai and www.foodlaw.ai are this site.
 // supplemental.pl is a separate site; never redirect to it.
-// A zone-level redirect (www → supplemental.pl) currently runs before this
-// Worker. This handler is the correct canonical once that rule is removed.
+// This redirect runs only when worker.js runs. Static assets are served first
+// unless wrangler.toml sets assets.run_worker_first = true.
 
 export const SECURITY_HEADERS = {
   'Content-Security-Policy':

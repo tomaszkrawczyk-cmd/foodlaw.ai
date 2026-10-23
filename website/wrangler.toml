@@ -7,6 +7,13 @@ compatibility_date = "2025-05-27"
 directory = "./dist/client"
 binding = "ASSETS"
 not_found_handling = "404-page"
+# Default is false: a request that matches a static file is served and worker.js
+# never runs. That is why https://www.foodlaw.ai/faq/ was HTTP 200, while a path
+# with no asset reached the script and 301'd. true runs worker.js first for every
+# host and path (www → apex 301, then security headers on the apex response).
+# Route patterns here are paths only (must start with /), so they cannot select
+# the www host by themselves.
+run_worker_first = true
 
 # Custom domains for the marketing website.
 # foodlaw.ai and www.foodlaw.ai are separate hostnames for this site;
