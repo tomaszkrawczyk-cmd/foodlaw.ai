@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { translations } from '../i18n/translations';
+
+const t = translations.pl;
+---
+
+<Layout
+  t={t}
+  pageTitle="Nie znaleziono strony | FOODLAW.ai"
+  pageDescription="Ten adres nie istnieje na FOODLAW.ai."
+  canonical="https://foodlaw.ai/404/"
+  robots="noindex, nofollow"
+  includeAlternates={false}
+  crumbs={[{ name: 'FOODLAW.ai', item: 'https://foodlaw.ai/' }, { name: '404', item: 'https://foodlaw.ai/404/' }]}
+>
+  <main id="main" class="pt-32 pb-24 px-4 text-center">
+    <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-4">Nie znaleziono strony</h1>
+    <p class="text-lg text-gray-700 mb-2">Ten adres nie istnieje.</p>
+    <p class="text-gray-600 mb-8">This page does not exist.</p>
+    <p class="flex flex-wrap items-center justify-center gap-4 text-primary-700 font-semibold">
+      <a class="hover:underline" href="/">Strona główna</a>
+      <a class="hover:underline" href="/en/">English</a>
+      <a class="hover:underline" href="/faq/">FAQ</a>
+      <a class="hover:underline" href="/huby/">Huby</a>
+    </p>
+  </main>
+</Layout>

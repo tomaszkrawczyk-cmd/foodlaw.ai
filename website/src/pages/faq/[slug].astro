@@ -1,7 +1,7 @@
 ---
 import InnerChrome from '../../components/InnerChrome.astro';
 import { translations } from '../../i18n/translations';
-import { faqs, faqUrl, hubUrl, hubs } from '../../data/geo';
+import { faqs, faqUrl, faqPageLd, crumbs, metaDescription, hubs } from '../../data/geo';
 
 export function getStaticPaths() {
   return faqs.pl.map((item) => ({ params: { slug: item.slug }, props: { item } }));
@@ -15,26 +15,21 @@ const hub = hubs.pl.find((h) => h.slug === item.hubSlug);
 <InnerChrome
   t={t}
   pageTitle={`${item.question} | FOODLAW.ai`}
-  pageDescription={item.answer.slice(0, 160)}
+  pageDescription={metaDescription(item.answer)}
   canonical={faqUrl('pl', item.slug)}
   hreflangPl={faqUrl('pl', item.slug)}
   hreflangEn={faqUrl('en', item.altSlug)}
+  crumbs={crumbs('pl', [
+    { name: 'FAQ', item: 'https://foodlaw.ai/faq/' },
+    { name: item.question, item: faqUrl('pl', item.slug) },
+  ])}
 >
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [{
-      "@type": "Question",
-      "name": item.question,
-      "url": faqUrl('pl', item.slug),
-      "acceptedAnswer": { "@type": "Answer", "text": item.answer }
-    }]
-  })} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqPageLd('pl', faqUrl('pl', item.slug), [item]))} />
 
-  <p class="text-sm text-primary-600 mb-4">
+  <nav class="text-sm text-primary-600 mb-4" aria-label="Breadcrumb">
     <a href="/" class="hover:underline">FOODLAW.ai</a> /
     <a href="/faq/" class="hover:underline">FAQ</a>
-  </p>
+  </nav>
   <article>
     <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-6">{item.question}</h1>
     <p class="text-lg text-gray-700 leading-relaxed mb-8">{item.answer}</p>
@@ -45,7 +40,7 @@ const hub = hubs.pl.find((h) => h.slug === item.hubSlug);
       </p>
     )}
     <p>
-      <a class="inline-flex items-center px-6 py-3 rounded-lg bg-accent-500 text-white font-semibold hover:bg-accent-600" href="https://supplemental.pl/kontakt/">Umów konsultację</a>
+      <a class="inline-flex items-center px-6 py-3 rounded-lg bg-accent-500 text-primary-900 font-semibold hover:bg-accent-400" href="https://supplemental.pl/kontakt/">Umów konsultację</a>
     </p>
   </article>
 </InnerChrome>

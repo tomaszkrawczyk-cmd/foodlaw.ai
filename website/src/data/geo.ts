@@ -1,3 +1,66 @@
+export const OG_IMAGE = 'https://foodlaw.ai/og-image.png';
+
+/** Trim a meta description on a word boundary. */
+export function metaDescription(text: string, max = 155): string {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max);
+  const space = cut.lastIndexOf(' ');
+  const base = (space > 80 ? cut.slice(0, space) : cut).trimEnd();
+  return `${base}…`;
+}
+
+export function crumbs(
+  lang: 'pl' | 'en',
+  rest: { name: string; item: string }[] = [],
+) {
+  const home =
+    lang === 'pl'
+      ? { name: 'FOODLAW.ai', item: 'https://foodlaw.ai/' }
+      : { name: 'FOODLAW.ai', item: 'https://foodlaw.ai/en/' };
+  return [home, ...rest];
+}
+
+export function faqPageLd(
+  lang: 'pl' | 'en',
+  pageUrl: string,
+  items: readonly { question: string; answer: string; slug: string }[],
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    url: pageUrl,
+    inLanguage: lang,
+    author: { '@id': 'https://supplemental.pl/#tomasz-krawczyk' },
+    publisher: { '@id': 'https://foodlaw.ai/#org' },
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      url: faqUrl(lang, item.slug),
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  };
+}
+
+export function articleLd(
+  lang: 'pl' | 'en',
+  url: string,
+  headline: string,
+  description: string,
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline,
+    description,
+    inLanguage: lang,
+    url,
+    mainEntityOfPage: url,
+    author: { '@id': 'https://supplemental.pl/#tomasz-krawczyk' },
+    publisher: { '@id': 'https://foodlaw.ai/#org' },
+  };
+}
+
 export const NAP = {
   name: 'Tomasz Krawczyk',
   org: 'FOODLAW.ai',

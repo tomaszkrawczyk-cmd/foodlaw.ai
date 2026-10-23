@@ -11,6 +11,7 @@ interface Props {
   canonical: string;
   hreflangPl: string;
   hreflangEn: string;
+  crumbs?: { name: string; item: string }[];
 }
 
 const props = Astro.props;
@@ -24,9 +25,10 @@ const altUrl = (props.t.lang === 'pl' ? props.hreflangEn : props.hreflangPl).rep
   canonical={props.canonical}
   hreflangPl={props.hreflangPl}
   hreflangEn={props.hreflangEn}
+  crumbs={props.crumbs}
 >
   <LanguageSwitcher t={props.t} altUrl={altUrl} />
-  <main class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+  <main id="main" class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mx-auto">
       <slot />
     </div>

@@ -6,6 +6,7 @@ compatibility_date = "2025-05-27"
 [assets]
 directory = "./dist/client"
 binding = "ASSETS"
+not_found_handling = "404-page"
 
 # Custom domains for the marketing website.
 # foodlaw.ai and www.foodlaw.ai are separate hostnames for this site;

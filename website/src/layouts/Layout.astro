@@ -1,7 +1,12 @@
 ---
 import '../styles/global.css';
 import type { Translation } from '../i18n/translations';
-import { NAP } from '../data/geo';
+import { NAP, OG_IMAGE } from '../data/geo';
+
+interface Crumb {
+  name: string;
+  item: string;
+}
 
 interface Props {
   t: Translation;
@@ -10,16 +15,44 @@ interface Props {
   canonical?: string;
   hreflangPl?: string;
   hreflangEn?: string;
+  crumbs?: Crumb[];
+  robots?: string;
+  includeAlternates?: boolean;
 }
 
-const { t, pageTitle, pageDescription, canonical, hreflangPl, hreflangEn } = Astro.props;
+const {
+  t,
+  pageTitle,
+  pageDescription,
+  canonical,
+  hreflangPl,
+  hreflangEn,
+  crumbs: crumbsProp,
+  robots,
+  includeAlternates = true,
+} = Astro.props;
+
 const title = pageTitle || t.meta.title;
 const description = pageDescription || t.meta.description;
 const canonicalUrl = canonical || t.meta.canonical;
 const ogLocale = t.lang === 'pl' ? 'pl_PL' : 'en_US';
 const altLocale = t.lang === 'pl' ? 'en_US' : 'pl_PL';
-const hlPl = hreflangPl || 'https://foodlaw.ai/';
-const hlEn = hreflangEn || 'https://foodlaw.ai/en/';
+const ogAlt = t.lang === 'pl'
+  ? 'FOODLAW.ai — asystent AI prawa żywnościowego UE i Polski'
+  : 'FOODLAW.ai — AI assistant for EU and Polish food law';
+const robotsContent = robots || 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
+// Emit an English alternate only when the page actually has one.
+// Monolingual URLs (for example /supplemental/ and /rej/) must not point hreflang at the homepage.
+const plHref = hreflangPl || (t.lang === 'pl' ? canonicalUrl : undefined);
+const enHref = hreflangEn;
+const xDefault = plHref || canonicalUrl;
+
+const crumbs: Crumb[] = crumbsProp ?? [
+  { name: 'FOODLAW.ai', item: t.lang === 'pl' ? 'https://foodlaw.ai/' : 'https://foodlaw.ai/en/' },
+];
+
+const skipLabel = t.lang === 'pl' ? 'Przejdź do treści' : 'Skip to content';
 ---
 
 <!doctype html>
@@ -29,30 +62,40 @@ const hlEn = hreflangEn || 'https://foodlaw.ai/en/';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={robotsContent} />
     <meta name="keywords" content={t.meta.keywords} />
     <meta name="ai-description" content={t.meta.aiDescription} />
     <meta name="author" content="Tomasz Krawczyk" />
+    <meta name="theme-color" content="#1e3a5f" />
     <meta name="geo.region" content="PL-MZ" />
     <meta name="geo.placename" content="Warszawa" />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="pl" href={hlPl} />
-    <link rel="alternate" hreflang="en" href={hlEn} />
-    <link rel="alternate" hreflang="x-default" href="https://foodlaw.ai/" />
+    {includeAlternates && plHref && <link rel="alternate" hreflang="pl" href={plHref} />}
+    {includeAlternates && enHref && <link rel="alternate" hreflang="en" href={enHref} />}
+    {includeAlternates && <link rel="alternate" hreflang="x-default" href={xDefault} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="text/plain" href="https://foodlaw.ai/llms.txt" title="LLM index" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={t.meta.ogImage} />
+    <meta property="og:image" content={OG_IMAGE} />
+    <meta property="og:image:secure_url" content={OG_IMAGE} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:locale:alternate" content={altLocale} />
     <meta property="og:site_name" content="FOODLAW.ai" />
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={OG_IMAGE} />
+    <meta name="twitter:image:alt" content={ogAlt} />
 
     {/* Entity graph: FOODLAW.ai ≠ Supplemental.pl (kancelaria) ≠ C.L.A.I.M.S. (produkt).
         schema.org sameAs asserts identity — never point FOODLAW.ai sameAs at supplemental.pl. */}
@@ -76,6 +119,14 @@ const hlEn = hreflangEn || 'https://foodlaw.ai/en/';
           },
           "founder": { "@id": "https://supplemental.pl/#tomasz-krawczyk" },
           "description": "Platforma narzędzi i bazy wiedzy prawa żywnościowego UE i Polski. Nie jest kancelarią. Kancelaria: supplemental.pl. Produkt C.L.A.I.M.S.: app.foodlaw.ai.",
+          "knowsAbout": [
+            "Prawo żywnościowe Unii Europejskiej",
+            "Polskie prawo żywności",
+            "Suplementy diety",
+            "Oświadczenia zdrowotne",
+            "Nowa żywność",
+            "Znakowanie żywności"
+          ],
           "sameAs": NAP.sameAs,
           "makesOffer": [
             { "@id": "https://app.foodlaw.ai/#app" },
@@ -106,6 +157,13 @@ const hlEn = hreflangEn || 'https://foodlaw.ai/en/';
             "addressCountry": NAP.addressCountry
           },
           "worksFor": { "@id": "https://supplemental.pl/#org" },
+          "knowsAbout": [
+            "Prawo żywnościowe UE i Polski",
+            "Notyfikacja suplementów diety",
+            "Oświadczenia żywieniowe i zdrowotne",
+            "Novel food",
+            "Postępowania GIS"
+          ],
           "sameAs": NAP.personSameAs
         },
         {
@@ -133,6 +191,7 @@ const hlEn = hreflangEn || 'https://foodlaw.ai/en/';
       ]
     })} />
 
+    {/* SearchAction is omitted: app.foodlaw.ai does not read a ?q= URL. */}
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
@@ -141,34 +200,22 @@ const hlEn = hreflangEn || 'https://foodlaw.ai/en/';
       "url": "https://foodlaw.ai",
       "inLanguage": ["pl", "en"],
       "description": "Narzędzia AI i baza wiedzy prawa żywnościowego UE i Polski. Nie jest kancelarią i nie jest urzędowym rejestrem oświadczeń zdrowotnych.",
-      "publisher": { "@id": "https://foodlaw.ai/#org" },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://app.foodlaw.ai/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "publisher": { "@id": "https://foodlaw.ai/#org" }
     })} />
 
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "FOODLAW.ai",
-          "item": "https://foodlaw.ai/"
-        },
-        ...(t.lang === 'en' ? [{
-          "@type": "ListItem",
-          "position": 2,
-          "name": "English",
-          "item": "https://foodlaw.ai/en/"
-        }] : [])
-      ]
+      "itemListElement": crumbs.map((crumb, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": crumb.name,
+        "item": crumb.item
+      }))
     })} />
   </head>
   <body class="bg-white text-gray-900 antialiased">
+    <a class="skip-link" href="#main">{skipLabel}</a>
     <slot />
   </body>
 </html>

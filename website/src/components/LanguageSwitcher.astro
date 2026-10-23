@@ -12,15 +12,17 @@ const lang = t.lang === 'en' ? 'en' : 'pl';
 const home = lang === 'pl' ? '/' : '/en/';
 const faqHref = lang === 'pl' ? '/faq/' : '/en/faq/';
 const hubsHref = lang === 'pl' ? '/huby/' : '/en/hubs/';
+const navLabel = lang === 'pl' ? 'Nawigacja główna' : 'Main navigation';
+const menuLabel = lang === 'pl' ? 'Menu' : 'Menu';
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100" aria-label={navLabel}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <a href={home} class="text-xl font-bold text-primary-700">
-        FOODLAW<span class="text-accent-500">.ai</span>
+        FOODLAW<span class="text-accent-700">.ai</span>
       </a>
-      <div class="flex items-center gap-6">
+      <div class="flex items-center gap-3 md:gap-6">
         <div class="hidden md:flex items-center gap-6">
           <a href={`${home}#features`} class="text-sm text-gray-600 hover:text-primary-700 transition-smooth">{t.nav.features}</a>
           <a href={`${home}#projects`} class="text-sm text-gray-600 hover:text-primary-700 transition-smooth">{t.nav.projects}</a>
@@ -30,8 +32,24 @@ const hubsHref = lang === 'pl' ? '/huby/' : '/en/hubs/';
           <a href="https://supplemental.pl" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-600 hover:text-primary-700 transition-smooth">supplemental.pl</a>
           <a href={`tel:${NAP.phone}`} class="text-sm text-gray-600 hover:text-primary-700 transition-smooth">{NAP.phoneDisplay}</a>
         </div>
+        <details class="md:hidden relative">
+          <summary class="menu-summary cursor-pointer px-3 py-1.5 text-sm font-medium rounded-md border border-primary-200 text-primary-700">
+            {menuLabel}
+          </summary>
+          <div class="absolute right-0 mt-2 w-64 rounded-lg border border-gray-100 bg-white p-4 flex flex-col gap-3 shadow-lg">
+            <a href={`${home}#features`} class="text-sm text-gray-700 hover:text-primary-700">{t.nav.features}</a>
+            <a href={`${home}#projects`} class="text-sm text-gray-700 hover:text-primary-700">{t.nav.projects}</a>
+            <a href={faqHref} class="text-sm text-gray-700 hover:text-primary-700">FAQ</a>
+            <a href={hubsHref} class="text-sm text-gray-700 hover:text-primary-700">{lang === 'pl' ? 'Huby' : 'Hubs'}</a>
+            <a href={`${home}#pricing`} class="text-sm text-gray-700 hover:text-primary-700">{t.nav.pricing}</a>
+            <a href="https://supplemental.pl" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-700 hover:text-primary-700">supplemental.pl</a>
+            <a href={`tel:${NAP.phone}`} class="text-sm text-gray-700 hover:text-primary-700">{NAP.phoneDisplay}</a>
+          </div>
+        </details>
         <a
           href={altUrl || t.otherLangUrl}
+          hreflang={lang === 'pl' ? 'en' : 'pl'}
+          lang={lang === 'pl' ? 'en' : 'pl'}
           class="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium rounded-md border border-primary-200 text-primary-700 hover:bg-primary-50 transition-smooth"
         >
           {t.otherLang}
