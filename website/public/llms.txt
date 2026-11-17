@@ -23,12 +23,14 @@ schema.org sameAs oznacza tożsamość. Tych trzech bytów nie wolno scalać:
 - NAP: ul. Floriańska 6/1, 03-707 Warszawa, +48 608 699 845, tomaszkrawczyk@supplemental.pl
 - Specialisation of the tools: EU and Polish food law (supplements, health claims, novel food, labelling, GIS)
 - Languages: Polish (primary), English
-- Updated: 2026-10-23
+- Updated: 2026-11-17
 
 ## Indexable pages
 
 - Home: https://foodlaw.ai/
 - English home: https://foodlaw.ai/en/
+- MCP server (PL): https://foodlaw.ai/serwer-mcp/
+- MCP server (EN): https://foodlaw.ai/en/mcp-server/
 - FAQ index: https://foodlaw.ai/faq/
 - Hubs index: https://foodlaw.ai/huby/
 - Full text for models: https://foodlaw.ai/llms-full.txt
@@ -63,6 +65,22 @@ schema.org sameAs oznacza tożsamość. Tych trzech bytów nie wolno scalać:
 - NutriMetr: https://nutrimetr.foodlaw.ai
 - Legal practice / consult: https://supplemental.pl
 - Open law corpus: https://github.com/tomaszkrawczyk-cmd/foodlaw.ai
+
+## MCP server
+
+Public, free, read-only, no login and no API key. Transport: Streamable HTTP, stateless.
+C.L.A.I.M.S. (app.foodlaw.ai) is available through search_claims_foodlaw and get_claim_foodlaw.
+
+- Page (PL): https://foodlaw.ai/serwer-mcp/
+- Page (EN): https://foodlaw.ai/en/mcp-server/
+- Endpoint: https://mcp.supplemental.pl/mcp
+- Registry name: pl.supplemental/foodlaw
+- Server card: https://mcp.supplemental.pl/.well-known/mcp/server-card.json
+- Health: https://mcp.supplemental.pl/health
+- Docs (PL): https://supplemental.pl/narzedzia/serwer-mcp/
+- Docs (EN): https://supplemental.pl/en/tools/mcp-server/
+- Source: https://github.com/tomaszkrawczyk-cmd/supplemental-eu-food-law-mcp
+- Tools: search_articles, get_article, check_health_claim, novel_food_status, search_claims_foodlaw, get_claim_foodlaw, gis_notification_steps, nutrition_calc
 
 ## Search
 

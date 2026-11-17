@@ -1,0 +1,228 @@
+---
+import InnerChrome from './InnerChrome.astro';
+import type { Translation } from '../i18n/translations';
+import { crumbs } from '../data/geo';
+import { MCP_PAGE, mcpServer, type McpLang } from '../data/mcp';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+const lang: McpLang = t.lang === 'en' ? 'en' : 'pl';
+const m = t.mcp;
+const pageUrl = MCP_PAGE[lang];
+const homePath = lang === 'pl' ? '/' : '/en/';
+const claimNames: ReadonlySet<string> = new Set(mcpServer.claimsTools);
+const docsUrl = mcpServer.docs[lang];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: m.metaTitle,
+      description: m.metaDescription,
+      inLanguage: lang,
+      isPartOf: { '@id': 'https://foodlaw.ai/#website' },
+      about: { '@id': 'https://mcp.supplemental.pl/mcp#api' },
+      publisher: { '@id': 'https://foodlaw.ai/#org' },
+    },
+    {
+      '@type': 'WebAPI',
+      '@id': 'https://mcp.supplemental.pl/mcp#api',
+      name: mcpServer.title,
+      alternateName: mcpServer.registryName,
+      url: mcpServer.endpoint,
+      documentation: docsUrl,
+      isAccessibleForFree: true,
+      description: mcpServer.description,
+      provider: { '@id': 'https://supplemental.pl/#org' },
+      softwareVersion: mcpServer.version,
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      '@id': `${pageUrl}#source`,
+      name: 'supplemental-eu-food-law-mcp',
+      codeRepository: mcpServer.source,
+      url: mcpServer.source,
+    },
+  ],
+};
+---
+
+<InnerChrome
+  t={t}
+  pageTitle={m.metaTitle}
+  pageDescription={m.metaDescription}
+  canonical={pageUrl}
+  hreflangPl={MCP_PAGE.pl}
+  hreflangEn={MCP_PAGE.en}
+  crumbs={crumbs(lang, [{ name: m.crumb, item: pageUrl }])}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <nav class="text-sm text-primary-600 mb-4" aria-label="Breadcrumb">
+    <a href={homePath} class="hover:underline">FOODLAW.ai</a>
+    <span aria-hidden="true"> / </span>
+    <span>{m.crumb}</span>
+  </nav>
+
+  <p class="text-accent-800 font-semibold text-sm tracking-wide mb-3">{m.eyebrow}</p>
+  <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 mb-4">{m.title}</h1>
+  <p class="text-lg text-gray-700 leading-relaxed mb-6">{m.lead}</p>
+  <ul class="flex flex-wrap gap-2 mb-10">
+    {m.badges.map((badge) => (
+      <li class="rounded-full bg-accent-100 text-accent-900 px-3 py-1 text-sm font-semibold">{badge}</li>
+    ))}
+  </ul>
+
+  <section class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">{m.audienceTitle}</h2>
+    <p class="text-gray-700 leading-relaxed">{m.audience}</p>
+  </section>
+
+  <section class="mb-10 rounded-xl border border-primary-100 bg-primary-50 p-5">
+    <h2 class="text-xl font-bold text-primary-800 mb-2">{m.claimsTitle}</h2>
+    <p class="text-gray-700 leading-relaxed">
+      {m.claimsBody}{' '}
+      <a class="font-semibold text-primary-700 hover:underline" href="https://app.foodlaw.ai" target="_blank" rel="noopener noreferrer">app.foodlaw.ai</a>.
+    </p>
+  </section>
+
+  <section id="endpoint" class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-4">{m.factsTitle}</h2>
+    <dl class="rounded-xl border border-gray-100 divide-y divide-gray-100">
+      <div class="p-4">
+        <dt class="text-sm font-semibold text-primary-700">{m.endpointLabel}</dt>
+        <dd class="mt-1">
+          <a class="font-mono text-sm break-all text-primary-800 hover:underline" href={mcpServer.endpoint} target="_blank" rel="noopener noreferrer">{mcpServer.endpoint}</a>
+        </dd>
+      </div>
+      <div class="p-4">
+        <dt class="text-sm font-semibold text-primary-700">{m.transportLabel}</dt>
+        <dd class="mt-1 text-gray-700">{m.transportValue}</dd>
+      </div>
+      <div class="p-4">
+        <dt class="text-sm font-semibold text-primary-700">{m.registryLabel}</dt>
+        <dd class="mt-1 font-mono text-sm text-gray-800">{mcpServer.registryName}</dd>
+      </div>
+      <div class="p-4">
+        <dt class="text-sm font-semibold text-primary-700">{m.authLabel}</dt>
+        <dd class="mt-1 text-gray-700">{m.authValue}</dd>
+      </div>
+      <div class="p-4">
+        <dt class="text-sm font-semibold text-primary-700">{m.protocolLabel}</dt>
+        <dd class="mt-1 text-gray-700">{mcpServer.protocolVersions.join(', ')}</dd>
+      </div>
+      <div class="p-4">
+        <dt class="text-sm font-semibold text-primary-700">{m.serverLabel}</dt>
+        <dd class="mt-1 text-gray-700">{mcpServer.name} {mcpServer.version} — {mcpServer.title}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">{m.cardQuoteLabel}</h2>
+    <blockquote class="border-l-4 border-accent-500 pl-4 text-gray-700 leading-relaxed">
+      <p>{mcpServer.description}</p>
+    </blockquote>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">{m.rulesTitle}</h2>
+    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+      {m.rules.map((rule) => <li>{rule}</li>)}
+    </ul>
+  </section>
+
+  <section id="tools" class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">{m.toolsTitle}</h2>
+    <p class="text-gray-600 mb-4">{m.toolsIntro}</p>
+    <ol class="space-y-4">
+      {mcpServer.tools.map((tool) => (
+        <li class="rounded-xl border border-gray-100 p-4">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <code class="text-sm font-semibold text-primary-800">{tool.name}</code>
+            {claimNames.has(tool.name) && (
+              <span class="rounded-full bg-accent-100 text-accent-900 px-2 py-0.5 text-xs font-semibold">{m.claimsBadge}</span>
+            )}
+          </div>
+          <p class="font-medium text-gray-900">{tool.title}</p>
+          <p class="text-gray-700 mt-1 leading-relaxed">{tool.description}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">{m.limitsTitle}</h2>
+    <p class="text-gray-700 leading-relaxed">{m.limitsBody}</p>
+  </section>
+
+  <section id="connect" class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">{m.connectTitle}</h2>
+    <p class="text-gray-700 leading-relaxed mb-6">{m.connectIntro}</p>
+
+    <h3 class="text-xl font-semibold text-primary-800 mb-2">{m.cursorTitle}</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">{m.cursorBody}</p>
+    <pre class="overflow-x-auto rounded-lg bg-primary-900 text-primary-50 p-4 text-sm leading-relaxed mb-8"><code>{mcpServer.configs.cursor}</code></pre>
+
+    <h3 class="text-xl font-semibold text-primary-800 mb-2">{m.claudeTitle}</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">{m.claudeBody}</p>
+    <pre class="overflow-x-auto rounded-lg bg-primary-900 text-primary-50 p-4 text-sm leading-relaxed mb-8"><code>{mcpServer.configs.claudeDesktop}</code></pre>
+
+    <h3 class="text-xl font-semibold text-primary-800 mb-2">{m.claudeCodeTitle}</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">{m.claudeCodeBody}</p>
+    <pre class="overflow-x-auto rounded-lg bg-primary-900 text-primary-50 p-4 text-sm leading-relaxed mb-8"><code>{mcpServer.configs.claudeCode}</code></pre>
+
+    <h3 class="text-xl font-semibold text-primary-800 mb-2">{m.chatgptTitle}</h3>
+    <p class="text-gray-700 leading-relaxed mb-8">{m.chatgptBody}</p>
+
+    <h3 class="text-xl font-semibold text-primary-800 mb-2">{m.vscodeTitle}</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">{m.vscodeBody}</p>
+    <pre class="overflow-x-auto rounded-lg bg-primary-900 text-primary-50 p-4 text-sm leading-relaxed mb-8"><code>{mcpServer.configs.vscode}</code></pre>
+
+    <h3 class="text-xl font-semibold text-primary-800 mb-2">{m.otherTitle}</h3>
+    <p class="text-gray-700 leading-relaxed">{m.otherBody}</p>
+  </section>
+
+  <section id="docs" class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">{m.linksTitle}</h2>
+    <ul class="space-y-2 text-primary-800">
+      <li>
+        <a class="font-semibold hover:underline" href={mcpServer.docs.pl} target="_blank" rel="noopener noreferrer">{m.docsPl}</a>
+      </li>
+      <li>
+        <a class="font-semibold hover:underline" href={mcpServer.docs.en} target="_blank" rel="noopener noreferrer">{m.docsEn}</a>
+      </li>
+      <li>
+        <a class="font-semibold hover:underline" href={mcpServer.source} target="_blank" rel="noopener noreferrer">{m.sourceLabel}</a>
+      </li>
+      <li>
+        <a class="hover:underline break-all" href={mcpServer.serverCard} target="_blank" rel="noopener noreferrer">{m.cardLabel}</a>
+      </li>
+      <li>
+        <a class="hover:underline" href={mcpServer.health} target="_blank" rel="noopener noreferrer">{m.healthLabel}</a>
+      </li>
+    </ul>
+    <h3 class="text-lg font-semibold text-primary-800 mt-6 mb-2">{m.clientDocsTitle}</h3>
+    <ul class="space-y-2">
+      {mcpServer.clientDocs.map((doc) => (
+        <li>
+          <a class="text-primary-700 hover:underline" href={doc.href} target="_blank" rel="noopener noreferrer">{doc.label}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="rounded-xl bg-primary-50 border border-primary-100 p-5">
+    <p class="text-sm text-primary-800 leading-relaxed">{m.disclaimer}</p>
+    <p class="text-sm text-primary-700 mt-3">{mcpServer.license}</p>
+    <p class="text-sm mt-4">
+      <a class="font-semibold text-primary-700 hover:underline" href={homePath}>{m.backHome}</a>
+    </p>
+  </section>
+</InnerChrome>

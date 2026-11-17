@@ -1,6 +1,7 @@
 ---
 import type { Translation } from '../i18n/translations';
 import { NAP } from '../data/geo';
+import { MCP_PATH } from '../data/mcp';
 
 interface Props {
   t: Translation;
@@ -11,6 +12,7 @@ const lang = t.lang === 'en' ? 'en' : 'pl';
 const home = lang === 'pl' ? '/' : '/en/';
 const faqHref = lang === 'pl' ? '/faq/' : '/en/faq/';
 const hubsHref = lang === 'pl' ? '/huby/' : '/en/hubs/';
+const mcpHref = MCP_PATH[lang];
 ---
 
 <footer class="bg-primary-900 text-white py-12 px-4 sm:px-6 lg:px-8">
@@ -40,6 +42,7 @@ const hubsHref = lang === 'pl' ? '/huby/' : '/en/hubs/';
           <li><a href={`${home}#pricing`} class="hover:text-white transition-smooth">{t.nav.pricing}</a></li>
           <li><a href={faqHref} class="hover:text-white transition-smooth">FAQ</a></li>
           <li><a href={hubsHref} class="hover:text-white transition-smooth">{lang === 'pl' ? 'Huby' : 'Hubs'}</a></li>
+          <li><a href={mcpHref} class="hover:text-white transition-smooth">{t.mcp.footerLink}</a></li>
           <li><a href="/supplemental/" class="hover:text-white transition-smooth">{lang === 'pl' ? 'Narzędzia AI' : 'AI tools'}</a></li>
           <li>
             <a href="https://supplemental.pl" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-smooth">

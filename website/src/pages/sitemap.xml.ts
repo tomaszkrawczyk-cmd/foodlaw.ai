@@ -7,25 +7,25 @@ const LASTMOD = '2026-10-23';
 
 type Alt = { hreflang: string; href: string };
 
-function entry(loc: string, alts: Alt[], priority: string) {
+function entry(loc: string, alts: Alt[], priority: string, lastmod = LASTMOD) {
   const links = alts
     .map((alt) => `    <xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}" />`)
     .join('\n');
   return `  <url>
     <loc>${loc}</loc>
-    <lastmod>${LASTMOD}</lastmod>
+    <lastmod>${lastmod}</lastmod>
     <priority>${priority}</priority>
 ${links}
   </url>`;
 }
 
-function pair(pl: string, en: string, priorityPl: string, priorityEn: string) {
+function pair(pl: string, en: string, priorityPl: string, priorityEn: string, lastmod = LASTMOD) {
   const alts: Alt[] = [
     { hreflang: 'pl', href: pl },
     { hreflang: 'en', href: en },
     { hreflang: 'x-default', href: pl },
   ];
-  return [entry(pl, alts, priorityPl), entry(en, alts, priorityEn)].join('\n');
+  return [entry(pl, alts, priorityPl, lastmod), entry(en, alts, priorityEn, lastmod)].join('\n');
 }
 
 function mono(url: string, priority: string) {
@@ -38,6 +38,7 @@ function mono(url: string, priority: string) {
 export const GET: APIRoute = () => {
   const blocks = [
     pair('https://foodlaw.ai/', 'https://foodlaw.ai/en/', '1.0', '0.9'),
+    pair('https://foodlaw.ai/serwer-mcp/', 'https://foodlaw.ai/en/mcp-server/', '0.8', '0.7', '2026-11-17'),
     pair(faqIndexUrl('pl'), faqIndexUrl('en'), '0.8', '0.7'),
     ...faqs.pl.map((item) => pair(faqUrl('pl', item.slug), faqUrl('en', item.altSlug), '0.7', '0.6')),
     pair(hubIndexUrl('pl'), hubIndexUrl('en'), '0.8', '0.7'),
