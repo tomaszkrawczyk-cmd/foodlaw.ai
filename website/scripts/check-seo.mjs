@@ -27,6 +27,8 @@ assert.ok(locs.includes('https://foodlaw.ai/'));
 assert.ok(locs.includes('https://foodlaw.ai/en/'));
 assert.ok(locs.includes('https://foodlaw.ai/supplemental/'));
 assert.ok(locs.includes('https://foodlaw.ai/rej/'));
+assert.ok(locs.includes('https://foodlaw.ai/serwer-mcp/'));
+assert.ok(locs.includes('https://foodlaw.ai/en/mcp-server/'));
 assert.ok(!locs.some((loc) => loc.includes('/404')));
 assert.match(sitemap, /hreflang="x-default"/);
 
@@ -55,6 +57,28 @@ assert.doesNotMatch(home, /SearchAction/);
 assert.doesNotMatch(home, /href="#"/);
 assert.match(home, /href="\/rej\/"/);
 assert.match(home, /FAQPage|application\/ld\+json/);
+
+const mcp = read('serwer-mcp/index.html');
+assert.match(mcp, /rel="canonical" href="https:\/\/foodlaw\.ai\/serwer-mcp\/"/);
+assert.match(mcp, /hreflang="pl" href="https:\/\/foodlaw\.ai\/serwer-mcp\/"/);
+assert.match(mcp, /hreflang="en" href="https:\/\/foodlaw\.ai\/en\/mcp-server\/"/);
+assert.match(mcp, /search_claims_foodlaw/);
+assert.match(mcp, /get_claim_foodlaw/);
+assert.match(mcp, /https:\/\/mcp\.supplemental\.pl\/mcp/);
+assert.match(mcp, /pl\.supplemental\/foodlaw/);
+assert.doesNotMatch(mcp, /noindex/);
+
+const mcpEn = read('en/mcp-server/index.html');
+assert.match(mcpEn, /rel="canonical" href="https:\/\/foodlaw\.ai\/en\/mcp-server\/"/);
+assert.match(mcpEn, /hreflang="pl" href="https:\/\/foodlaw\.ai\/serwer-mcp\/"/);
+assert.match(mcpEn, /hreflang="en" href="https:\/\/foodlaw\.ai\/en\/mcp-server\/"/);
+assert.match(mcpEn, /nutrition_calc/);
+
+assert.match(home, /href="\/serwer-mcp\/"/);
+const enHome = read('en/index.html');
+assert.match(enHome, /href="\/en\/mcp-server\/"/);
+assert.match(read('llms.txt'), /https:\/\/foodlaw\.ai\/serwer-mcp\//);
+assert.match(read('llms.txt'), /pl\.supplemental\/foodlaw/);
 
 const supplemental = read('supplemental/index.html');
 assert.match(supplemental, /hreflang="pl" href="https:\/\/foodlaw\.ai\/supplemental\/"/);

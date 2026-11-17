@@ -1,0 +1,18 @@
+---
+import type { Translation } from '../i18n/translations';
+import { MCP_PATH } from '../data/mcp';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+const href = t.lang === 'en' ? MCP_PATH.en : MCP_PATH.pl;
+---
+
+<section class="bg-primary-50 px-4 py-5 sm:px-6 lg:px-8 border-b border-primary-100" aria-label={t.mcp.nav}>
+  <p class="max-w-3xl mx-auto text-center text-sm sm:text-base text-primary-800">
+    <a class="font-semibold text-primary-700 hover:underline" href={href}>{t.mcp.teaserLink}</a>
+    <span> — {t.mcp.teaser}</span>
+  </p>
+</section>
